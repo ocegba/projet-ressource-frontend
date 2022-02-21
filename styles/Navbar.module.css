@@ -9,44 +9,72 @@
     background-color: #000000;
 }
 
+img.logo {
+    border-radius: 15px;       
+}
+
 .listItem{
     display: inline;
-    margin-right: 30px;
+    margin-right: 50px;
+    margin-left: 20px;
     flex-direction: row;
     color: white;
-    font-size: 15px;
-    flex-direction: row;
     align-items: center;
     padding: 0px;
+
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: left;
+
 }
 
-.listItemButtonSign {
+.listItemSign {
     display: inline;
     margin-right: 60px;
-    flex-direction: row;
     color: white;
-    font-size: 15px;
-    align-items: center;
-    padding: 0px;
-
-
+    padding: 10px 22px;
     background: #9EB5EB;
     border-radius: 15px;
-    
+
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 22px;
+    letter-spacing: 0rem;
+    text-align: center;
+
 }
 
-.listItemButtonHelp {
+.listItemSign:hover {
+    background: #333333;
+}
+
+.listItemHelp {
     display: inline;
     margin-right: 60px;
     flex-direction: row;
     color: white;
     align-items: center;
-    padding: 0px;
+    padding: 10px 22px;
 
     width: 78px;
     height: 51px;
 
-
     background: #888C97;
     border-radius: 15px;
+
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: center;
+
+}
+
+.listItemHelp:hover {
+    background: #333333;
 }

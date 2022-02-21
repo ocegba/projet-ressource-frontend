@@ -1,12 +1,13 @@
 import React from 'react'
 import styles from "../styles/Navbar.module.css"
-import logo from "../public/img/logo.png"
+import Image from 'next/image'
+import logo from "../public/img/logo.gif"
 import Link from 'next/link'
 
 const Navbar = () => {
   return (
     <div className={styles.container}>
-        <img href={logo} alt="loading..." />
+        <Image className={styles.logo} src={logo} alt="loading..." width={80} height={80}/>
         <ul className={styles.list}>
           <li className={styles.listItem}>
             <Link href="/create-a-ressource">Créer une ressource</Link>
@@ -22,10 +23,10 @@ const Navbar = () => {
           </li>
         </ul>
         <ul className={styles.list}>
-          <li className={styles.listItemButtonSign}>
+          <li className={styles.listItemSign}>
             <Link href="/sign-up">S'inscrire</Link>
           </li>
-          <li className={styles.listItemButtonHelp}>
+          <li className={styles.listItemHelp}>
             <Link href="/help">Aide</Link>
           </li>
         </ul>
