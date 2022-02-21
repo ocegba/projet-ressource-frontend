@@ -19,3 +19,34 @@
     align-items: center;
     padding: 0px;
 }
+
+.listItemButtonSign {
+    display: inline;
+    margin-right: 60px;
+    flex-direction: row;
+    color: white;
+    font-size: 15px;
+    align-items: center;
+    padding: 0px;
+
+
+    background: #9EB5EB;
+    border-radius: 15px;
+    
+}
+
+.listItemButtonHelp {
+    display: inline;
+    margin-right: 60px;
+    flex-direction: row;
+    color: white;
+    align-items: center;
+    padding: 0px;
+
+    width: 78px;
+    height: 51px;
+
+
+    background: #888C97;
+    border-radius: 15px;
+}

@@ -21,6 +21,14 @@ const Navbar = () => {
           <Link href="/sign-in">Se connecter</Link>
           </li>
         </ul>
+        <ul className={styles.list}>
+          <li className={styles.listItemButtonSign}>
+            <Link href="/sign-up">S'inscrire</Link>
+          </li>
+          <li className={styles.listItemButtonHelp}>
+            <Link href="/help">Aide</Link>
+          </li>
+        </ul>
     </div>
   )
 }
