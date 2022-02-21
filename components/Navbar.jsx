@@ -1,11 +1,26 @@
 import React from 'react'
 import styles from "../styles/Navbar.module.css"
-import logo from "../multimedia/logo.gif"
+import logo from "../public/img/logo.png"
+import Link from 'next/link'
 
 const Navbar = () => {
   return (
     <div className={styles.container}>
-        <img src={logo} alt="loading..." />
+        <img href={logo} alt="loading..." />
+        <ul className={styles.list}>
+          <li className={styles.listItem}>
+            <Link href="/create-a-ressource">Créer une ressource</Link>
+          </li>
+          <li className={styles.listItem}>
+            <Link href="/search-a-ressource">Rechercher une ressource</Link>
+          </li>
+          <li className={styles.listItem}>
+            <Link href="/about">À propos</Link>
+          </li>
+          <li className={styles.listItem}>
+          <Link href="/sign-in">Se connecter</Link>
+          </li>
+        </ul>
     </div>
   )
 }
