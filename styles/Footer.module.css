@@ -1,4 +1,4 @@
-.container{
+.footercontainer{
     display:flex;
     color: white;
     height: 350px;
@@ -18,7 +18,7 @@ img.logo {
     border-radius: 60px;       
 }
 
-.textabout{
+.footercontenttext{
     position: absolute;
     left: 20%;
     right: 50%;
@@ -31,7 +31,7 @@ img.logo {
     display: column;
 }
 
-.pdfabout{
+.footercontentpdf{
     position: absolute;
     left: 50%;
     right: 50%;
@@ -42,6 +42,15 @@ img.logo {
     line-height: 25px;
 
     display: column;
+
+    justify-content: space-between;
+}
+
+.footercontentpdf p{
+    top: 10px;
+    text-align: justify;
+    justify-content: space-between;
+
 }
 
 img.logoentreprise {
@@ -50,4 +59,14 @@ img.logoentreprise {
     left: 1113px;
     top: 57px;
     border-radius: 0px;
+}
+
+@media screen and (max-width: 900px) {
+    .footercontainer{
+      height: auto;
+      flex-direction: column;
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+
 }
