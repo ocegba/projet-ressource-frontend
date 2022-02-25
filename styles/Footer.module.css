@@ -11,12 +11,13 @@
 }
 
 .footer > * {
+    height: fit-content;
+    width:fit-content;
     flex: 1 100%;
 }
 
 .footerleft{
-    margin-right: 1.25em;
-    margin-bottom: 2em;
+    margin: 0;
 }
 
 .logo{
@@ -49,6 +50,8 @@
     display: -ms-flex;
     display: -o-flex;
     display: flex;
+    font-size: 20px;
+
 }
 
 .footerright > *{
@@ -56,8 +59,8 @@
     margin-right: 1.25em;
 }
 
-.box a{
-    color: white;
+.box{
+
 }
 
 .footerbottom{
