@@ -9,7 +9,7 @@ const Navbar = () => {
 
   return (
     <div className={styles.container}>
-        <Image className={styles.logo} src={logo} alt="loading..." width={80} height={80} />
+        <a href="/" alt="loading..."><Image className={styles.logo} src={logo} width={80} height={80}/></a>
         <ul className={styles.list}>
           <li className={styles.listItem}>
             <Link href="/create-a-ressource">Créer une ressource</Link>
