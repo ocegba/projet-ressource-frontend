@@ -24,7 +24,7 @@ const Intro = () => {
           <h2 className={styles.subTitle}>Chercher une ressource</h2>
           <p>Découvrez des activités qui sont proposées par notre communauté<br/><br/>
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis qui aliquid nam aspernatur ullam recusandae error hic autem odit. Non qui id sequi est voluptatem! Voluptatibus, at rerum! Fugit, officiis.</p>
-          <li className={styles.morepdf}>
+          <li>
             <Link href="/more">En savoir plus</Link>
           </li>
         </div>
