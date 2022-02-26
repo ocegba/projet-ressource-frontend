@@ -24,12 +24,10 @@ const Intro = () => {
           <h2 className={styles.subTitle}>Chercher une ressource</h2>
           <p>Découvrez des activités qui sont proposées par notre communauté<br/><br/>
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis qui aliquid nam aspernatur ullam recusandae error hic autem odit. Non qui id sequi est voluptatem! Voluptatibus, at rerum! Fugit, officiis.</p>
-          <li>
-            <Link href="/more">En savoir plus</Link>
-          </li>
+          <a href="PROJET_CUBE_2020_INFRILAL1_MARCHEPUBLIC_CCTP_ANNEXE_EXEMPLE_RESSOURCES_RELATIONNELLES_v1_20200601.pdf" download>En savoir plus</a>
         </div>
         <div className={styles.card}>
-          <h2 className={styles.subTitle}>Consulter les ressources de la communautée</h2>
+          <h2 className={styles.subTitle}>Consulter les ressources de la communauté</h2>
           <FormulaireRes/>
         </div>
       </div>

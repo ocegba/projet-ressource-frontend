@@ -50,3 +50,19 @@
     display: block;
     margin : auto;
 }
+
+.formu div ul{
+    position: relative;
+    text-align: center;
+    user-select: none;
+
+    font-size: 18px;
+}
+
+.formu div ul input{
+    margin: 0px 0px 0px 0px;
+}
+
+.formu div ul label{
+    margin: 0px 20px 0px 3px;
+  }
