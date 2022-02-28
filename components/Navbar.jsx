@@ -9,54 +9,54 @@ const Navbar = () => {
 
   return (
     <div className={styles.container}>
-        <a href="/" alt="loading..."><Image className={styles.logo} src={logo} width={80} height={80}/></a>
-        <ul className={styles.list}>
-          <li className={styles.listItem}>
-            <Link href="/create-a-ressource">Créer une ressource</Link>
-          </li>
-          <li className={styles.listItem}>
-            <Link href="/search-a-ressource">Rechercher une ressource</Link>
-          </li>
-          <li className={styles.listItem}>
-            <Link href="/about">À propos</Link>
-          </li>
-          <li className={styles.listItem}>
+      <a href="/" alt="loading..."><Image className={styles.logo} src={logo} width={80} height={80} /></a>
+      <ul className={styles.list}>
+        <li className={styles.listItem}>
+          <Link href="/createRessource">Créer une ressource</Link>
+        </li>
+        <li className={styles.listItem}>
+          <Link href="/searchRessource">Rechercher une ressource</Link>
+        </li>
+        <li className={styles.listItem}>
+          <Link href="/about">À propos</Link>
+        </li>
+        <li className={styles.listItem}>
+          <Link href="/signin">Se connecter</Link>
+        </li>
+      </ul>
+      <ul className={styles.list}>
+        <li className={styles.listItemSign}>
+          <Link href="/signup">S'inscrire</Link>
+        </li>
+        <li className={styles.listItemHelp}>
+          <Link href="/help">Aide</Link>
+        </li>
+      </ul>
+      <div className={styles.hamburger} onClick={() => setOpen(!open)} >
+        <div className={styles.line} />
+        <div className={styles.line} />
+        <div className={styles.line} />
+      </div>
+      <ul onClick={() => setOpen(false)} className={styles.menu} style={{ right: open ? "0px" : "-50vw" }}>
+        <li className={styles.menuItem}>
+          <Link href="/create-a-ressource">Créer une ressource</Link>
+        </li>
+        <li className={styles.menuItem}>
+          <Link href="/search-a-ressource">Rechercher une ressource</Link>
+        </li>
+        <li className={styles.menuItem}>
+          <Link href="/about">À propos</Link>
+        </li>
+        <li className={styles.menuItem}>
           <Link href="/sign-in">Se connecter</Link>
-          </li>
-        </ul>
-        <ul className={styles.list}>
-          <li className={styles.listItemSign}>
-            <Link href="/sign-up">S'inscrire</Link>
-          </li>
-          <li className={styles.listItemHelp}>
-            <Link href="/help">Aide</Link>
-          </li>
-        </ul>
-        <div className={styles.hamburger} onClick={() => setOpen(!open)} >
-          <div className={styles.line} />
-          <div className={styles.line} />
-          <div className={styles.line} />
-        </div>
-        <ul onClick={() => setOpen(false)} className={styles.menu} style={{ right: open ? "0px" : "-50vw" }}>
-          <li className={styles.menuItem}>
-            <Link href="/create-a-ressource">Créer une ressource</Link>
-          </li>
-          <li className={styles.menuItem}>
-            <Link href="/search-a-ressource">Rechercher une ressource</Link>
-          </li>
-          <li className={styles.menuItem}>
-            <Link href="/about">À propos</Link>
-          </li>
-          <li className={styles.menuItem}>
-            <Link href="/sign-in">Se connecter</Link>
-          </li>
-          <li className={styles.menuItemSign}>
-            <Link href="/sign-up">S'inscrire</Link>
-          </li>
-          <li className={styles.menuItemHelp}>
-            <Link href="/help">Aide</Link>
-          </li>
-        </ul>
+        </li>
+        <li className={styles.menuItemSign}>
+          <Link href="/sign-up">S'inscrire</Link>
+        </li>
+        <li className={styles.menuItemHelp}>
+          <Link href="/help">Aide</Link>
+        </li>
+      </ul>
     </div>
   )
 }
