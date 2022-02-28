@@ -1,0 +1,11 @@
+.container{
+    width: 100%;
+    margin-left: 50px;
+}
+
+.container p{
+    width: auto;
+    font-size: 36px;
+    text-align: justify;
+
+}
