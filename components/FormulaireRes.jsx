@@ -2,7 +2,7 @@ import styles from '../styles/FormulaireRes.module.css'
 
 const Formulaire = () => {
   return (
-    <form className={styles.formu} method="post" action="/search-a-ressource">
+    <form className={styles.formu} method="post" action="/searchRessource">
       <div>
         <label for="keyword">Activités ou ressources :</label>
         <input type="text" name="keyword" id="keyword" placeholder='ex: Chasse aux trésors' />
