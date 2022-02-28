@@ -1,11 +1,9 @@
 import styles from '../styles/signup.module.css';
+import Head from 'next/head'
 import { useRef } from "react";
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-function validCompte() {
-
-}
 
 function signin() {
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
@@ -20,9 +18,14 @@ function signin() {
 
     return (
         <div className={styles.container}>
+            <Head>
+                <title>S'inscrire</title>
+                <meta name="description" content="Inscrivez-vous pour participez aux activités" />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
             <form method="post" onSubmit={handleSubmit(onSubmit)} className={styles.login}>
-                <p className={styles.title}>Créer votre compte</p>
-                <p className={styles.subtitle}>Créer votre compte et profitez des ressources !</p>
+                <p className={styles.title}>Créez votre compte</p>
+                <p className={styles.subtitle}>Créez votre compte et profitez des ressources !</p>
                 <input
                     type="text"
                     id="username"
@@ -53,7 +56,7 @@ function signin() {
                     id="confirmpassword"
                     name="confirmpassword"
                     placeholder="Vérifiez le mot de passe"
-                    {...register("confirmpassword", {validate: value => value === password.current || "Le mot de passe n'est pas identique."})} />
+                    {...register("confirmpassword", { validate: value => value === password.current || "Le mot de passe n'est pas identique." })} />
                 {errors.confirmpassword && <p className={styles.errors}>{errors.confirmpassword.message}</p>}
 
                 <button>
