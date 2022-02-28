@@ -39,19 +39,19 @@ const Navbar = () => {
       </div>
       <ul onClick={() => setOpen(false)} className={styles.menu} style={{ right: open ? "0px" : "-50vw" }}>
         <li className={styles.menuItem}>
-          <Link href="/create-a-ressource">Créer une ressource</Link>
+          <Link href="/createRessource">Créer une ressource</Link>
         </li>
         <li className={styles.menuItem}>
-          <Link href="/search-a-ressource">Rechercher une ressource</Link>
+          <Link href="/searchRessource">Rechercher une ressource</Link>
         </li>
         <li className={styles.menuItem}>
           <Link href="/about">À propos</Link>
         </li>
         <li className={styles.menuItem}>
-          <Link href="/sign-in">Se connecter</Link>
+          <Link href="/signin">Se connecter</Link>
         </li>
         <li className={styles.menuItemSign}>
-          <Link href="/sign-up">S'inscrire</Link>
+          <Link href="/signup">S'inscrire</Link>
         </li>
         <li className={styles.menuItemHelp}>
           <Link href="/help">Aide</Link>
