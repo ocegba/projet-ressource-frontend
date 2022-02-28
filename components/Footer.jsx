@@ -23,7 +23,7 @@ const Footer = () => {
           <a href="mailto:contact@resourcesrelationnelles.fr">contact@resourcesrelationnelles.fr</a>
         </li>
         <li>
-          <li class={styles.aboutpdf}>
+          <li className={styles.aboutpdf}>
             <ul className={styles.box}>
               <li><a href="mentionslegales.pdf" download="mentionslegales.PDF">Mentions légales</a></li>
               <li><a href="PolitiqueDeFonctionnalité.pdf" download="PolitiqueDeFonctionnalité.PDF">Politique de confidentialité</a></li>
