@@ -14,7 +14,7 @@ const Footer = () => {
       <ul className={styles.footerright}>
         <li>
           <h2 className={styles.title}>
-            RESOURCES RELATIONNELLES
+            (RE)SOURCES RELATIONNELLES
           </h2>
           <p>Immeuble Le Quatrième
             Zone Aéroportuaire de Montpellier Méditerranée
@@ -27,7 +27,7 @@ const Footer = () => {
             <ul className={styles.box}>
               <li><a href="mentionslegales.pdf" download="mentionslegales.PDF">Mentions légales</a></li>
               <li><a href="PolitiqueDeFonctionnalité.pdf" download="PolitiqueDeFonctionnalité.PDF">Politique de confidentialité</a></li>
-              <li><a href="Conditions.pdf" download="Conditions.PDF">Conditions générales d'utilisation Resources Relationnelles</a></li>
+              <li><a href="Conditions.pdf" download="Conditions.PDF">Conditions générales d'utilisation (Re)Sources Relationnelles</a></li>
             </ul>
           </li>
         </li>

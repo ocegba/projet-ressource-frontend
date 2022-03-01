@@ -8,7 +8,7 @@ import logoministere from "../public/img/Ministère_des_Solidarités_et_de_la_Sa
 const about = () => {
   return (
         <div className={styles.container}>
-            <p><b>Resources relationnelles</b> a été réalisé par l’entreprise <b>4APPS</b> proposé par le <b>ministère des Solidarités et de la Santé.</b></p>
+            <p><b>(Re)Sources relationnelles</b> a été réalisé par l’entreprise <b>4APPS</b> proposé par le <b>ministère des Solidarités et de la Santé.</b></p>
             <div>
                 <Image className={styles.logo} src={logo} alt="loading..." width={260} height={260} />
                 <Image className={styles.logo} src={logoentreprise} alt="loading..." width={260} height={260} />

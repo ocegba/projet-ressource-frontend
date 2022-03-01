@@ -19,7 +19,7 @@ function signin() {
                 <meta name="description" content="Inscrivez-vous pour participez aux activités" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <form message onSubmit={handleSubmit((data) => setData(JSON.stringify(data)))} className={styles.login}>
+            <form method="post" onSubmit={handleSubmit((data) => setData(JSON.stringify(data)))} className={styles.login}>
                 <p className={styles.title}>Créez votre compte</p>
                 <p className={styles.subtitle}>Créez votre compte et profitez des ressources !</p>
                 <input

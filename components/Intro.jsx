@@ -12,7 +12,7 @@ const Intro = () => {
         <div className={styles.IntroImage}>
             <div className={styles.IntroContent}>
               <div className={styles.IntroItems}>
-                  <h1>Resources Relationnelles</h1>
+                  <h1>(Re)Sources Relationnelles</h1>
                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit temporibus doloribus quo dolorem, rem omnis, facere autem, eius quidem necessitatibus tenetur ex tempore. Voluptatem, dignissimos dolorem. Nemo blanditiis voluptatem fugiat?</p>
               </div>
             </div>

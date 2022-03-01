@@ -7,8 +7,8 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Resources relationnelles</title>
-        <meta name="description" content="Resources relationnelles, un guide pour vos relations" />
+        <title>(Re)Sources relationnelles</title>
+        <meta name="description" content="(Re)Sources relationnelles, un guide pour vos relations" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Intro/>
