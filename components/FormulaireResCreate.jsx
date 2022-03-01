@@ -1,16 +1,16 @@
-import styles from '../styles/FormulaireResFilter.module.css'
+import styles from '../styles/FormulaireResCreate.module.css'
 
 const Formulaire = () => {
   return (
     <form className={styles.formu} method="post" action="/searchRessource">
       <div>
-        <label for="keyword">Activités ou ressources :</label>
-        <input type="text" name="keyword" id="keyword" placeholder='ex: Chasse aux trésors' />
+        <label for="keyword">Nom de la ressource :</label>
+        <input type="text" name="keyword" id="keyword" placeholder='ex: Chasse aux trésors' required/>
       </div>
 
       <div>
         <label for="category">Catégorie :</label>
-        <select required name="category" id="category" placeholder='Sélectionnez une catégorie' reqired>
+        <select required name="category" id="category" placeholder='Sélectionnez une catégorie' required>
           <option value="communication">Communication</option>
           <option value="cultures">Cultures</option>
           <option value="developpementpersonnel">Developpement personnel</option>
@@ -29,7 +29,7 @@ const Formulaire = () => {
 
       <div>
         <label for="typesRessources">Types de ressources :</label>
-        <select required name="typesRessources" id="typesRessources" placeholder='Sélectionnez un type de ressource' reqired>
+        <select required name="typesRessources" id="typesRessources" placeholder='Sélectionnez un type de ressource' required>
           <option value="activite">Activité / Jeu à réaliser</option>
           <option value="article">Article</option>
           <option value="cartedefi">Carte défi</option>
@@ -42,13 +42,23 @@ const Formulaire = () => {
       </div>
 
       <div>
+        <label for="story">Texte :</label>
+        <textarea type="text" name="story" id="story" placeholder='Expliquer votre ressource' />
+      </div>
+
+      <div>
+        <label for="file">Fichier :</label>
+        <input type="file" name="file" id="file" placeholder='Insérer une image, un document pdf ou word...'/>
+      </div>
+
+      <div>
+        <label for="url">Entrez un lien url en complément de votre ressource :</label>
+        <input type="url" name="url" id="url" placeholder="https://example.com" pattern="https://.*" size="30"/>
+      </div>
+
+      <div>
         <label for="typesRelations">Types de relations :</label>
-        <ul required name="typesRelations" id="typesRelations" placeholder='Sélectionnez une ou plusieurs relations' reqired>
-          {/* <option value="soi">Soi</option>
-          <option value="conjoints">Conjoints</option>
-          <option value="famille">Famille</option>
-          <option value="amisetcommunautés">Amis et communautés</option>
-          <option value="inconnus">Inconnus</option> */}
+        <ul required name="typesRelations" id="typesRelations" placeholder='Sélectionnez une ou plusieurs relations' required>
           <input type="checkbox" name="soi" id="soi" /> <label for="soi">Soi</label>
           <input type="checkbox" name="conjoints" id="conjoints" /> <label for="conjoints">Conjoints</label>
           <input type="checkbox" name="famille" id="famille" /> <label for="famille">Famille</label>
