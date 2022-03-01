@@ -3,7 +3,7 @@ import styles from '../styles/Intro.module.css'
 import Image from 'next/image'
 import logo from "../public/img/logo.gif" 
 import Link from 'next/link'
-import FormulaireRes from './FormulaireRes'
+import FormulaireResFilter from './FormulaireResFilter'
 
 const Intro = () => {
   return (
@@ -28,7 +28,7 @@ const Intro = () => {
         </div>
         <div className={styles.card}>
           <h2 className={styles.subTitle}>Consulter les ressources de la communauté</h2>
-          <FormulaireRes/>
+          <FormulaireResFilter/>
         </div>
       </div>
     </div>

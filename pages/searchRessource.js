@@ -1,4 +1,4 @@
-import FormulaireRes from '../components/FormulaireRes'
+import FormulaireResFilter from '../components/FormulaireResFilter'
 import styles from '../styles/SearchRessource.module.css'
 
 const searchRessource = () => {
@@ -7,7 +7,7 @@ const searchRessource = () => {
       <div className={styles.research}>
         <h1>Consultez les ressources de la communauté</h1>
           <div>
-            <FormulaireRes/>
+            <FormulaireResFilter/>
           </div>
         
       </div>
