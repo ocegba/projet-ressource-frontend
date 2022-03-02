@@ -27,7 +27,7 @@ function signin() {
                     id="username"
                     name="username"
                     placeholder="Pseudo"
-                    {...register("username", { required: "Un pseudonyme valide est requis.", pattern: "[A-Za-z0-9]+", minLength: { value: 5, message: "Le pseudo est trop court" }, maxength: { value: 12, message: "Le pseudo est trop long" } })}
+                    {...register("username", { required: "Un pseudonyme valide est requis.", pattern: "^([a-zA-Z0-9-_]{2,36})$", minLength: { value: 5, message: "Le pseudo est trop court" }, maxength: { value: 12, message: "Le pseudo est trop long" } })}
                 />
                 {errors.username && <p className={styles.errors}>{errors.username.message}</p>}
 
@@ -36,7 +36,7 @@ function signin() {
                     id="email"
                     name="email"
                     placeholder="Adresse mail"
-                    {...register("email", { required: "Un email valide est requis.", pattern: { value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/ } })} />
+                    {...register("email", { required: "Un email valide est requis.", pattern: "^[a-zA-Z0-9.]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z-]+)*$" })} />
                 {errors.email && <p className={styles.errors}>{errors.email.message}</p>}
 
                 <input
@@ -57,7 +57,6 @@ function signin() {
 
                 <input type='submit' value="Créez votre compte" />
                 
-                {data}
                 <div>
                     <a href="/signin">Déjà inscrit ? Connectez-vous</a>
                 </div>
