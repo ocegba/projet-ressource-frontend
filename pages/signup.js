@@ -57,6 +57,7 @@ function signin() {
 
                 <input type='submit' value="Créez votre compte" />
 
+                {data}
                 <div>
                     <a href="/signin">Déjà inscrit ? Connectez-vous</a>
                 </div>
