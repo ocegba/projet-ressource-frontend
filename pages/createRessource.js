@@ -186,7 +186,6 @@ const createRessource = () => {
             <button type="submit">Rechercher une ressource</button>
           </div>
         </form >
-        )
       </div>
       <div className={styles.cardcontent}>
         <div className={styles.cardSchema}>

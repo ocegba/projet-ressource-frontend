@@ -49,11 +49,12 @@ const Formulaire = () => {
           <option value="famille">Famille</option>
           <option value="amisetcommunautés">Amis et communautés</option>
           <option value="inconnus">Inconnus</option> */}
-          <input type="checkbox" name="soi" id="soi" /> <label for="soi">Soi</label>
-          <input type="checkbox" name="conjoints" id="conjoints" /> <label for="conjoints">Conjoints</label>
-          <input type="checkbox" name="famille" id="famille" /> <label for="famille">Famille</label>
-          <input type="checkbox" name="amisetcommunautés" id="amisetcommunautés" /> <label for="amisetcommunautés">Amis et communautés</label>
-          <input type="checkbox" name="inconnus" id="inconnus" /> <label for="inconnus">Inconnus</label>
+
+          <input type="radio" name="relations" id="soi" /> <label for="soi">Soi</label>
+          <input type="radio" name="relations" id="conjoints" /> <label for="conjoints">Conjoints</label>
+          <input type="radio" name="relations" id="famille" /> <label for="famille">Famille</label>
+          <input type="radio" name="relations" id="amisetcommunautés" /> <label for="amisetcommunautés">Amis et communautés</label>
+          <input type="radio" name="relations" id="inconnus" /> <label for="inconnus">Inconnus</label>
         </ul>
       </div>
 
