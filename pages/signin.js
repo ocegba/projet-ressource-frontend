@@ -14,7 +14,7 @@ function signin() {
             <meta name="description" content="Page de connexion" />
             <link rel="icon" href="/favicon.ico" />
             </Head>
-            <form  method="post" action="/profil" className={styles.login}>
+            <form  method="post" action="api/profil" className={styles.login}>
                 <p className={styles.title}>Se connecter</p>
                 <p className={styles.subtitle}>Connectez-vous et profitez des ressources !</p>
                 <input

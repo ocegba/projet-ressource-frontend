@@ -7,8 +7,8 @@ import { useForm } from 'react-hook-form';
 
 function signin() {
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
-    const[data, setData] =useState();
-    
+    const [data, setData] = useState();
+
     const password = useRef({});
     password.current = watch("password", "");
 
@@ -56,7 +56,7 @@ function signin() {
                 {errors.confirmpassword && <p className={styles.errors}>{errors.confirmpassword.message}</p>}
 
                 <input type='submit' value="Créez votre compte" />
-                
+
                 <div>
                     <a href="/signin">Déjà inscrit ? Connectez-vous</a>
                 </div>
