@@ -2,42 +2,43 @@ const { dbPool } = require("./dbConfig");
 const Pool = require('pg-pool');
 const bcrypt = require("bcrypt");
 const bcryptjs = require("bcryptjs");
+import { hash } from 'bcrypt';
+
 
 export default async function handler(req, res) {
 
     const body = req.body;
-    console.log(body.password);
 
     // const prenomUtilisateur = body.username;
     const pseudoUtilisateur = body.username;
-    let mdpUtilisateur = await bcryptjs.hash(body.password, 1);
-    console.log(mdpUtilisateur);
     const mailUtilisateur = body.email;
 
     if (req.method === 'POST') {
         res.redirect('/profil');
         // if (checkEmail(mailUtilisateur) === true && checkUserName(pseudoUtilisateur) === true) {
-    //     dbPool.query('INSERT INTO compte ("pseudoUtilisateur","mailUtilisateur","mdpUtilisateur","dateCreationUtilisateur") VALUES ($1,$2,$3,NOW()) RETURNING * ',
-    //         [pseudoUtilisateur, mailUtilisateur, mdpUtilisateur], (error, result) => {
-    //             // console.log(error);
-    //             if (result) {
-    //                 res.redirect('/profil');
-    //             } else {
-    //                 console.log(error)
-    //             }
-    //             // try {
-    //             //     redirect('/profil');
-    //             // } catch (error) {
-    //             //     throw error;
-    //             // }
+            hash(req.body.password, 1, async function (err, hash) {
+            dbPool.query('INSERT INTO compte ("pseudoUtilisateur","mailUtilisateur","mdpUtilisateur","dateCreationUtilisateur") VALUES ($1,$2,$3,NOW()) RETURNING * ',
+                [pseudoUtilisateur, mailUtilisateur, hash], (error, result) => {
+                    // console.log(error);
+                    if (result) {
+                        res.redirect('/profil');
+                    } else {
+                        throw error;
+                    }
+                    // try {
+                    //     redirect('/profil');
+                    // } catch (error) {
+                    //     throw error;
+                    // }
 
-    //         });
-    //     // }
-    // } else {
-    //     res.status(405);
-    //     res.end();
-    // }
-}
+                });
+            });
+            // }
+        // } else {
+        //     res.status(405);
+        //     res.end();
+        // }
+    }
 }
 
 // function checkEmail(mail) {   // test if account exists with email
@@ -68,3 +69,4 @@ export default async function handler(req, res) {
 //         }
 //     }
 // }
+
