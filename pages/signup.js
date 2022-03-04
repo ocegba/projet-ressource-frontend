@@ -19,7 +19,8 @@ function signin() {
                 <meta name="description" content="Inscrivez-vous pour participez aux activités" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <form method="post" onSubmit={handleSubmit((data) => setData(JSON.stringify(data)))} className={styles.login}>
+            {/* onSubmit={handleSubmit((data) => setData(JSON.stringify(data)))} */}
+            <form method="post"  action="/api/register" className={styles.login}>
                 <p className={styles.title}>Créez votre compte</p>
                 <p className={styles.subtitle}>Créez votre compte et profitez des ressources !</p>
                 <input
@@ -55,7 +56,10 @@ function signin() {
                     {...register("confirmpassword", { validate: value => value === password.current || "Le mot de passe n'est pas identique." })} />
                 {errors.confirmpassword && <p className={styles.errors}>{errors.confirmpassword.message}</p>}
 
-                <input type='submit' value="Créez votre compte" />
+                {/* <input type='submit' value="Créez votre compte" /> */}
+                <button>
+                    <span className={styles.submit}>Créez votre compte</span>
+                </button>
 
                 {data}
                 <div>

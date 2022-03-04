@@ -6,10 +6,19 @@ const searchRessource = () => {
     <div className={styles.container}>
       <div className={styles.research}>
         <h1>Consultez les ressources de la communauté</h1>
-          <div>
-            <FormulaireResFilter/>
-          </div>
-        
+        <div>
+          <FormulaireResFilter />
+        </div>
+
+      </div>
+
+      <div>
+
+        <select>
+          {/* {
+            numbers.map(el => <option value={el} key={el}> {el} </option>)
+          } */}
+        </select>
       </div>
     </div>
   )
@@ -18,9 +27,3 @@ const searchRessource = () => {
 export default searchRessource
 
 
-
-{/* <select>
-{
-   numbers.map(el => <option value={el} key={el}> {el} </option>)
-}
-</select> */}
