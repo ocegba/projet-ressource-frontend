@@ -7,11 +7,11 @@ const Navbar = () => {
 
   return (
     <nav class="bg-black border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800">
-      <div class="lg:container flex flex-wrap justify-between items-center mx-auto">
+      <div class="container flex flex-wrap justify-between items-center mx-auto">
         <a href="#" class="flex items-center">
           <a href="/" alt="loading..."><Image class="rounded-2xl" src={logo} width={80} height={80} /></a>
         </a>
-        <div class="flex md:order-2">
+        <div class="flex pt-5 md:order-2">
           <li>
             <a href="/signup" class="text-white bg-blue-300 hover:bg-slate-400 focus:ring-3 focus:ring-slate-400 font-medium rounded-lg text-xl px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >S'inscrire</a>
           </li>
