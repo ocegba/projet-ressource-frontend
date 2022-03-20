@@ -137,7 +137,7 @@ const Footer = () => {
       </div>
       <div class="text-center p-6 bg-black">
         <span>© 2022 Copyright: </span>
-        <a class="text-white font-semibold" href="https://tailwind-elements.com/">(RE)SOURCES RELATIONNELLES</a>
+        <a class="text-white font-semibold">(RE)SOURCES RELATIONNELLES</a>
       </div>
     </footer>
   )
