@@ -29,16 +29,16 @@ const Navbar = () => {
           {!open ? (
             <ul class="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-xl md:font-medium">
               <li>
-                <a href="/createRessource" class="block hover:bg-blue-300/75 py-2 pr-4 pl-3 text-white border-b border-gray-100" aria-current="page">Créer une ressource</a>
+                <a href="/createRessource" class="block hover:bg-blue-300/75 py-2 pr-4 pl-3 text-white" aria-current="page">Créer une ressource</a>
               </li>
               <li>
-                <a href="/searchRessource" class="block hover:bg-blue-300/75 py-2 pr-4 pl-3 text-white border-b border-gray-100">Rechercher une ressource</a>
+                <a href="/searchRessource" class="block hover:bg-blue-300/75 py-2 pr-4 pl-3 text-white">Rechercher une ressource</a>
               </li>
               <li>
-                <a href="/about" class="block hover:bg-blue-300/75 py-2 pr-4 pl-3 text-white border-b border-gray-100">À propos</a>
+                <a href="/about" class="block hover:bg-blue-300/75 py-2 pr-4 pl-3 text-white">À propos</a>
               </li>
               <li>
-                <a href="/signin" class="block hover:bg-blue-300/75 py-2 pr-4 pl-3 text-white border-b border-gray-100">Se connecter</a>
+                <a href="/signin" class="block hover:bg-blue-300/75 py-2 pr-4 pl-3 text-white">Se connecter</a>
               </li>
             </ul>
           ) : false}
