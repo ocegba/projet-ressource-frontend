@@ -15,12 +15,12 @@ const createRessource = () => {
         <form id="formCreate" className={styles.formu} method="post" action="/">
           <div>
             <label for="nameres">Nom de la ressource :</label>
-            <input type="text" name="nameres" id="nameres" placeholder='ex: Chasse aux trésors' required />
+            <input type="text" name="nameres" id="nameres" placeholder='ex: Chasse aux trésors' />
           </div>
 
           <div>
             <label for="category">Catégorie :</label>
-            <select required name="category" id="category" placeholder='Sélectionnez une catégorie' required>
+            <select required name="category" id="category" placeholder='Sélectionnez une catégorie' >
               <option value="communication">Communication</option>
               <option value="cultures">Cultures</option>
               <option value="developpementpersonnel">Developpement personnel</option>
@@ -39,7 +39,7 @@ const createRessource = () => {
 
           <div>
             <label for="typesRessources">Types de ressources :</label>
-            <select required name="typesRessources" id="typesRessources" placeholder='Sélectionnez un type de ressource' required>
+            <select required name="typesRessources" id="typesRessources" placeholder='Sélectionnez un type de ressource' >
               <option value="activite">Activité / Jeu à réaliser</option>
               <option value="article">Article</option>
               <option value="cartedefi">Carte défi</option>
@@ -68,7 +68,7 @@ const createRessource = () => {
 
           <div>
             <label for="typesRelations">Types de relations :</label>
-            <ul required name="typesRelations" id="typesRelations" placeholder='Sélectionnez une ou plusieurs relations' required>
+            <ul required name="typesRelations" id="typesRelations" placeholder='Sélectionnez une ou plusieurs relations' >
               <input type="checkbox" name="soi" id="soi" /> <label for="soi">Soi</label>
               <input type="checkbox" name="conjoints" id="conjoints" /> <label for="conjoints">Conjoints</label>
               <input type="checkbox" name="famille" id="famille" /> <label for="famille">Famille</label>
