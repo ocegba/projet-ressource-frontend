@@ -10,7 +10,7 @@ const Formulaire = () => {
 
       <div>
         <label for="category">Catégorie :</label>
-        <select required name="category" id="category" placeholder='Sélectionnez une catégorie' reqired>
+        <select required name="category" id="category" placeholder='Sélectionnez une catégorie' >
           <option value="communication">Communication</option>
           <option value="cultures">Cultures</option>
           <option value="developpementpersonnel">Developpement personnel</option>
@@ -29,7 +29,7 @@ const Formulaire = () => {
 
       <div>
         <label for="typesRessources">Types de ressources :</label>
-        <select required name="typesRessources" id="typesRessources" placeholder='Sélectionnez un type de ressource' reqired>
+        <select required name="typesRessources" id="typesRessources" placeholder='Sélectionnez un type de ressource' >
           <option value="activite">Activité / Jeu à réaliser</option>
           <option value="article">Article</option>
           <option value="cartedefi">Carte défi</option>
@@ -43,18 +43,12 @@ const Formulaire = () => {
 
       <div>
         <label for="typesRelations">Types de relations :</label>
-        <ul required name="typesRelations" id="typesRelations" placeholder='Sélectionnez une ou plusieurs relations' reqired>
-          {/* <option value="soi">Soi</option>
-          <option value="conjoints">Conjoints</option>
-          <option value="famille">Famille</option>
-          <option value="amisetcommunautés">Amis et communautés</option>
-          <option value="inconnus">Inconnus</option> */}
-
-          <input type="radio" name="relations" id="soi" /> <label for="soi">Soi</label>
-          <input type="radio" name="relations" id="conjoints" /> <label for="conjoints">Conjoints</label>
-          <input type="radio" name="relations" id="famille" /> <label for="famille">Famille</label>
-          <input type="radio" name="relations" id="amisetcommunautés" /> <label for="amisetcommunautés">Amis et communautés</label>
-          <input type="radio" name="relations" id="inconnus" /> <label for="inconnus">Inconnus</label>
+        <ul reqired name="typesRelations" id="typesRelations" placeholder='Sélectionnez une ou plusieurs relations' >
+          <input type="checkbox" name="relations" id="soi" /> <label for="soi">Soi</label>
+          <input type="checkbox" name="relations" id="conjoints" /> <label for="conjoints">Conjoints</label>
+          <input type="checkbox" name="relations" id="famille" /> <label for="famille">Famille</label>
+          <input type="checkbox" name="relations" id="amisetcommunautés" /> <label for="amisetcommunautés">Amis et communautés</label>
+          <input type="checkbox" name="relations" id="inconnus" /> <label for="inconnus">Inconnus</label>
         </ul>
       </div>
 
