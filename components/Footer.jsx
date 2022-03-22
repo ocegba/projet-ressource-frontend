@@ -85,7 +85,7 @@ const Footer = () => {
             <div class="lg:mb-0 mb-6">
               <Image
                 src={logo}
-                class="rounded-2xl"
+                class="rounded-3xl"
               />
             </div>
             <div class="lg:mb-0 mb-6">
