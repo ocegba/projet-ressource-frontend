@@ -25,7 +25,7 @@ const createRessource = () => {
 
           <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
             <label class="text-xl" for="title">Titre de la ressource :</label>
-            <input  class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10" maxlength="45" 
+            <input class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10" maxlength="45"
               type="text"
               name="title"
               id="title"
@@ -95,7 +95,7 @@ const createRessource = () => {
 
           <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
             <label class="text-xl" for="file">Fichier :</label>
-            <input 
+            <input
               type="file"
               name="file"
               id="file"
