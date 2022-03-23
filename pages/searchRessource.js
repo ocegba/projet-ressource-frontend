@@ -11,10 +11,10 @@ const searchRessource = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div class='flex h-fit items-center justify-center bg-gray-100'>
-        <div class='justify-center text-justify text-4xl items-center align-center'>
-          <h1 class="font-extrabold">Consultez les ressources de la communauté</h1>
-          <div class="flex justify-center">
+      <div class='flex h-fit justify-center bg-gray-100'>
+        <div class='bg-custom-blue/50 text-3xl mt-3 mb-3 justify-center items-center rounded-3xl shadow-xl'>
+          <h1 class="border-gray-200 border-solid border-0 box-border font-bold text-4xl leading-none m-auto py-3.5 text-center not-italic">Consultez les ressources de la communauté</h1>
+          <div class="items-center">
             <FormulaireResFilter />
           </div>
 

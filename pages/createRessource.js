@@ -19,7 +19,7 @@ const createRessource = () => {
         <meta name="description" content="Créer votre propre ressource" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div class="flex-1 justify-center	items-center p-14 ">
+      <div class="bg-custom-blue/50 rounded-3xl flex-1 justify-center	items-center p-8 m-4 h-fit">
         <h1 class="flex justify-center items-center align-justify font-extrabold text-4xl">Créer votre ressource</h1>
         <form i d="formCreate" class="flex flex-col" method="post" action="/">
 
@@ -120,7 +120,7 @@ const createRessource = () => {
 
           <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
             <label class="text-xl" for="typesRelations">Types de relations :</label>
-            <ul class="relative align-center select-none text-lg justify-between"
+            <ul class="relative align-center select-none text-lg"
               required
               name="typesRelations"
               id="typesRelations"
@@ -128,11 +128,11 @@ const createRessource = () => {
               value={relations}
               onChange={(e) => setRelations(e.target.value)}>
 
-              <input type="checkbox" value="Soi" name="soi" id="soi" /> <label>Soi</label>
-              <input type="checkbox" value="Conjoints" name="conjoints" id="conjoints" /> <label>Conjoints</label>
-              <input type="checkbox" value="Famille" name="famille" id="famille" /> <label>Famille</label>
-              <input type="checkbox" value="Amis et communautés" name="amisetcommunautés" id="amisetcommunautés" /> <label>Amis et communautés</label>
-              <input type="checkbox" value="Inconnus" name="inconnus" id="inconnus" /> <label>Inconnus</label>
+              <input type="checkbox" class="shadow-xl rounded-md mx-0	my-0" value="Soi" name="soi" id="soi" /> <label class="text-xl my-0	mr-1 ml-0.5">Soi</label>
+              <input type="checkbox" class="shadow-xl rounded-md mx-0	my-0" value="Conjoints" name="conjoints" id="conjoints" /> <label class="text-xl my-0	mr-1 ml-0.5">Conjoints</label>
+              <input type="checkbox" class="shadow-xl rounded-md mx-0	my-0" value="Famille" name="famille" id="famille" /> <label class="text-xl my-0	mr-1 ml-0.5">Famille</label>
+              <input type="checkbox" class="shadow-xl rounded-md mx-0	my-0" value="Amis et communautés" name="amisetcommunautés" id="amisetcommunautés" /> <label class="text-xl my-0	mr-1 ml-0.5">Amis et communautés</label>
+              <input type="checkbox" class="shadow-xl rounded-md mx-0	my-0" value="Inconnus" name="inconnus" id="inconnus" /> <label class="text-xl my-0	mr-1 ml-0.5">Inconnus</label>
             </ul>
           </div>
 
@@ -249,7 +249,7 @@ const createRessource = () => {
           </div>
 
           <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-            <button class="block cursor-pointer mt-5 w-auto max-w-500 h-14 text-white font-bold text-3xl shadow-xl bg-blue-300 rounded-2xl border-blue-300 hover:bg-blue-300/50" type="submit">Créer une ressource</button>
+            <button class="h-20 mt-3 mb-3 bg-custom-blue text-white font-bold text-3xl w-fit pr-2 pl-2 rounded-xl block m-auto cursor-pointer rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" type="submit">Créer une ressource</button>
           </div>
         </form >
       </div>
@@ -265,7 +265,7 @@ const createRessource = () => {
 
             <div>
               <p class="text-xs bg-red-200" id="categoryOutput">{category}</p>
-              <p class="text-xs bg-blue-200" id="typesRessourcesOutput">{ressources}</p>
+              <p class="text-xs bg-custom-blue" id="typesRessourcesOutput">{ressources}</p>
               <p class="text-xs bg-green-200" id="typesRelationsOutput">{relations}</p>
             </div>
 

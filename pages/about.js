@@ -1,6 +1,5 @@
 import React from 'react'
 import Image from 'next/image'
-import styles from '../styles/about.module.css'
 import logo from "../public/img/logo.gif"
 import logoentreprise from "../public/img/logoentreprise.png"
 import logoministere from "../public/img/Ministère_des_Solidarités_et_de_la_Santé.png"

@@ -1,8 +1,7 @@
 import React from 'react'
-import SideBar from '../components/SideBar'
-import styles from '../styles/about.module.css'
+import SideBar from '../../components/SideBar'
 import Head from 'next/head'
-import Table, { SelectColumnFilter, StatusPill } from "../components/Table";
+import Table, { SelectColumnFilter, StatusPill } from "../../components/Table";
 
 const profil = () => {
     // 3 fonctions getData,data  et colums pour les ressources crées, participation aux ressources et les commentaires

@@ -1,4 +1,3 @@
-import styles from "../styles/Footer.module.css"
 import Image from 'next/image'
 import logo from "../public/img/logo.gif"
 import logoentreprise from "../public/img/logoentreprise.png"
