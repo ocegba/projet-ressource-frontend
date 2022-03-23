@@ -13,7 +13,7 @@ const createRessource = () => {
   const [ville, setVille] = useState('')
 
   return (
-    <div class="flex flex-column w-full	bg-gray-100 h-fit">
+    <div class="flex flex-column portrait:flex-col w-full	bg-gray-100 h-fit">
       <Head>
         <title>Créer votre propre ressource</title>
         <meta name="description" content="Créer votre propre ressource" />

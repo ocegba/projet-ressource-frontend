@@ -1,8 +1,14 @@
 import React from "react"
+import Head from 'next/head'
 
 const Help = () => {
   return (
     <div class="bg-lightblue py-20 px-4">
+      <Head>
+        <title>Aide</title>
+        <meta name="description" content="Page d'aide" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div class="mx-auto max-w-6xl flex flex-col md:flex-row">
         <h2 class="mr-8 w-full md:w-1/3 text-3xl font-extrabold leading-9">
           Questions fréquentes
