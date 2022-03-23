@@ -1,7 +1,6 @@
 import React from "react";
 import 'regenerator-runtime/runtime';
-import { useTable, useGlobalFilter, useAsyncDebounce } from 'react-table';
-import { useFilters, useSortBy, usePagination } from 'react-table';
+import { useTable, useGlobalFilter, useAsyncDebounce,  useFilters, useSortBy, usePagination} from 'react-table';
 import { ChevronLeftIcon, ChevronRightIcon, ChevronDoubleLeftIcon, ChevronDoubleRightIcon } from "@heroicons/react/solid";
 import { Button, PageButton } from './Button'
 import { classNames } from "./Utils";
