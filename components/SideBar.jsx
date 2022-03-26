@@ -1,5 +1,20 @@
 import React from 'react'
-import a from 'next/link'
+
+/*requete si c'est un moderateur ou admin */
+function strRoleUser() {
+    var roleUser = ["citoyen connecté", "modérateur", "administrateur"]
+    // var item = roleUser[Math.floor(Math.random() * roleUser.length)];
+    var item = "administrateur"
+    return item
+}
+
+function isUser() {
+    if (strRoleUser() === "administrateur" || strRoleUser() === "modérateur") {
+        return true
+    } else {
+        return false
+    }
+}
 
 const SideBar = () => {
     return (
@@ -11,14 +26,16 @@ const SideBar = () => {
                             <li>
                                 <a class="flex items-center px-4 py-2 mt-5 text-gray-700 bg-gray-100 rounded-md ">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M224 256c70.7 0 128-57.31 128-128s-57.3-128-128-128C153.3 0 96 57.31 96 128S153.3 256 224 256zM274.7 304H173.3C77.61 304 0 381.6 0 477.3c0 19.14 15.52 34.67 34.66 34.67h378.7C432.5 512 448 496.5 448 477.3C448 381.6 370.4 304 274.7 304z" /></svg>
-                                    Citoyen connecté</a>
+                                    {strRoleUser().charAt(0).toUpperCase()+ strRoleUser().slice(1)}</a>
                             </li>
-                            <li>
+
+                            {/* requete si c'est un moderateur ou admin */}
+                            {isUser() == true && <li>
                                 <a href="dashboard" class="flex items-center px-4 py-2 mt-5 text-gray-600 rounded-md hover:bg-gray-200">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 576 512"><path d="M575.8 255.5C575.8 273.5 560.8 287.6 543.8 287.6H511.8L512.5 447.7C512.6 483.2 483.9 512 448.5 512H128.1C92.75 512 64.09 483.3 64.09 448V287.6H32.05C14.02 287.6 0 273.5 0 255.5C0 246.5 3.004 238.5 10.01 231.5L266.4 8.016C273.4 1.002 281.4 0 288.4 0C295.4 0 303.4 2.004 309.5 7.014L564.8 231.5C572.8 238.5 576.9 246.5 575.8 255.5H575.8zM288 160C252.7 160 224 188.7 224 224C224 259.3 252.7 288 288 288C323.3 288 352 259.3 352 224C352 188.7 323.3 160 288 160zM256 320C211.8 320 176 355.8 176 400C176 408.8 183.2 416 192 416H384C392.8 416 400 408.8 400 400C400 355.8 364.2 320 320 320H256z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg"  class="w-6 h-6" viewBox="0 0 576 512"><path d="M64 400C64 408.8 71.16 416 80 416H480C497.7 416 512 430.3 512 448C512 465.7 497.7 480 480 480H80C35.82 480 0 444.2 0 400V64C0 46.33 14.33 32 32 32C49.67 32 64 46.33 64 64V400zM342.6 278.6C330.1 291.1 309.9 291.1 297.4 278.6L240 221.3L150.6 310.6C138.1 323.1 117.9 323.1 105.4 310.6C92.88 298.1 92.88 277.9 105.4 265.4L217.4 153.4C229.9 140.9 250.1 140.9 262.6 153.4L320 210.7L425.4 105.4C437.9 92.88 458.1 92.88 470.6 105.4C483.1 117.9 483.1 138.1 470.6 150.6L342.6 278.6z"/></svg>
                                     <span class="mx-4 font-medium">Dashboard</span>
                                 </a>
-                            </li>
+                            </li>}
 
                             <li>
                                 <a href="parametres" class="flex items-center px-4 py-2 mt-5 text-gray-600 rounded-md hover:bg-gray-200">

@@ -1,5 +1,6 @@
 /*tous les composantds et les pages; */
 @tailwind base;
+@tailwind page;
 @tailwind components;
 @tailwind utilities;
 

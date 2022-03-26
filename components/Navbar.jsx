@@ -2,6 +2,11 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import logo from "../public/img/logo.gif"
 
+/*requete si c'est connecté ou non */
+function isLogged() {
+  return true
+}
+
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
@@ -13,7 +18,10 @@ const Navbar = () => {
         </a>
         <div class="flex pt-5 md:order-2">
           <li>
-            <a href="/signup" class="text-white bg-custom-blue hover:bg-slate-400 focus:ring-3 focus:ring-slate-400 font-medium rounded-lg text-xl px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >S'inscrire</a>
+            {/*requete si c'est connecté ou non */}
+
+            {isLogged() == false && <a href="/signup" class="text-white bg-custom-blue hover:bg-slate-400 focus:ring-3 focus:ring-slate-400 font-medium rounded-lg text-xl px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >S'inscrire</a>}
+            {isLogged() == true && <a href="/profil/profil" class="text-white bg-custom-blue hover:bg-slate-400 focus:ring-3 focus:ring-slate-400 font-medium rounded-lg text-xl px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >Mon profil</a>}
           </li>
           <li>
             <a href="/help" class="text-white bg-gray-500 hover:bg-gray-700 focus:ring-3 focus:ring-gray-700 font-medium rounded-lg text-xl px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >Aide</a>
@@ -38,7 +46,8 @@ const Navbar = () => {
                 <a href="/about" class="block hover:text-custom-blue py-2 pr-4 pl-3 text-white">À propos</a>
               </li>
               <li>
-                <a href="/signin" class="block hover:text-custom-blue py-2 pr-4 pl-3 text-white">Se connecter</a>
+                {/*requete si c'est connecté ou non */}
+                {isLogged() == false && <a href="/signin" class="block hover:text-custom-blue py-2 pr-4 pl-3 text-white">Se connecter</a>}
               </li>
             </ul>
           ) : false}
