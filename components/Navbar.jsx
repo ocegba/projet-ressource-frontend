@@ -4,7 +4,7 @@ import logo from "../public/img/logo.gif"
 
 /*requete si c'est connecté ou non */
 function isLogged() {
-  return true
+  return false
 }
 
 const Navbar = () => {
