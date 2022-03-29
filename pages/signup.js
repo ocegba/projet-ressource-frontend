@@ -52,7 +52,7 @@ function signin() {
                     id="confirmpassword"
                     name="confirmpassword"
                     placeholder="Vérifiez le mot de passe"
-                    {...register("confirmpassword", { validate: value => value === password.current || "Le mot de passe n'est pas identique." })} />
+                    {...register("confirmpassword", { validate: confirmpassword => confirmpassword === password.current || "Le mot de passe n'est pas identique." })} />
                 {errors.confirmpassword && <p class="text-red-700 mr-12 text-right">{errors.confirmpassword.message}</p>}
 
                 <button class="h-20 bg-custom-blue text-white font-bold text-3xl w-fit pr-2 pl-2 rounded-xl block m-auto cursor-pointer rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300  ">

@@ -14,7 +14,6 @@ export default async function handler(req, res) {
     const mailUtilisateur = body.email;
 
     if (req.method === 'POST') {
-        res.redirect('/profil/profil');
         // if (checkEmail(mailUtilisateur) === true && checkUserName(pseudoUtilisateur) === true) {
             hash(req.body.password, 1, async function (err, hash) {
             dbPool.query('INSERT INTO compte ("pseudoUtilisateur","mailUtilisateur","mdpUtilisateur","dateCreationUtilisateur") VALUES ($1,$2,$3,NOW()) RETURNING * ',
