@@ -8,8 +8,8 @@ datasource db {
 }
 
 model commentaire {
-  idCommentaire                                  Int         @id @default(autoincrement())
-  idCompte                                       Int?
+  idCommentaire                                  BigInt         @id @default(autoincrement())
+  idCompte                                       BigInt?
   contenuCommentaire                             String
   dateCommentaire                                DateTime
   isCommentaireSupprime                          Boolean     @default(false)
@@ -20,7 +20,7 @@ model commentaire {
 }
 
 model compte {
-  idCompte                        Int           @id @default(autoincrement())
+  idCompte                        BigInt           @id @default(autoincrement())
   nomUtilisateur                  String?       @db.VarChar
   prenomUtilisateur               String?       @db.VarChar
   pseudoUtilisateur               String        @unique @db.VarChar
