@@ -1,0 +1,126 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model commentaire {
+  idCommentaire                                  Int         @id @default(autoincrement())
+  idCompte                                       Int?
+  contenuCommentaire                             String
+  dateCommentaire                                DateTime
+  isCommentaireSupprime                          Boolean     @default(false)
+  idRessource                                    BigInt?
+  compte                                         compte?     @relation(fields: [idCompte], references: [idCompte], onDelete: NoAction, onUpdate: NoAction, map: "idCompte")
+  ressource_commentaire_idRessourceToressource   ressource?  @relation("commentaire_idRessourceToressource", fields: [idRessource], references: [idRessource], onDelete: NoAction, onUpdate: NoAction, map: "idRessource")
+  ressource_commentaireToressource_idCommentaire ressource[] @relation("commentaireToressource_idCommentaire")
+}
+
+model compte {
+  idCompte                        Int           @id @default(autoincrement())
+  nomUtilisateur                  String?       @db.VarChar
+  prenomUtilisateur               String?       @db.VarChar
+  pseudoUtilisateur               String        @unique @db.VarChar
+  mailUtilisateur                 String        @unique @db.VarChar
+  mdpUtilisateur                  String?       @db.VarChar
+  dateCreationUtilisateur         DateTime      @db.Date
+  typeUtilisateur                 Role          @default(USER)
+  dateAffectationGradeUtilisateur DateTime?     @db.Date
+  departementUtilisateur          String?       @db.VarChar
+  regionUtilisateur               String?       @db.VarChar
+  tempsMoyenConnexionUtilisateur  BigInt?
+  ageUtilisateur                  Int?
+  isActive                        Boolean       @default(false)
+  commentaire                     commentaire[]
+  ressource                       ressource[]
+}
+
+model discussion {
+  idDiscussion BigInt @id
+}
+
+model ressource {
+  idRessource                                      BigInt        @id @default(autoincrement())
+  titreRessource                                   String?       @db.VarChar
+  categorieRessource                               String?       @db.VarChar
+  typeRessource                                    String?       @db.VarChar
+  typeRelationRessource                            String?       @db.VarChar
+  dateRessource                                    DateTime?     @db.Date
+  lienRessource                                    String?       @db.VarChar
+  localisationRessource                            String?       @db.VarChar
+  idCommentaire                                    BigInt?
+  idCompte                                         BigInt?
+  commentaire_commentaireToressource_idCommentaire commentaire?  @relation("commentaireToressource_idCommentaire", fields: [idCommentaire], references: [idCommentaire], onDelete: NoAction, onUpdate: NoAction, map: "idCommentaire")
+  compte                                           compte?       @relation(fields: [idCompte], references: [idCompte], onDelete: NoAction, onUpdate: NoAction, map: "idCompte")
+  commentaire_commentaire_idRessourceToressource   commentaire[] @relation("commentaire_idRessourceToressource")
+}
+
+model tableauDeBord {
+  idTableauBord   BigInt    @id(map: "tableau de bord_pkey")
+  dateTableauBord DateTime? @db.Date
+}
+
+enum Role {
+  USER
+  MODERATOR
+  ADMINISTRATOR
+  SUPER_ADMIN
+}
+
+enum categorie {
+  Communication
+  Cultures
+  D_veloppement_personnel @map("Développement personnel")
+  Intelligence__motionnelle @map("Intelligence émotionnelle")
+  Loisirs
+  Monde_professionnel @map("Monde professionnel")
+  Parentalit_ @map("Parentalité")
+  Qualit__de_vie @map("Qualité de vie")
+  Recherche_de_sens @map("Recherche de sens")
+  Sant__physique @map("Santé physique")
+  Sant__psychique @map("Santé psychique")
+  Spiritualit_ @map("Spiritualité")
+  Vie_affective @map("Vie affective")
+}
+
+enum cat_gories {
+  Communication
+  Cultures
+  D_veloppement_personnel @map("Développement personnel")
+  Intelligence__motionnelle @map("Intelligence émotionnelle")
+  Loisirs
+  Monde_professionnel @map("Monde professionnel")
+  Parentalit_ @map("Parentalité")
+  Qualit__de_vie @map("Qualité de vie")
+  Recherche_de_sens @map("Recherche de sens")
+  Sant__physique @map("Santé physique")
+  Sant__psychique @map("Santé psychique")
+  Spiritualit_ @map("Spiritualité")
+  Vie_affective @map("Vie affective")
+
+  @@map("catégories")
+}
+
+enum relations {
+  Soi
+  Conjoints
+  Famille
+  Professionnelle
+  Amis_et_communaut_ @map("Amis et communauté")
+  Inconnus
+}
+
+enum typer {
+  Activit____Jeu___r_aliser @map("Activité / Jeu à réaliser")
+  Article
+  Carte_d_fi @map("Carte défi")
+  Cours_au_format_PDF @map("Cours au format PDF")
+  Exercice___Atelier @map("Exercice / Atelier")
+  Fiche_de_lecture @map("Fiche de lecture")
+  Jeu_en_ligne @map("Jeu en ligne")
+  Vid_o @map("Vidéo")
+  Sport
+}
