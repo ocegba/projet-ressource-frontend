@@ -8,8 +8,8 @@ datasource db {
 }
 
 model commentaire {
-  idCommentaire                                  BigInt         @id @default(autoincrement())
-  idCompte                                       BigInt?
+  idCommentaire                                  Int         @id @default(autoincrement())
+  idCompte                                       Int?
   contenuCommentaire                             String
   dateCommentaire                                DateTime
   isCommentaireSupprime                          Boolean     @default(false)
@@ -20,7 +20,7 @@ model commentaire {
 }
 
 model compte {
-  idCompte                        BigInt           @id @default(autoincrement())
+  idCompte                        Int           @id @default(autoincrement())
   nomUtilisateur                  String?       @db.VarChar
   prenomUtilisateur               String?       @db.VarChar
   pseudoUtilisateur               String        @unique @db.VarChar
@@ -47,12 +47,14 @@ model ressource {
   titreRessource                                   String?       @db.VarChar
   categorieRessource                               String?       @db.VarChar
   typeRessource                                    String?       @db.VarChar
-  typeRelationRessource                            String?       @db.VarChar
   dateRessource                                    DateTime?     @db.Date
   lienRessource                                    String?       @db.VarChar
   localisationRessource                            String?       @db.VarChar
   idCommentaire                                    BigInt?
   idCompte                                         BigInt?
+  typeRelationRessource                            String?       @db.VarChar
+  storyRessource                                   String?       @db.VarChar(1000)
+  fileRessource                                    String?       @db.VarChar
   commentaire_commentaireToressource_idCommentaire commentaire?  @relation("commentaireToressource_idCommentaire", fields: [idCommentaire], references: [idCommentaire], onDelete: NoAction, onUpdate: NoAction, map: "idCommentaire")
   compte                                           compte?       @relation(fields: [idCompte], references: [idCompte], onDelete: NoAction, onUpdate: NoAction, map: "idCompte")
   commentaire_commentaire_idRessourceToressource   commentaire[] @relation("commentaire_idRessourceToressource")
