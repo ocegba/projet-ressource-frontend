@@ -53,7 +53,7 @@ model ressource {
   idCommentaire                                    BigInt?
   idCompte                                         BigInt?
   typeRelationRessource                            String?       @db.VarChar
-  storyRessource                                   String?       @db.VarChar(1000)
+  storyRessource                                   String?       @db.VarChar
   fileRessource                                    String?       @db.VarChar
   commentaire_commentaireToressource_idCommentaire commentaire?  @relation("commentaireToressource_idCommentaire", fields: [idCommentaire], references: [idCommentaire], onDelete: NoAction, onUpdate: NoAction, map: "idCommentaire")
   compte                                           compte?       @relation(fields: [idCompte], references: [idCompte], onDelete: NoAction, onUpdate: NoAction, map: "idCompte")

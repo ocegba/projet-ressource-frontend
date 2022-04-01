@@ -1,16 +1,58 @@
 import Head from 'next/head'
-import React, { useRef, useState } from "react";
-import { useFormState } from 'react-hook-form';
+import React, { useRef, useState } from "react"
+import axios from "axios";
 
-const createRessource = () => {
-  const [title, setTitle] = useState('')
-  const [category, setCategory] = useState('')
-  const [ressources, setRessources] = useState('')
-  const [relations, setRelations] = useState('')
-  const [story, setStory] = useState('')
-  const [file, setFile] = useState('')
-  const [url, setUrl] = useState('')
-  const [ville, setVille] = useState('')
+export default function createRessource() {
+  const [disable, setDisable] = useState(false);
+
+  const [titreRessource, setTitreRessource] = useState('')
+  const [categorieRessource, setCategorieRessource] = useState('')
+  const [typeRessource, setTypeRessource] = useState('')
+  const [typeRelationRessource, setRelationRessource] = useState('')
+  const [storyRessource, setStoryRessource] = useState('')
+  const [fileRessource, setFileRessource] = useState('')
+  const [lienRessource, setLienRessource] = useState('')
+  const [localisationRessource, setLocalisationRessource] = useState('')
+
+  const formRef = useRef();
+
+  const [isChecked, setIsChecked] = useState({ option1: false, option2: false })
+  const toggle = ({ target: { name } }) =>
+    setIsChecked({ ...isChecked, [name]: !isChecked[name] })
+
+  async function addNewRessource(params) {
+    setDisable(true);
+    const {
+      addRessourcesTitreRessource,
+      addRessourcesCategorieRessource,
+      addRessourcesTypeRessource,
+      addRessourcesRelationRessource,
+      addRessourcesStoryRessource,
+      addRessourcesFileRessource,
+      addRessourcesLienRessource,
+      addRessourcesLocalisationRessource,
+    } = formRef.current;
+    const titreRessource = addRessourcesTitreRessource.value;
+    const categorieRessource = addRessourcesCategorieRessource.value;
+    const typeRessource = addRessourcesTypeRessource.value;
+    const typeRelationRessource = addRessourcesRelationRessource.value;
+    const storyRessource = addRessourcesStoryRessource.value;
+    // const fileRessource = addRessourcesFileRessource.value;
+    const lienRessource = addRessourcesLienRessource.value;
+    const localisationRessource = addRessourcesLocalisationRessource.value;
+    await axios.post("/api/addRessource", {
+      titreRessource,
+      categorieRessource,
+      typeRessource,
+      typeRelationRessource,
+      storyRessource,
+      /*             fileRessource, */
+      lienRessource,
+      localisationRessource,
+    });
+    setDisable(false);
+    window.location.reload();
+  }
 
   return (
     <div class="flex flex-column portrait:flex-col w-full	bg-gray-100 h-fit">
@@ -21,29 +63,29 @@ const createRessource = () => {
       </Head>
       <div class="bg-custom-blue/50 rounded-3xl flex-1 justify-center	items-center p-8 m-4 h-fit">
         <h1 class="flex justify-center items-center align-justify font-extrabold text-4xl">Créer votre ressource</h1>
-        <form i d="formCreate" class="flex flex-col" method="post" action="/">
+        <form i ref={formRef} d="formCreate" class="flex flex-col">
 
           <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-            <label class="text-xl" for="title">Titre de la ressource :</label>
+            <label class="text-xl" for="titreRessource">Titre de la ressource :</label>
             <input class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10" maxlength="45"
               type="text"
-              name="title"
-              id="title"
+              name="addRessourcesTitreRessource"
+              id="titreRessource"
               placeholder='ex: Chasse aux trésors'
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              value={titreRessource}
+              onChange={(e) => setTitreRessource(e.target.value)}
             />
           </div>
 
           <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-            <label class="text-xl" for="category">Catégorie :</label>
+            <label class="text-xl" for="categorieRessource">Catégorie :</label>
             <select class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
               required
-              name="category"
-              id="category"
+              name="addRessourcesCategorieRessource"
+              id="categorieRessource"
               placeholder='Sélectionnez une catégorie'
-              value={category}
-              onChange={(e) => setCategory(e.target.value)} >
+              value={categorieRessource}
+              onChange={(e) => setCategorieRessource(e.target.value)} >
 
               <option value="Communication">Communication</option>
               <option value="Cultures">Cultures</option>
@@ -65,11 +107,11 @@ const createRessource = () => {
             <label class="text-xl" for="typesRessources">Types de ressources :</label>
             <select class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
               required
-              name="typesRessources"
+              name="addRessourcesTypeRessource"
               id="typesRessources"
               placeholder='Sélectionnez un type de ressource'
-              value={ressources}
-              onChange={(e) => setRessources(e.target.value)} >
+              value={typeRessource}
+              onChange={(e) => setTypeRessource(e.target.value)} >
 
               <option value="Activité / Jeu à réaliser">Activité / Jeu à réaliser</option>
               <option value="Article">Article</option>
@@ -83,69 +125,68 @@ const createRessource = () => {
           </div>
 
           <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-            <label class="text-xl" for="story">Texte :</label>
+            <label class="text-xl" for="storyRessource">Texte :</label>
             <textarea class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
               type="text"
-              name="story"
-              id="story"
+              name="addRessourcesStoryRessource"
+              id="storyRessource"
               placeholder='Expliquer votre ressource'
-              value={story}
-              onChange={(e) => setStory(e.target.value)} />
+              value={storyRessource}
+              onChange={(e) => setStoryRessource(e.target.value)}/>
           </div>
 
-          <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-            <label class="text-xl" for="file">Fichier :</label>
+          {/*           <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
+            <label class="text-xl" for="fileRessource">Fichier :</label>
             <input
               type="file"
-              name="file"
-              id="file"
+              name="addRessourcesFileRessource"
+              id="fileRessource"
               placeholder='Insérer une image, un document pdf ou word...'
-              value={file}
-              onChange={(e) => setFile(e.target.value)} />
-          </div>
+              value={fileRessource}
+              onChange={(e) => setFileRessource(e.target.value)} />
+          </div> */}
 
           <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-            <label class="text-xl" for="url">Entrez un lien url en complément de votre ressource :</label>
+            <label class="text-xl" for="lienRessource">Entrez un lien url en complément de votre ressource :</label>
             <input class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
               type="url"
-              name="url"
-              id="url"
+              name="addRessourcesLienRessource"
+              id="lienRessource"
               placeholder="https://example.com"
               pattern="https://.*"
               size="30"
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
+              value={lienRessource}
+              onChange={(e) => setLienRessource(e.target.value)}
             />
           </div>
 
           <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-            <label class="text-xl" for="typesRelations">Types de relations :</label>
-            <ul class="relative align-center select-none text-lg"
+            <label class="text-xl" for="typesRelationRessource">Types de relations :</label>
+            <select class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
               required
-              name="typesRelations"
-              id="typesRelations"
+              name="addRessourcesRelationRessource"
+              id="typesRelationRessource"
               placeholder='Sélectionnez une ou plusieurs relations'
-              value={relations}
-              onChange={(e) => setRelations(e.target.value)}>
+              value={typeRelationRessource}
+              onChange={(e) => setRelationRessource(e.target.value)}>
 
-              <input type="checkbox" class="shadow-xl rounded-md mx-0	my-0" value="Soi" name="soi" id="soi" /> <label class="text-xl my-0	mr-1 ml-0.5">Soi</label>
-              <input type="checkbox" class="shadow-xl rounded-md mx-0	my-0" value="Conjoints" name="conjoints" id="conjoints" /> <label class="text-xl my-0	mr-1 ml-0.5">Conjoints</label>
-              <input type="checkbox" class="shadow-xl rounded-md mx-0	my-0" value="Famille" name="famille" id="famille" /> <label class="text-xl my-0	mr-1 ml-0.5">Famille</label>
-              <input type="checkbox" class="shadow-xl rounded-md mx-0	my-0" value="Amis et communautés" name="amisetcommunautés" id="amisetcommunautés" /> <label class="text-xl my-0	mr-1 ml-0.5">Amis et communautés</label>
-              <input type="checkbox" class="shadow-xl rounded-md mx-0	my-0" value="Inconnus" name="inconnus" id="inconnus" /> <label class="text-xl my-0	mr-1 ml-0.5">Inconnus</label>
-            </ul>
+              <option value="Tous">Tous </option>
+              <option value="Soi">Soi </option>
+              <option value="Conjoints">Conjoints</option>
+              <option value="Famille">Famille</option>
+              <option value="Amis et communautés">Amis et communautés</option>
+              <option value="Inconnus">Inconnus </option>
+            </select>
           </div>
 
           <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-            <label class="text-xl" for="ville">Ville :</label>
+            <label class="text-xl">Ville :</label>
             <input class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
-              type="text"
-              name="ville"
-              id="ville"
+              name="addRessourcesLocalisationRessource"
               list="nomville"
               placeholder='Sélectionnez une ville'
-              value={ville}
-              onChange={(e) => setVille(e.target.value)}
+              value={localisationRessource}
+              onChange={(e) => setLocalisationRessource(e.target.value)}
             />
             <datalist id="nomville">
               <option value="" />
@@ -249,7 +290,7 @@ const createRessource = () => {
           </div>
 
           <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-            <button class="h-20 mt-3 mb-3 bg-custom-blue text-white font-bold text-3xl w-fit pr-2 pl-2 rounded-xl block m-auto cursor-pointer rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" type="submit">Créer une ressource</button>
+            <button disabled={disable} class="h-20 mt-3 mb-3 bg-custom-blue text-white font-bold text-3xl w-fit pr-2 pl-2 rounded-xl block m-auto cursor-pointer rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" type="submit" onClick={() => addNewRessource()}>Créer une ressource</button>
           </div>
         </form >
       </div>
@@ -259,14 +300,14 @@ const createRessource = () => {
         <div class="static w-600 h-550 bg-white rounded-lg drop-shadow-xl">
           <div class="flex justify-between p-2 h-24 top-0">
             <div class="h-fit">
-              <h2 class="m-auto text-lg text-black">{title}</h2>
-              <p class="m-auto text-black">crée par <span id="username" /><br />prévu à {ville}</p>
+              <h2 class="m-auto text-lg text-black">{titreRessource}</h2>
+              <p class="m-auto text-black">crée par <span id="username" /><br />prévu à {localisationRessource}</p>
             </div>
 
             <div>
-              <p class="text-xs bg-red-200" id="categoryOutput">{category}</p>
-              <p class="text-xs bg-custom-blue" id="typesRessourcesOutput">{ressources}</p>
-              <p class="text-xs bg-green-200" id="typesRelationsOutput">{relations}</p>
+              <p class="text-xs bg-red-200" id="categorieRessourceOutput">{categorieRessource}</p>
+              <p class="text-xs bg-custom-blue" id="typesRessourcesOutput">{typeRessource}</p>
+              <p class="text-xs bg-green-200" id="typesRelationRessourceOutput">{typeRelationRessource}</p>
             </div>
 
             <div class="cursor-pointer">
@@ -278,17 +319,17 @@ const createRessource = () => {
           </div>
 
           <div class="h-96 bg-green-200">
-            <p class="pl-2 text-justify">{story}</p>
+            <p class="pl-2 text-justify">{storyRessource}</p>
           </div>
 
           <div class="grid grid-cols-2 justify-between p-2.5">
             <div class="inline-block">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 384 512"><path d="M256 0v128h128L256 0zM224 128L224 0H48C21.49 0 0 21.49 0 48v416C0 490.5 21.49 512 48 512h288c26.51 0 48-21.49 48-48V160h-127.1C238.3 160 224 145.7 224 128z" /></svg>
-              <a href="fichier.pdf" id="fileOutput" download>{file}</a>
+              <a href="fichier.pdf" id="fileRessourceOutput" download>{fileRessource}</a>
             </div>
             <div class="inline-block mr-0">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 640 512"><path d="M172.5 131.1C228.1 75.51 320.5 75.51 376.1 131.1C426.1 181.1 433.5 260.8 392.4 318.3L391.3 319.9C381 334.2 361 337.6 346.7 327.3C332.3 317 328.9 297 339.2 282.7L340.3 281.1C363.2 249 359.6 205.1 331.7 177.2C300.3 145.8 249.2 145.8 217.7 177.2L105.5 289.5C73.99 320.1 73.99 372 105.5 403.5C133.3 431.4 177.3 435 209.3 412.1L210.9 410.1C225.3 400.7 245.3 404 255.5 418.4C265.8 432.8 262.5 452.8 248.1 463.1L246.5 464.2C188.1 505.3 110.2 498.7 60.21 448.8C3.741 392.3 3.741 300.7 60.21 244.3L172.5 131.1zM467.5 380C411 436.5 319.5 436.5 263 380C213 330 206.5 251.2 247.6 193.7L248.7 192.1C258.1 177.8 278.1 174.4 293.3 184.7C307.7 194.1 311.1 214.1 300.8 229.3L299.7 230.9C276.8 262.1 280.4 306.9 308.3 334.8C339.7 366.2 390.8 366.2 422.3 334.8L534.5 222.5C566 191 566 139.1 534.5 108.5C506.7 80.63 462.7 76.99 430.7 99.9L429.1 101C414.7 111.3 394.7 107.1 384.5 93.58C374.2 79.2 377.5 59.21 391.9 48.94L393.5 47.82C451 6.731 529.8 13.25 579.8 63.24C636.3 119.7 636.3 211.3 579.8 267.7L467.5 380z" /></svg>
-              <a href="">{url}</a>
+              <a href="">{lienRessource}</a>
             </div>
           </div>
 
@@ -304,5 +345,3 @@ const createRessource = () => {
     </div>
   )
 }
-
-export default createRessource
