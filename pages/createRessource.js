@@ -37,7 +37,7 @@ export default function createRessource() {
     const typeRessource = addRessourcesTypeRessource.value;
     const typeRelationRessource = addRessourcesRelationRessource.value;
     const storyRessource = addRessourcesStoryRessource.value;
-    // const fileRessource = addRessourcesFileRessource.value;
+    const fileRessource = addRessourcesFileRessource.value;
     const lienRessource = addRessourcesLienRessource.value;
     const localisationRessource = addRessourcesLocalisationRessource.value;
     await axios.post("/api/addRessource", {
@@ -46,7 +46,7 @@ export default function createRessource() {
       typeRessource,
       typeRelationRessource,
       storyRessource,
-      /*             fileRessource, */
+      fileRessource,
       lienRessource,
       localisationRessource,
     });
@@ -67,7 +67,7 @@ export default function createRessource() {
 
           <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
             <label class="text-xl" for="titreRessource">Titre de la ressource :</label>
-            <input class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10" maxlength="45"
+            <input class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10" maxlength="50"
               type="text"
               name="addRessourcesTitreRessource"
               id="titreRessource"
@@ -87,6 +87,7 @@ export default function createRessource() {
               value={categorieRessource}
               onChange={(e) => setCategorieRessource(e.target.value)} >
 
+              <option value="" selected disabled hidden>Choisir une catégorie</option>
               <option value="Communication">Communication</option>
               <option value="Cultures">Cultures</option>
               <option value="Developpement personnel">Developpement personnel</option>
@@ -113,6 +114,7 @@ export default function createRessource() {
               value={typeRessource}
               onChange={(e) => setTypeRessource(e.target.value)} >
 
+              <option value="" selected disabled hidden>Choisir un type de ressources</option>
               <option value="Activité / Jeu à réaliser">Activité / Jeu à réaliser</option>
               <option value="Article">Article</option>
               <option value="Carte défi">Carte défi</option>
@@ -132,10 +134,10 @@ export default function createRessource() {
               id="storyRessource"
               placeholder='Expliquer votre ressource'
               value={storyRessource}
-              onChange={(e) => setStoryRessource(e.target.value)}/>
+              onChange={(e) => setStoryRessource(e.target.value)} />
           </div>
 
-          {/*           <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
+          <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
             <label class="text-xl" for="fileRessource">Fichier :</label>
             <input
               type="file"
@@ -144,7 +146,7 @@ export default function createRessource() {
               placeholder='Insérer une image, un document pdf ou word...'
               value={fileRessource}
               onChange={(e) => setFileRessource(e.target.value)} />
-          </div> */}
+          </div>
 
           <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
             <label class="text-xl" for="lienRessource">Entrez un lien url en complément de votre ressource :</label>
@@ -170,10 +172,12 @@ export default function createRessource() {
               value={typeRelationRessource}
               onChange={(e) => setRelationRessource(e.target.value)}>
 
+              <option value="" selected disabled hidden>Choisir un type de relations</option>
               <option value="Tous">Tous </option>
               <option value="Soi">Soi </option>
               <option value="Conjoints">Conjoints</option>
               <option value="Famille">Famille</option>
+              <option value="Professionelle"> Professionnelle : collègues, collaborateurs et managers</option>
               <option value="Amis et communautés">Amis et communautés</option>
               <option value="Inconnus">Inconnus </option>
             </select>
