@@ -14,7 +14,6 @@ function addFavoris(){
 export default function CardRes({ressource}) {
 
     return (
-        <Link href={`/ressource/${ressource.idRessource}`}>
         <div class="flex-1 justify-center	items-center p-14">
         <div class="static w-600 h-550 bg-white rounded-lg drop-shadow-xl">
           <div class="flex justify-between p-2 h-24 top-0">
@@ -60,8 +59,6 @@ export default function CardRes({ressource}) {
 
         </div>
 
-      </div>
-        </Link>
-    
+      </div>    
     )
 }

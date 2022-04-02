@@ -16,10 +16,6 @@ export default function createRessource() {
 
   const formRef = useRef();
 
-  const [isChecked, setIsChecked] = useState({ option1: false, option2: false })
-  const toggle = ({ target: { name } }) =>
-    setIsChecked({ ...isChecked, [name]: !isChecked[name] })
-
   async function addNewRessource(params) {
     setDisable(true);
     const {

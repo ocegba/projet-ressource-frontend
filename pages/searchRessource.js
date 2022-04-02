@@ -1,4 +1,4 @@
-import FormulaireResFilter from '../components/FormulaireResFilter'
+import Formulaire from '../components/Formulaire'
 import Head from 'next/head'
 import Table, { SelectColumnFilter, StatusPill } from "../components/Table";
 
@@ -15,7 +15,7 @@ const searchRessource = () => {
         <div class='bg-custom-blue/50 text-3xl mt-3 mb-3 justify-center items-center rounded-3xl shadow-xl'>
           <h1 class="border-gray-200 border-solid border-0 box-border font-bold text-4xl leading-none m-auto py-3.5 text-center not-italic">Consultez les ressources de la communauté</h1>
           <div class="items-center">
-            <FormulaireResFilter />
+            <Formulaire />
           </div>
 
         </div>

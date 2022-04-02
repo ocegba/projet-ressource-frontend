@@ -1,20 +1,71 @@
-const Formulaire = () => {
+import React, { useRef, useState } from "react"
+import axios from "axios";
+
+export default function Formulaire() {
+  const [disable, setDisable] = useState(false)
+
+  const [categorieRessource, setCategorieRessource] = useState('')
+  const [titreRessource, setTitreRessource] = useState('')
+  const [typeRessource, setTypeRessource] = useState('')
+  const [typeRelationRessource, setRelationRessource] = useState('')
+  const [localisationRessource, setLocalisationRessource] = useState('')
+
+  const formRef = useRef();
+
+  async function searchNewRessource(params) {
+    setDisable(true);
+    const {
+      searchRessourcesTitreRessource,
+      searchRessourcesCategorieRessource,
+      searchRessourcesTypeRessource,
+      searchRessourcesRelationRessource,
+      searchRessourcesLocalisationRessource,
+    } = formRef.current;
+    const titreRessource = searchRessourcesTitreRessource.value;
+    const categorieRessource = searchRessourcesCategorieRessource.value;
+    const typeRessource = searchRessourcesTypeRessource.value;
+    const typeRelationRessource = searchRessourcesRelationRessource.value;
+    const localisationRessource = searchRessourcesLocalisationRessource.value;
+    await axios.post("/api/searchRessource", {
+      titreRessource,
+      categorieRessource,
+      typeRessource,
+      typeRelationRessource,
+      localisationRessource,
+    });
+    setDisable(false);
+    window.location.reload();
+  }
+
   return (
-    <form class="flex flex-col justify-center" method="post" action="/searchRessource">
+    <form ref={formRef} class="flex flex-col justify-center">
       <div class="flex flex-col mt-4 min-h-[80px] w-11/12 h-20 mt-3 mb-3 m-auto pr-2 pl-2">
-        <label class="text-xl leading-7" for="keyword">Activités ou ressources :</label>
-        <input class="bg-white text-base font-medium h-14 pl-2 shadow-xl rounded-xl" type="text" name="keyword" id="keyword" placeholder='ex: Chasse aux trésors' />
+        <label class="text-xl leading-7" for="titreRessource">Activités ou ressources :</label>
+        <input class="bg-white text-base font-medium h-14 pl-2 shadow-xl rounded-xl"
+          type="text"
+          name="searchRessourcesTitreRessource"
+          id="titreRessource"
+          placeholder='ex: Chasse aux trésors'
+          onChange={(e) => setTitreRessource(e.target.value)}
+        />
       </div>
 
       <div class="flex flex-col mt-4 min-h-[80px] w-11/12 h-20 mt-3 mb-3 m-auto pr-2 pl-2 ">
-        <label class="text-xl leading-7" for="category">Catégorie :</label>
-        <select class="bg-white text-base font-medium h-14 pl-2 shadow-xl rounded-xl" required name="category" id="category" placeholder='Sélectionnez une catégorie' >
+        <label class="text-xl leading-7" for="categorieRessource">Catégorie :</label>
+        <select class="bg-white text-base font-medium h-14 pl-2 shadow-xl rounded-xl"
+          name="searchRessourcesCategorieRessource"
+          id="categorieRessource"
+          placeholder='Sélectionnez une catégorie'
+          value={categorieRessource}
+          onChange={(e) => setCategorieRessource(e.target.value)}>
+
+          <option value="" selected disabled hidden>Choisir une catégorie</option>
           <option value="communication">Communication</option>
           <option value="cultures">Cultures</option>
           <option value="developpementpersonnel">Developpement personnel</option>
           <option value="intelligenceemotionnelle">Intelligence émotionnelle</option>
           <option value="loisirs">Loisirs</option>
-          <option value="mondeprofessionnel">États-Unis</option>
+          <option value="mondeprofessionnel">Monde Professionel</option>
           <option value="parentalite">Parentalité</option>
           <option value="qualitedevie">Qualité de vie</option>
           <option value="recherchedesens">Recherche de sens</option>
@@ -27,7 +78,14 @@ const Formulaire = () => {
 
       <div class="flex flex-col mt-4 min-h-[80px] w-11/12 h-20 mt-3 mb-3 m-auto pr-2 pl-2 ">
         <label class="text-xl leading-7" for="typesRessources">Types de ressources :</label>
-        <select class="bg-white text-base font-medium h-14 pl-2 shadow-xl rounded-xl" required name="typesRessources" id="typesRessources" placeholder='Sélectionnez un type de ressource' >
+        <select class="bg-white text-base font-medium h-14 pl-2 shadow-xl rounded-xl"
+          name="searchRessourcesTypeRessource"
+          id="typesRessources"
+          placeholder='Sélectionnez un type de ressource'
+          value={typeRessource}
+          onChange={(e) => setTypeRessource(e.target.value)} >
+
+          <option value="" selected disabled hidden>Choisir un type de ressources</option>
           <option value="activite">Activité / Jeu à réaliser</option>
           <option value="article">Article</option>
           <option value="cartedefi">Carte défi</option>
@@ -40,19 +98,34 @@ const Formulaire = () => {
       </div>
 
       <div class="flex flex-col mt-4 min-h-[80px] w-11/12 h-20 mt-3 mb-3 m-auto pr-2 pl-2">
-        <label class="text-xl" for="typesRelations">Types de relations :</label>
-        <ul reqired name="typesRelations" id="typesRelations" placeholder='Sélectionnez une ou plusieurs relations' >
-          <input class="shadow-xl rounded-md mx-0	my-0" type="checkbox" name="relations" id="soi" /> <label class="text-xl my-0	mr-4 ml-0.5" for="soi">Soi</label>
-          <input class="shadow-xl rounded-md mx-0	my-0" type="checkbox" name="relations" id="conjoints" /> <label class="text-xl my-0	mr-4 ml-0.5" for="conjoints">Conjoints</label>
-          <input class="shadow-xl rounded-md mx-0	my-0" type="checkbox" name="relations" id="famille" /> <label class="text-xl my-0	mr-4 ml-0.5" for="famille">Famille</label>
-          <input class="shadow-xl rounded-md mx-0	my-0" type="checkbox" name="relations" id="amisetcommunautés" /> <label class="text-xl my-0	mr-4 ml-0.5" for="amisetcommunautés">Amis et communautés</label>
-          <input class="shadow-xl rounded-md mx-0	my-0" type="checkbox" name="relations" id="inconnus" /> <label class="text-xl my-0	mr-4 ml-0.5" for="inconnus">Inconnus</label>
-        </ul>
+        <label class="text-xl leading-7" for="typesRelationRessource">Types de relations :</label>
+        <select class="bg-white text-base font-medium h-14 pl-2 shadow-xl rounded-xl"
+          name="searchRessourcesRelationRessource"
+          id="typesRelationRessource"
+          placeholder='Sélectionnez une ou plusieurs relations'
+          value={typeRelationRessource}
+          onChange={(e) => setRelationRessource(e.target.value)}>
+
+          <option value="" selected disabled hidden>Choisir un type de relations</option>
+          <option value="Tous">Tous </option>
+          <option value="Soi">Soi </option>
+          <option value="Conjoints">Conjoints</option>
+          <option value="Famille">Famille</option>
+          <option value="Professionelle"> Professionnelle : collègues, collaborateurs et managers</option>
+          <option value="Amis et communautés">Amis et communautés</option>
+          <option value="Inconnus">Inconnus </option>
+        </select>
       </div>
 
       <div class="flex flex-col mt-4 min-h-[80px] w-11/12 h-20 mt-3 mb-3 m-auto pr-2 pl-2 ">
-        <label class="text-xl leading-7" for="ville">Ville :</label>
-        <input class="bg-white text-base font-medium h-14 pl-2 shadow-xl rounded-xl" type="text" name="ville" id="ville" list="nomville" placeholder='Sélectionnez une ville' />
+        <label class="text-xl leading-7">Ville :</label>
+        <input class="bg-white text-base font-medium h-14 pl-2 shadow-xl rounded-xl"
+          name="searchRessourcesLocalisationRessource"
+          list="nomville"
+          placeholder='Sélectionnez une ville'
+          value={localisationRessource}
+          onChange={(e) => setLocalisationRessource(e.target.value)}
+        />
         <datalist id="nomville">
           <option value="" />
           <option value="bourg">Bour-en-Bresse (01)</option>
@@ -155,10 +228,8 @@ const Formulaire = () => {
       </div>
 
       <div >
-        <button class="h-20 mt-3 mb-3 bg-custom-blue text-white font-bold text-3xl w-fit pr-2 pl-2 rounded-xl block m-auto cursor-pointer rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" type="submit">Rechercher une ressource</button>
+        <button class="h-20 mt-3 mb-3 bg-custom-blue text-white font-bold text-3xl w-fit pr-2 pl-2 rounded-xl block m-auto cursor-pointer rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" type="submit" onClick={() => searchNewRessource()}>Rechercher une ressource</button>
       </div>
     </form >
   )
 }
-
-export default Formulaire

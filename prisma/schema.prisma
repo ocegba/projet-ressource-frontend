@@ -43,7 +43,7 @@ model discussion {
 }
 
 model ressource {
-  idRessource                                      Int           @id @default(autoincrement())
+  idRessource                                      BigInt           @id @default(autoincrement())
   titreRessource                                   String?       @db.VarChar
   categorieRessource                               String?       @db.VarChar
   typeRessource                                    String?       @db.VarChar
