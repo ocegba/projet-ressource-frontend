@@ -36,6 +36,7 @@ export default function createRessource() {
     const fileRessource = addRessourcesFileRessource.value;
     const lienRessource = addRessourcesLienRessource.value;
     const localisationRessource = addRessourcesLocalisationRessource.value;
+    const dateRessource = (new Date(Date.now())).toISOString();
     await axios.post("/api/addRessource", {
       titreRessource,
       categorieRessource,
@@ -45,6 +46,7 @@ export default function createRessource() {
       fileRessource,
       lienRessource,
       localisationRessource,
+      dateRessource,
     });
     setDisable(false);
     window.location.reload();
