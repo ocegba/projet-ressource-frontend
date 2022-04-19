@@ -12,7 +12,7 @@ export default function Formulaire() {
 
   const formRef = useRef();
 
-  async function searchNewRessource(params) {
+/*   async function searchNewRessource(params) {
     setDisable(true);
     const {
       searchRessourcesTitreRessource,
@@ -35,7 +35,7 @@ export default function Formulaire() {
     });
     setDisable(false);
     window.location.reload();
-  }
+  } */
 
   return (
     <form ref={formRef} class="flex flex-col justify-center">
@@ -228,7 +228,8 @@ export default function Formulaire() {
       </div>
 
       <div >
-        <button class="h-20 mt-3 mb-3 bg-custom-blue text-white font-bold text-3xl w-fit pr-2 pl-2 rounded-xl block m-auto cursor-pointer rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" type="submit" onClick={() => searchNewRessource()}>Rechercher une ressource</button>
+        <button class="h-20 mt-3 mb-3 bg-custom-blue text-white font-bold text-3xl w-fit pr-2 pl-2 rounded-xl block m-auto cursor-pointer rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300"
+        type="submit" /*  onClick={() => searchNewRessource()} */>Rechercher une ressource</button>
       </div>
     </form >
   )

@@ -7,7 +7,7 @@ export default async (req, res) => {
     const data = req.body;
 
     try {
-        const result = await prisma.ressource.findMany({
+        const searchRessource = await prisma.ressource.findMany({
             where: {
                 titreRessource: {
                     contains: data.titreRessource,
@@ -27,9 +27,7 @@ export default async (req, res) => {
             }
         }
         )
-        console.log(result)
-        res.status(200).json(JSONBig.parse(JSONBig.stringify((result))));
-        return result;
+        res.status(200).json(JSONBig.parse(JSONBig.stringify((searchRessource))));
     } catch (err) {
         console.log(err);
         res.status(403).json({ err: "Il y a un problème en recherchant une ressource" });
