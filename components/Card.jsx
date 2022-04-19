@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react"
 import axios from "axios";
-import useSWR from 'swr'
 import { prisma } from "@prisma/client";
 
 function addParticiper() {
@@ -36,11 +35,6 @@ export default function Card({ ressource }) {
     window.location.reload();
   }
 
-  const fetcher = async (url) => await axios.get(url).then((res) => res.data);
-  const { data, error } = useSWR('../pages/api/commentaires/readComment', fetcher)
-  if (error) return <div>An error occured.</div>
-  if (!data) return <div>Loading ...</div>
-  { console.log(error)}
 
   return (
     <div class="flex-1 justify-center	items-center p-14">
@@ -107,9 +101,7 @@ export default function Card({ ressource }) {
               </form>
             </div>
             <ul>
-              {/* {data.commentaire.map(comment => (
-                <li key={ressource.idRessource}>{comment.contenuCommentaire}</li>
-              ))} */}
+            {/* Anciens commentaires */}
             </ul>
           </div>
         ) : false}
