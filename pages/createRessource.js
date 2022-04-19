@@ -37,7 +37,7 @@ export default function createRessource() {
     const lienRessource = addRessourcesLienRessource.value;
     const localisationRessource = addRessourcesLocalisationRessource.value;
     const dateRessource = (new Date(Date.now())).toISOString();
-    await axios.post("/api/addRessource", {
+    await axios.post("/api/ressource/addRessource", {
       titreRessource,
       categorieRessource,
       typeRessource,

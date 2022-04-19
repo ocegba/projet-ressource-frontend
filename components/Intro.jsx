@@ -28,7 +28,7 @@ const Intro = () => {
         </div>
         <div className={styles.card}>
           <h2 className={styles.subTitle}>Consulter les ressources de la communauté</h2>
-          {/* <Formulaire /> */}
+          <Formulaire />
         </div>
       </div>
     </div>
