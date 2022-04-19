@@ -1,7 +1,6 @@
 import React from 'react'
 import SideBar from '../../components/SideBar'
 import Head from 'next/head'
-import Table, { SelectColumnFilter, StatusPill } from "../../components/Table";
 
 const profil = () => {
     return (
