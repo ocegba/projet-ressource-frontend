@@ -1,7 +1,5 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from '../../../prisma/prisma'
 import JSONBig from 'json-bigint';
-
-const prisma = new PrismaClient();
 
 export default async (req, res) => {
     const data = req.body;

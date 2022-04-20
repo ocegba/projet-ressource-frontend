@@ -18,6 +18,7 @@
     "dotenv": "^16.0.0",
     "heroicons": "^1.0.6",
     "json-bigint": "^1.0.0",
+    "moment": "^2.29.3",
     "next": "^12.1.0",
     "next-connect": "^0.12.2",
     "passport": "^0.4.1",

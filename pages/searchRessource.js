@@ -1,11 +1,8 @@
 import Formulaire, { returnDataForm } from '../components/Formulaire'
 import Head from 'next/head'
-import { PrismaClient } from "@prisma/client";
 import Card from '../components/Card';
 import JSONBig from 'json-bigint';
-
-
-const prisma = new PrismaClient();
+import prisma from '../prisma/prisma'
 
 function searchRessource(props) {
   const ressources = props.ressources;
