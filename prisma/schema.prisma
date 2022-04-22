@@ -55,6 +55,8 @@ model ressource {
   typeRelationRessource                            String?       @db.VarChar
   storyRessource                                   String?       @db.VarChar
   fileRessource                                    String?       @db.VarChar
+  validerRessource                                 Boolean?
+  notRaisonRessource                               String?
   commentaire_commentaireToressource_idCommentaire commentaire?  @relation("commentaireToressource_idCommentaire", fields: [idCommentaire], references: [idCommentaire], onDelete: NoAction, onUpdate: NoAction, map: "idCommentaire")
   compte                                           compte?       @relation(fields: [idCompte], references: [idCompte], onDelete: NoAction, onUpdate: NoAction, map: "idCompte")
   commentaire_commentaire_idRessourceToressource   commentaire[] @relation("commentaire_idRessourceToressource")
