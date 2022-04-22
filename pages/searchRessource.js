@@ -14,9 +14,9 @@ function searchRessource(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div class='flex h-fit justify-center bg-gray-100'>
-        <div class='bg-custom-blue/50 text-3xl mt-3 mb-3 justify-center items-center rounded-3xl shadow-xl'>
-          <h1 class="border-gray-200 border-solid border-0 box-border font-bold text-4xl leading-none m-auto py-3.5 text-center not-italic">Consultez les ressources de la communauté</h1>
+      <div class='flex h-fit portrait:w-text-lg justify-center bg-gray-100'>
+        <div class='bg-custom-blue/50 text-3xl mt-3 mb-3 justify-center items-center rounded-3xl shadow-xl portrait:w-min'>
+          <h1 class="border-gray-200 border-solid border-0 box-border font-bold text-4xl leading-none m-auto py-3.5 text-center not-italic portrait:w-fit">Consultez les ressources de la communauté</h1>
           <div class="items-center">
             <Formulaire ressource={ressources} />
           </div>
@@ -34,7 +34,13 @@ function searchRessource(props) {
 }
 
 export async function getServerSideProps() {
-  const rechercheRessource = await prisma.ressource.findMany();
+  const rechercheRessource = await prisma.ressource.findMany(
+    {
+      where: {
+        validerRessource: true,
+      }
+    }
+  );
   return {
     props: {
       ressources: JSONBig.parse(JSONBig.stringify(rechercheRessource)),
