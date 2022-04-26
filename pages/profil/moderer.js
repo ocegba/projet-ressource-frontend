@@ -2,7 +2,7 @@ import React from 'react'
 import Head from 'next/head'
 import SideBar from '../../components/SideBar'
 import { Tabs } from '../../components/Tabs'
-import { RowsCompteAdmin, RowsCommentairesAdmin, RowsCommentairesMod, RowsRessourcesMod } from '../../components/Rows';
+import { RowsCompteAdmin, RowsCommentairesAdmin, RowsCommentairesMod, RowsRessourcesModRef, RowsRessourcesModHold} from '../../components/Rows';
 import JSONBig from 'json-bigint';
 import prisma from '../../prisma/prisma'
 
@@ -81,12 +81,12 @@ function moderer(props) {
                                             <p class="py-3 px-5 text-xl">Vous pouvez accepter une demande de création d'une ressource en donnant une raison dans le cas contraire.</p>
                                             <p class="py-3 px-5 text-lg">Les demandes de création de ressources en attente :</p>
                                             {
-                                                ressourcesHold?.map((hold, i) => <RowsRessourcesMod ressource={hold} key={i} />)
+                                                ressourcesHold?.map((hold, i) => <RowsRessourcesModHold ressource={hold} key={i} />)
                                             }
 
                                             <p class="py-3 px-5 text-lg">Les demandes de création de ressources refusées :</p>
                                             {
-                                                ressourcesRef?.map((ref, i) => <RowsRessourcesMod ressource={ref} key={i} />)
+                                                ressourcesRef?.map((ref, i) => <RowsRessourcesModRef ressource={ref} key={i} />)
                                             }
                                         </div>
                                     </div>
