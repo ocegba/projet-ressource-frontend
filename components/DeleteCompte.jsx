@@ -11,7 +11,7 @@ const DeleteCompte = () => {
                 <div class="grid gap-3 grid-cols-2 portrait:grid-cols-1 ">
                     <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
                         <label class="text-xl">Entrez votre email</label>
-                        <input type="email" id="email" name="email" />
+                        <input  class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-11" type="email" id="email" name="email" />
                     </div>
                 </div>
                 <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
