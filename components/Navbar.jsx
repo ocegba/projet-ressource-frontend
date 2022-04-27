@@ -8,24 +8,23 @@ function isLogged() {
 }
 
 const Navbar = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState("");
 
   return (
-    <nav class="bg-black border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800">
+    <nav class="bg-black border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-800">
       <div class="container flex flex-wrap justify-between items-center mx-auto">
         <a href="#" class="flex items-center">
           <a href="/" alt="loading..."><Image class="rounded-2xl" src={logo} width={80} height={80} /></a>
         </a>
         <div class="flex pt-5 md:order-2">
           <li>
-            {/*requete si c'est connecté ou non */}
-
             {isLogged() == false && <a href="/signup" class="text-white bg-custom-blue hover:bg-slate-400 focus:ring-3 focus:ring-slate-400 font-medium rounded-lg text-xl px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >S'inscrire</a>}
             {isLogged() == true && <a href="/profil/profil" class="text-white bg-custom-blue hover:bg-slate-400 focus:ring-3 focus:ring-slate-400 font-medium rounded-lg text-xl px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >Mon profil</a>}
           </li>
           <li>
-            <a href="/help" class="text-white bg-gray-500 hover:bg-gray-700 focus:ring-3 focus:ring-gray-700 font-medium rounded-lg text-xl px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >Aide</a>
+            {isLogged() == false && <a href="/signin" class="text-white bg-custom-blue hover:bg-slate-400 focus:ring-3 focus:ring-slate-400 font-medium rounded-lg text-xl px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >Se connecter</a>}
           </li>
+         
 
           <button onClick={() => setOpen(!open)} data-collapse-toggle="mobile-menu-4" type="button" class="inline-flex items-center p-2 text-xl text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-4" aria-expanded="false">
             <span class="sr-only">Ouvrir le menu principal</span>
@@ -37,7 +36,7 @@ const Navbar = () => {
           {!open ? (
             <ul class="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-xl md:font-medium">
               <li>
-                <a href="/createRessource" class="block hover:text-custom-blue py-2 pr-4 pl-3 text-white" aria-current="page">Créer une ressource</a>
+                <a href="/createRessource" class="block hover:text-custom-blue py-2 pr-4 pl-3 text-white">Créer une ressource</a>
               </li>
               <li>
                 <a href="/searchRessource" class="block hover:text-custom-blue py-2 pr-4 pl-3 text-white">Rechercher une ressource</a>
@@ -47,7 +46,7 @@ const Navbar = () => {
               </li>
               <li>
                 {/*requete si c'est connecté ou non */}
-                {isLogged() == false && <a href="/signin" class="block hover:text-custom-blue py-2 pr-4 pl-3 text-white">Se connecter</a>}
+                <a href="/help" class="block hover:text-custom-blue py-2 pr-4 pl-3 text-white">Aide</a>
               </li>
             </ul>
           ) : false}

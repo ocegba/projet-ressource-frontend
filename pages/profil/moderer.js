@@ -2,7 +2,7 @@ import React from 'react'
 import Head from 'next/head'
 import SideBar from '../../components/SideBar'
 import { Tabs } from '../../components/Tabs'
-import { RowsCompteAdmin, RowsCommentairesAdmin, RowsCommentairesMod, RowsRessourcesModRef, RowsRessourcesModHold} from '../../components/Rows';
+import { RowsCompteAdmin, RowsCommentairesAdmin, RowsCommentairesMod, RowsRessourcesModRef, RowsRessourcesModHold } from '../../components/Rows';
 import JSONBig from 'json-bigint';
 import prisma from '../../prisma/prisma'
 
@@ -11,12 +11,11 @@ function moderer(props) {
     const ressourcesRef = props.ressourcesRef;
     const ressourcesHold = props.ressourcesHold;
     const [openTab, setOpenTab] = React.useState(1);
-    console.log(ressourcesHold)
     return (
         <div class="flex">
             <Head>
-                <title>Administrer</title>
-                <meta name="description" content="Administrer" />
+                <title>Modérer</title>
+                <meta name="description" content="Modérer" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <SideBar />
@@ -103,16 +102,16 @@ export async function getServerSideProps() {
     const rechercheCommentaire = await prisma.commentaire.findMany();
     const rechercheResHold = await prisma.ressource.findMany({
         where: {
-          validerRessource:  null,
+            validerRessource: null,
         }
-      }
+    }
     );
 
     const rechercheResRefuser = await prisma.ressource.findMany({
         where: {
-          validerRessource: false,
+            validerRessource: false,
         }
-      }
+    }
     );
 
     return {
