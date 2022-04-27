@@ -1,40 +1,36 @@
 import React, { useRef, useState } from "react"
-import Head from 'next/head'
+import axios from 'axios'
 
 const InfoUpdate = () => {
 
     const formRef = useRef();
 
-    async function updateCompteInfo(params) {
+    async function updateCompteInfo() {
         const {
             updatePrenomUtilisateur,
             updateNomUtilisateur,
-            updateRessourcesTypeRessource,
             updateRegionUtilisateur,
             updateMail,
-            updateDépartement,
+            updateDepartement,
             updateAge
         } = formRef.current;
         const prenomUtilisateur = updatePrenomUtilisateur.value;
         const nomUtilisateur = updateNomUtilisateur.value;
-        const pseudoUtilisateur = updateRessourcesTypeRessource.value;
         const regionUtilisateur = updateRegionUtilisateur.value;
         const mailUtilisateur = updateMail.value;
-        const departementUtilisateur = updateDépartement.value;
+        const departementUtilisateur = updateDepartement.value;
         const ageUtilisateur = updateAge.value;
-        await axios.post("/api/parametres/updateCompte", {
+        await axios.put("../api/parametres/updateCompte", {
+            idCompte : 24,
             prenomUtilisateur,
             nomUtilisateur,
-            pseudoUtilisateur,
             regionUtilisateur,
             mailUtilisateur,
-            ageUtilisateur,
+            ageUtilisateur : parseInt(ageUtilisateur),
             departementUtilisateur,
         });
         alert("Informations modifiées ! ")
-        window.location.reload();
     }
-
     return (
         <div class="flex flex-column portrait:flex-col w-full h-fit">
             <form i ref={formRef} d="formUpdate" class="grid gap-0 grid-cols-2 portrait:grid-cols-1">
@@ -57,14 +53,6 @@ const InfoUpdate = () => {
                 </div>
 
                 <div class="flex flex-col min-h-80 mt-15 w-10/12 my-3">
-                    <label class="text-xl" for="pseudoUtilisateur">Pseudo</label>
-                    <input class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
-                        name="updatePseudoUtilisateur"
-                        id="pseudoUtilisateur"
-                    />
-                </div>
-
-                <div class="flex flex-col min-h-80 mt-15 w-10/12 my-3">
                     <label class="text-xl" for="mailUtilisateur">E-mail</label>
                     <input class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
                         type="mail"
@@ -83,7 +71,7 @@ const InfoUpdate = () => {
                 <div class="flex flex-col min-h-80 mt-15 w-10/12 my-3">
                     <label class="text-xl">Département</label>
                     <input class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
-                        name="updateDépartement"
+                        name="updateDepartement"
                         list="departement"
                         placeholder='Département'
 
