@@ -7,7 +7,7 @@ const DeleteCompte = () => {
 
     return (
         <div class="flex flex-column portrait:flex-col w-full h-fit">
-            <form i d="formDelete" class="portrait:grid-cols-1">
+            <form method="post" id="formDelete" action="/api/delete" class="portrait:grid-cols-1">
                 <div class="grid gap-3 grid-cols-2 portrait:grid-cols-1 ">
                     <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
                         <label class="text-xl">Entrez votre email</label>
