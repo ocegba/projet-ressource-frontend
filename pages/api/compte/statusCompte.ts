@@ -13,13 +13,11 @@ export default async (req, res) => {
         },
         data: {
                 isActive: !(data.isActive),
-            
-            
         }
     });
     res.status(200).json(JSONBig.parse(JSONBig.stringify((statusCompte))));
   } catch (error) {
     console.log(error)
-    res.status(403).json({ err: "Erreur pendant l'activation/désactivation d'une compte" });
+    res.status(403).json({ err: "Erreur pendant l'activation/désactivation d'un compte" });
   }
 };
