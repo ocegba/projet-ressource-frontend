@@ -22,7 +22,7 @@ function administrer(props) {
 
       <Tabs nomElement1="Ressources" element1={
         <div>
-          <p class="py-3 px-5 text-xl" >Vous pouvez créer, modifier, suspendre ou supprimer une ressource</p>
+          <p class="py-3 px-5 text-xl" >Vous pouvez créer, modifier, suspendre ou supprimer une ressource qui a été publiée</p>
 
           <a class="py-3 px-5" href="/createRessource">
             <input type="submit" href="/createRessource" class="cursor-pointer border-2 bg-white-600 hover:bg-gray-300 rounded-lg
@@ -60,7 +60,11 @@ function administrer(props) {
 }
 
 export async function getServerSideProps() {
-  const rechercheRessource = await prisma.ressource.findMany();
+  const rechercheRessource = await prisma.ressource.findMany({
+    where :{
+      validerRessource : true,
+    }
+  });
   const rechercheCategorie = await prisma.ressource.findMany({
     select: {
       categorieRessource: true,

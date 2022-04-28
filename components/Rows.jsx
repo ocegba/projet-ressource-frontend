@@ -24,7 +24,7 @@ async function deleteCommentaire(commentaire) {
 
 async function validerRessource(ressource) {
     const idRessource = ressource.idRessource
-    if (window.confirm("Ressource validée")) {
+    if (window.confirm("Ressource en validation")) {
 
         await axios.post("../api/ressource/validerRessource", {
             idRessource,
@@ -34,6 +34,14 @@ async function validerRessource(ressource) {
     window.location.reload()
 }
 
+async function suspendreRessource(ressource) {
+    const idRessource = ressource.idRessource
+
+    await axios.post("../api/ressource/suspendreRessource", {
+        idRessource,
+    });
+    window.location.reload()
+}
 ///////////////////////////////////////////// PROFIL CONNECTE /////////////////////////////////////////////////////
 
 export const RowsRessources = ({ ressource }) => {
@@ -378,7 +386,7 @@ export const RowsCommentaires = ({ commentaire }) => {
         const {
             editCommentaireCommentaire,
         } = formRef.current;
-        const contenuCommentaire =editCommentaireCommentaire.value;
+        const contenuCommentaire = editCommentaireCommentaire.value;
         await axios.put("../api/commentaires/editCommentaire", {
             idCommentaire: (commentaire?.idCommentaire),
             contenuCommentaire,
@@ -387,23 +395,23 @@ export const RowsCommentaires = ({ commentaire }) => {
     }
     return (
         <>
-         <div class="grid grid-cols-8 gap-4 px-4 py-5 relative flex flex-col min-w-0 break-words bg-white w-full my-3 shadow-lg rounded-lg cursor-pointer shadow-lg shadow">
-            <div class="col-start-1 col-span-6 text-justify	">
-                {commentaire.contenuCommentaire} <br />
-                crée le {moment(commentaire.dateCommentaire).format("LL")}<br />
+            <div class="grid grid-cols-8 gap-4 px-4 py-5 relative flex flex-col min-w-0 break-words bg-white w-full my-3 shadow-lg rounded-lg cursor-pointer shadow-lg shadow">
+                <div class="col-start-1 col-span-6 text-justify	">
+                    {commentaire.contenuCommentaire} <br />
+                    crée le {moment(commentaire.dateCommentaire).format("LL")}<br />
+                </div>
+                <div class="flex items-center justify-center">
+                    <svg onClick={() => setOpen(!open)} class="bg-blue-400 hover:bg-blue-500 p-3 rounded-lg cursor-pointer shadow-lg shadow-blue-300 " xmlns="http://www.w3.org/2000/svg" width="50" viewBox="0 0 450 535">
+                        <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V299.6L289.3 394.3C281.1 402.5 275.3 412.8 272.5 424.1L257.4 484.2C255.1 493.6 255.7 503.2 258.8 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256zM564.1 250.1C579.8 265.7 579.8 291 564.1 306.7L534.7 336.1L463.8 265.1L493.2 235.7C508.8 220.1 534.1 220.1 549.8 235.7L564.1 250.1zM311.9 416.1L441.1 287.8L512.1 358.7L382.9 487.9C378.8 492 373.6 494.9 368 496.3L307.9 511.4C302.4 512.7 296.7 511.1 292.7 507.2C288.7 503.2 287.1 497.4 288.5 491.1L303.5 431.8C304.9 426.2 307.8 421.1 311.9 416.1V416.1z" />
+                    </svg>
+                </div>
+                <div class="flex items-center justify-center">
+                    <svg onClick={() => deleteCommentaire(commentaire)} class="bg-red-500 hover:bg-red-600 p-3 rounded-lg cursor-pointer shadow-lg shadow-red-400" xmlns="http://www.w3.org/2000/svg" width="50" viewBox="0 0 450 535">
+                        <path d="M135.2 17.69C140.6 6.848 151.7 0 163.8 0H284.2C296.3 0 307.4 6.848 312.8 17.69L320 32H416C433.7 32 448 46.33 448 64C448 81.67 433.7 96 416 96H32C14.33 96 0 81.67 0 64C0 46.33 14.33 32 32 32H128L135.2 17.69zM394.8 466.1C393.2 492.3 372.3 512 346.9 512H101.1C75.75 512 54.77 492.3 53.19 466.1L31.1 128H416L394.8 466.1z" />
+                    </svg>
+                </div>
             </div>
-            <div class="flex items-center justify-center">
-                <svg onClick={() => setOpen(!open)} class="bg-blue-400 hover:bg-blue-500 p-3 rounded-lg cursor-pointer shadow-lg shadow-blue-300 " xmlns="http://www.w3.org/2000/svg" width="50" viewBox="0 0 450 535">
-                    <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V299.6L289.3 394.3C281.1 402.5 275.3 412.8 272.5 424.1L257.4 484.2C255.1 493.6 255.7 503.2 258.8 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256zM564.1 250.1C579.8 265.7 579.8 291 564.1 306.7L534.7 336.1L463.8 265.1L493.2 235.7C508.8 220.1 534.1 220.1 549.8 235.7L564.1 250.1zM311.9 416.1L441.1 287.8L512.1 358.7L382.9 487.9C378.8 492 373.6 494.9 368 496.3L307.9 511.4C302.4 512.7 296.7 511.1 292.7 507.2C288.7 503.2 287.1 497.4 288.5 491.1L303.5 431.8C304.9 426.2 307.8 421.1 311.9 416.1V416.1z" />
-                </svg>
-            </div>
-            <div class="flex items-center justify-center">
-                <svg onClick={() => deleteCommentaire(commentaire)} class="bg-red-500 hover:bg-red-600 p-3 rounded-lg cursor-pointer shadow-lg shadow-red-400" xmlns="http://www.w3.org/2000/svg" width="50" viewBox="0 0 450 535">
-                    <path d="M135.2 17.69C140.6 6.848 151.7 0 163.8 0H284.2C296.3 0 307.4 6.848 312.8 17.69L320 32H416C433.7 32 448 46.33 448 64C448 81.67 433.7 96 416 96H32C14.33 96 0 81.67 0 64C0 46.33 14.33 32 32 32H128L135.2 17.69zM394.8 466.1C393.2 492.3 372.3 512 346.9 512H101.1C75.75 512 54.77 492.3 53.19 466.1L31.1 128H416L394.8 466.1z" />
-                </svg>
-            </div>
-        </div>
-        <div class="md:flex bg-gray-200 justify-center items-center rounded-lg md:w-auto md:order-1" id="mobile-menu-4">
+            <div class="md:flex bg-gray-200 justify-center items-center rounded-lg md:w-auto md:order-1" id="mobile-menu-4">
                 {open ? (<>
                     <form ref={formRef} d="formCreate" class="flex flex-col">
 
@@ -422,7 +430,7 @@ export const RowsCommentaires = ({ commentaire }) => {
                 ) : false}
             </div>
         </>
-    )   
+    )
 }
 
 export const RowsParticipate = ({ actions }) => {
@@ -518,7 +526,8 @@ export const RowsRessourcesAdmin = ({ ressource }) => {
         });
         window.location.reload();
     }
-    return (<>
+    return (
+    <>
         <div class="grid grid-cols-9 gap-4 px-4 py-5 relative flex flex-col min-w-0 break-words bg-white w-full my-3 shadow-lg rounded-lg cursor-pointer shadow-lg shadow">
             <div class="col-start-1 col-span-3 text-justify	">
                 {ressource.titreRessource} <br />
@@ -538,7 +547,7 @@ export const RowsRessourcesAdmin = ({ ressource }) => {
                 </svg>
             </div>
             <div class="flex items-center justify-center">
-                <svg class="bg-orange-500 hover:bg-orange-500  pl-3 py-1.5 rounded-lg cursor-pointer shadow-lg shadow-orange-400" xmlns="http://www.w3.org/2000/svg" width="50" viewBox="0 0 450 535">
+                <svg onClick={() => suspendreRessource(ressource)} class="bg-orange-500 hover:bg-orange-500  pl-3 py-1.5 rounded-lg cursor-pointer shadow-lg shadow-orange-400" xmlns="http://www.w3.org/2000/svg" width="50" viewBox="0 0 450 535">
                     <path d="M272 63.1l-32 0c-26.51 0-48 21.49-48 47.1v288c0 26.51 21.49 48 48 48L272 448c26.51 0 48-21.49 48-48v-288C320 85.49 298.5 63.1 272 63.1zM80 63.1l-32 0c-26.51 0-48 21.49-48 48v288C0 426.5 21.49 448 48 448l32 0c26.51 0 48-21.49 48-48v-288C128 85.49 106.5 63.1 80 63.1z" />
                 </svg>
             </div>
