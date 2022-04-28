@@ -18,6 +18,6 @@ export default async (req, res) => {
     res.status(200).json(JSONBig.parse(JSONBig.stringify((validerRessource))));
   } catch (error) {
     console.log(error)
-    res.status(403).json({ err: "Erreur pendant la suppression d'une ressource" });
+    res.status(403).json({ err: "Erreur pendant la validation d'une ressource" });
   }
 };
