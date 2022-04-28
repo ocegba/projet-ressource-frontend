@@ -538,278 +538,278 @@ export const RowsRessourcesAdmin = ({ ressource }) => {
         window.location.reload();
     }
     return (
-    <>
-        <div class="grid grid-cols-9 gap-4 px-4 py-5 relative flex flex-col min-w-0 break-words bg-white w-full my-3 shadow-lg rounded-lg cursor-pointer shadow-lg shadow">
-            <div class="col-start-1 col-span-3 text-justify	">
-                {ressource.titreRessource} <br />
-                crée le {moment(ressource.dateRessource).format("LL")}<br />
+        <>
+            <div class="grid grid-cols-9 gap-4 px-4 py-5 relative flex flex-col min-w-0 break-words bg-white w-full my-3 shadow-lg rounded-lg cursor-pointer shadow-lg shadow">
+                <div class="col-start-1 col-span-3 text-justify	">
+                    {ressource.titreRessource} <br />
+                    crée le {moment(ressource.dateRessource).format("LL")}<br />
+                </div>
+                <div class="col-start-4">
+                    {ressource.categorieRessource}
+                </div>
+                <div class="col-start-5">
+                    {ressource.typeRessource} <br />
+                    {ressource.typeRelationRessource}
+                </div>
+                <div class="col-start-6"></div>
+                <div class="flex items-center justify-center">
+                    <svg onClick={() => setOpen(!open)} class="bg-blue-400 hover:bg-blue-500 p-3 rounded-lg cursor-pointer shadow-lg shadow-blue-300" xmlns="http://www.w3.org/2000/svg" width="50" viewBox="0 0 450 535">
+                        <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V299.6L289.3 394.3C281.1 402.5 275.3 412.8 272.5 424.1L257.4 484.2C255.1 493.6 255.7 503.2 258.8 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256zM564.1 250.1C579.8 265.7 579.8 291 564.1 306.7L534.7 336.1L463.8 265.1L493.2 235.7C508.8 220.1 534.1 220.1 549.8 235.7L564.1 250.1zM311.9 416.1L441.1 287.8L512.1 358.7L382.9 487.9C378.8 492 373.6 494.9 368 496.3L307.9 511.4C302.4 512.7 296.7 511.1 292.7 507.2C288.7 503.2 287.1 497.4 288.5 491.1L303.5 431.8C304.9 426.2 307.8 421.1 311.9 416.1V416.1z" />
+                    </svg>
+                </div>
+                <div class="flex items-center justify-center">
+                    <svg onClick={() => suspendreRessource(ressource)} class="bg-orange-500 hover:bg-orange-500  pl-3 py-1.5 rounded-lg cursor-pointer shadow-lg shadow-orange-400" xmlns="http://www.w3.org/2000/svg" width="50" viewBox="0 0 450 535">
+                        <path d="M272 63.1l-32 0c-26.51 0-48 21.49-48 47.1v288c0 26.51 21.49 48 48 48L272 448c26.51 0 48-21.49 48-48v-288C320 85.49 298.5 63.1 272 63.1zM80 63.1l-32 0c-26.51 0-48 21.49-48 48v288C0 426.5 21.49 448 48 448l32 0c26.51 0 48-21.49 48-48v-288C128 85.49 106.5 63.1 80 63.1z" />
+                    </svg>
+                </div>
+
+                <div class="flex items-center justify-center">
+                    <svg onClick={() => deleteRessource(ressource)} class="bg-red-500 hover:bg-red-600 p-3 rounded-lg cursor-pointer shadow-lg shadow-red-400" xmlns="http://www.w3.org/2000/svg" width="50" viewBox="0 0 450 535">
+                        <path d="M135.2 17.69C140.6 6.848 151.7 0 163.8 0H284.2C296.3 0 307.4 6.848 312.8 17.69L320 32H416C433.7 32 448 46.33 448 64C448 81.67 433.7 96 416 96H32C14.33 96 0 81.67 0 64C0 46.33 14.33 32 32 32H128L135.2 17.69zM394.8 466.1C393.2 492.3 372.3 512 346.9 512H101.1C75.75 512 54.77 492.3 53.19 466.1L31.1 128H416L394.8 466.1z" />
+                    </svg>
+                </div>
             </div>
-            <div class="col-start-4">
-                {ressource.categorieRessource}
+            <div class="md:flex bg-gray-200 justify-center items-center rounded-lg md:w-auto md:order-1" id="mobile-menu-4">
+                {open ? (<>
+                    <form ref={formRef} d="formCreate" class="flex flex-col">
+
+                        <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
+                            <label class="text-xl" for="titreRessource">Titre de la ressource :</label>
+                            <input class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10" maxlength="50"
+                                type="text"
+                                defaultValue={ressource?.titreRessource}
+                                name="editRessourcesTitreRessource"
+                                id="titreRessource"
+                                placeholder='ex: Chasse aux trésors'
+                            />
+                        </div>
+
+                        <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
+                            <label class="text-xl" for="categorieRessource">Catégorie :</label>
+                            <select class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
+                                required
+                                defaultValue={ressource?.categorieRessource}
+                                name="editRessourcesCategorieRessource"
+                                id="categorieRessource"
+                                placeholder='Sélectionnez une catégorie'
+                            >
+
+                                <option value="" selected disabled hidden>Choisir une catégorie</option>
+                                <option value="Communication">Communication</option>
+                                <option value="Cultures">Cultures</option>
+                                <option value="Developpement personnel">Developpement personnel</option>
+                                <option value="Intelligence émotionnelle">Intelligence émotionnelle</option>
+                                <option value="Loisirs">Loisirs</option>
+                                <option value="Monde professionnel">Monde professionnel</option>
+                                <option value="Parentalité">Parentalité</option>
+                                <option value="Qualité de vie">Qualité de vie</option>
+                                <option value="Recherche de sens">Recherche de sens</option>
+                                <option value="Santé physique">Santé physique</option>
+                                <option value="Santé psychique">Santé psychique</option>
+                                <option value="Spiritualité">Spiritualité</option>
+                                <option value="Vie affective">Vie affective</option>
+                            </select>
+                        </div>
+
+                        <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
+                            <label class="text-xl" for="typesRessources">Types de ressources :</label>
+                            <select class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
+                                required
+                                defaultValue={ressource?.typeRessource}
+                                name="editRessourcesTypeRessource"
+                                id="typesRessources"
+                                placeholder='Sélectionnez un type de ressource'
+                            >
+
+                                <option value="" selected disabled hidden>Choisir un type de ressources</option>
+                                <option value="Activité / Jeu à réaliser">Activité / Jeu à réaliser</option>
+                                <option value="Article">Article</option>
+                                <option value="Carte défi">Carte défi</option>
+                                <option value="Cours au format PDF">Cours au format PDF</option>
+                                <option value="Exercice / Atelier">Exercice / Atelier</option>
+                                <option value="Fiche de lecture">Fiche de lecture</option>
+                                <option value="Jeu">Jeu en ligne</option>
+                                <option value="Vidéo">Vidéo</option>
+                            </select>
+                        </div>
+
+                        <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
+                            <label class="text-xl" for="storyRessource">Texte :</label>
+                            <textarea class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
+                                defaultValue={ressource?.storyRessource}
+                                type="text"
+                                name="editRessourcesStoryRessource"
+                                id="storyRessource"
+                                placeholder='Expliquer votre ressource'
+                            />
+                        </div>
+
+                        <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
+                            <label class="text-xl" for="fileRessource">Fichier :</label>
+                            <input
+                                defaultValue={ressource?.fileRessource}
+                                type="file"
+                                name="editRessourcesFileRessource"
+                                id="fileRessource"
+                                placeholder='Insérer une image, un document pdf ou word...'
+                            />
+                        </div>
+
+                        <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
+                            <label class="text-xl" for="lienRessource">Entrez un lien url en complément de votre ressource :</label>
+                            <input class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
+                                defaultValue={ressource?.lienRessource}
+                                type="url"
+                                name="editRessourcesLienRessource"
+                                id="lienRessource"
+                                placeholder="https://example.com"
+                                pattern="https://.*"
+                                size="30"
+                            />
+                        </div>
+
+                        <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">*
+                            <label class="text-xl" for="typesRelationRessource">Types de relations :</label>
+                            <select class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
+                                defaultValue={ressource?.typeRelationRessource}
+                                name="editRessourcesRelationRessource"
+                                id="typesRelationRessource"
+                                placeholder='Sélectionnez une ou plusieurs relations'
+                            >
+
+                                <option value="" selected disabled hidden>Choisir un type de relations</option>
+                                <option value="Tous">Tous </option>
+                                <option value="Soi">Soi </option>
+                                <option value="Conjoints">Conjoints</option>
+                                <option value="Famille">Famille</option>
+                                <option value="Professionelle"> Professionnelle : collègues, collaborateurs et managers</option>
+                                <option value="Amis et communautés">Amis et communautés</option>
+                                <option value="Inconnus">Inconnus </option>
+                            </select>
+                        </div>
+
+                        <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
+                            <label class="text-xl">Département :</label>
+                            <input class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
+                                defaultValue={ressource?.localisationRessource}
+                                name="editRessourcesLocalisationRessource"
+                                list="departement"
+                                placeholder='Sélectionnez un département'
+                            />
+                            <datalist id="departement">
+                                <option value="" />
+                                <option value="Ain">Ain</option>
+                                <option value="Aisne">Aisne</option>
+                                <option value="Allier">Allier</option>
+                                <option value="Alpes-de-Haute-Provence">Alpes-de-Haute-Provence</option>
+                                <option value="Alpes-Maritimes">Alpes-Maritimes</option>
+                                <option value="Ardennes">Ardennes</option>
+                                <option value="Ardèche">Ardèche</option>
+                                <option value="Ariège">Ariège</option>
+                                <option value="Aube">Aube</option>
+                                <option value="Aude">Aude</option>
+                                <option value="Aveyron">Aveyron</option>
+                                <option value="Bas-Rhin">Bas-Rhin</option>
+                                <option value="Bouches-du-Rhône">Bouches-du-Rhône</option>
+                                <option value="Calvados">Calvados</option>
+                                <option value="Cantal">Cantal</option>
+                                <option value="Charente">Charente</option>
+                                <option value="Charente-Maritime">Charente-Maritime</option>
+                                <option value="Cher">Cher</option>
+                                <option value="Corrèze">Corrèze</option>
+                                <option value="Corse-du-Sud">Corse-du-Sud</option>
+                                <option value="Creuse">Creuse</option>
+                                <option value="Côte-d'Or">Côte-d'Or</option>
+                                <option value="Côtes-d'Armor">Côtes-d'Armor</option>
+                                <option value="Deux-Sèvres">Deux-Sèvres</option>
+                                <option value="Dordogne">Dordogne</option>
+                                <option value="Doubs">Doubs</option>
+                                <option value="Drôme">Drôme</option>
+                                <option value="Essonne">Essonne</option>
+                                <option value="Eure">Eure</option>
+                                <option value="Eure-et-Loir">Eure-et-Loir</option>
+                                <option value="Finistère">Finistère</option>
+                                <option value="Gard">Gard</option>
+                                <option value="Gers">Gers</option>
+                                <option value="Gironde">Gironde</option>
+                                <option value="Guadeloupe">Guadeloupe</option>
+                                <option value="Guyane">Guyane</option>
+                                <option value="Haut-Rhin">Haut-Rhin</option>
+                                <option value="Haute-Corse">Haute-Corse</option>
+                                <option value="Haute-Garonne">Haute-Garonne</option>
+                                <option value="Haute-Loire">Haute-Loire</option>
+                                <option value="Haute-Marne">Haute-Marne</option>
+                                <option value="Haute-Savoie">Haute-Savoie</option>
+                                <option value="Haute-Saône">Haute-Saône</option>
+                                <option value="Haute-Vienne">Haute-Vienne</option>
+                                <option value="Hautes-Alpes">Hautes-Alpes</option>
+                                <option value="Hautes-Pyrénées">Hautes-Pyrénées</option>
+                                <option value="Hauts-de-Seine">Hauts-de-Seine</option>
+                                <option value="Hérault">Hérault</option>
+                                <option value="Ille-et-Vilaine">Ille-et-Vilaine</option>
+                                <option value="Indre">Indre</option>
+                                <option value="Indre-et-Loire">Indre-et-Loire</option>
+                                <option value="Isère">Isère</option>
+                                <option value="Jura">Jura</option>
+                                <option value="La Réunion">La Réunion</option>
+                                <option value="Landes">Landes</option>
+                                <option value="Loir-et-Cher">Loir-et-Cher</option>
+                                <option value="Loire">Loire</option>
+                                <option value="Loire-Atlantique">Loire-Atlantique</option>
+                                <option value="Loiret">Loiret</option>
+                                <option value="Lot">Lot</option>
+                                <option value="Lot-et-Garonne">Lot-et-Garonne</option>
+                                <option value="Lozère">Lozère</option>
+                                <option value="Maine-et-Loire">Maine-et-Loire</option>
+                                <option value="Manche">Manche</option>
+                                <option value="Marne">Marne</option>
+                                <option value="Martinique">Martinique</option>
+                                <option value="Mayenne">Mayenne</option>
+                                <option value="Mayotte">Mayotte</option>
+                                <option value="Meurthe-et-Moselle">Meurthe-et-Moselle</option>
+                                <option value="Meuse">Meuse</option>
+                                <option value="Morbihan">Morbihan</option>
+                                <option value="Moselle">Moselle</option>
+                                <option value="Nièvre">Nièvre</option>
+                                <option value="Nord">Nord</option>
+                                <option value="Oise">Oise</option>
+                                <option value="Orne">Orne</option>
+                                <option value="Paris">Paris</option>
+                                <option value="Pas-de-Calais">Pas-de-Calais</option>
+                                <option value="Puy-de-Dôme">Puy-de-Dôme</option>
+                                <option value="Pyrénées-Atlantiques">Pyrénées-Atlantiques</option>
+                                <option value="Pyrénées-Orientales">Pyrénées-Orientales</option>
+                                <option value="Rhône">Rhône</option>
+                                <option value="Sarthe">Sarthe</option>
+                                <option value="Savoie">Savoie</option>
+                                <option value="Saône-et-Loire">Saône-et-Loire</option>
+                                <option value="Seine-et-Marne">Seine-et-Marne</option>
+                                <option value="Seine-Maritime">Seine-Maritime</option>
+                                <option value="Seine-Saint-Denis">Seine-Saint-Denis</option>
+                                <option value="Somme">Somme</option>
+                                <option value="Tarn">Tarn</option>
+                                <option value="Tarn-et-Garonne">Tarn-et-Garonne</option>
+                                <option value="Territoire de Belfort">Territoire de Belfort</option>
+                                <option value="Val-d'Oise">Val-d'Oise</option>
+                                <option value="Val-de-Marne">Val-de-Marne</option>
+                                <option value="Var">Var</option>
+                                <option value="Vaucluse">Vaucluse</option>
+                                <option value="Vendée">Vendée</option>
+                                <option value="Vienne">Vienne</option>
+                                <option value="Vosges">Vosges</option>
+                                <option value="Yonne">Yonne</option>
+                                <option value="Yvelines">Yvelines</option>
+
+                            </datalist>
+                        </div>
+                        <div>
+                            <input class="mt-2 mb-2 bg-custom-blue hover:bg-custom-blue-200 text-white font-bold text-xl w-fit pr-1 pl-1 rounded-xl block m-auto cursor-pointer rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" type="submit" value="Modifier votre ressource" onClick={() => editRessource()} />
+                        </div>
+                    </form >
+                </>
+                ) : false}
             </div>
-            <div class="col-start-5">
-                {ressource.typeRessource} <br />
-                {ressource.typeRelationRessource}
-            </div>
-            <div class="col-start-6"></div>
-            <div class="flex items-center justify-center">
-                <svg onClick={() => setOpen(!open)} class="bg-blue-400 hover:bg-blue-500 p-3 rounded-lg cursor-pointer shadow-lg shadow-blue-300" xmlns="http://www.w3.org/2000/svg" width="50" viewBox="0 0 450 535">
-                    <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V299.6L289.3 394.3C281.1 402.5 275.3 412.8 272.5 424.1L257.4 484.2C255.1 493.6 255.7 503.2 258.8 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256zM564.1 250.1C579.8 265.7 579.8 291 564.1 306.7L534.7 336.1L463.8 265.1L493.2 235.7C508.8 220.1 534.1 220.1 549.8 235.7L564.1 250.1zM311.9 416.1L441.1 287.8L512.1 358.7L382.9 487.9C378.8 492 373.6 494.9 368 496.3L307.9 511.4C302.4 512.7 296.7 511.1 292.7 507.2C288.7 503.2 287.1 497.4 288.5 491.1L303.5 431.8C304.9 426.2 307.8 421.1 311.9 416.1V416.1z" />
-                </svg>
-            </div>
-            <div class="flex items-center justify-center">
-                <svg onClick={() => suspendreRessource(ressource)} class="bg-orange-500 hover:bg-orange-500  pl-3 py-1.5 rounded-lg cursor-pointer shadow-lg shadow-orange-400" xmlns="http://www.w3.org/2000/svg" width="50" viewBox="0 0 450 535">
-                    <path d="M272 63.1l-32 0c-26.51 0-48 21.49-48 47.1v288c0 26.51 21.49 48 48 48L272 448c26.51 0 48-21.49 48-48v-288C320 85.49 298.5 63.1 272 63.1zM80 63.1l-32 0c-26.51 0-48 21.49-48 48v288C0 426.5 21.49 448 48 448l32 0c26.51 0 48-21.49 48-48v-288C128 85.49 106.5 63.1 80 63.1z" />
-                </svg>
-            </div>
-
-            <div class="flex items-center justify-center">
-                <svg onClick={() => deleteRessource(ressource)} class="bg-red-500 hover:bg-red-600 p-3 rounded-lg cursor-pointer shadow-lg shadow-red-400" xmlns="http://www.w3.org/2000/svg" width="50" viewBox="0 0 450 535">
-                    <path d="M135.2 17.69C140.6 6.848 151.7 0 163.8 0H284.2C296.3 0 307.4 6.848 312.8 17.69L320 32H416C433.7 32 448 46.33 448 64C448 81.67 433.7 96 416 96H32C14.33 96 0 81.67 0 64C0 46.33 14.33 32 32 32H128L135.2 17.69zM394.8 466.1C393.2 492.3 372.3 512 346.9 512H101.1C75.75 512 54.77 492.3 53.19 466.1L31.1 128H416L394.8 466.1z" />
-                </svg>
-            </div>
-        </div>
-        <div class="md:flex bg-gray-200 justify-center items-center rounded-lg md:w-auto md:order-1" id="mobile-menu-4">
-            {open ? (<>
-                <form ref={formRef} d="formCreate" class="flex flex-col">
-
-                    <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-                        <label class="text-xl" for="titreRessource">Titre de la ressource :</label>
-                        <input class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10" maxlength="50"
-                            type="text"
-                            defaultValue={ressource?.titreRessource}
-                            name="editRessourcesTitreRessource"
-                            id="titreRessource"
-                            placeholder='ex: Chasse aux trésors'
-                        />
-                    </div>
-
-                    <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-                        <label class="text-xl" for="categorieRessource">Catégorie :</label>
-                        <select class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
-                            required
-                            defaultValue={ressource?.categorieRessource}
-                            name="editRessourcesCategorieRessource"
-                            id="categorieRessource"
-                            placeholder='Sélectionnez une catégorie'
-                        >
-
-                            <option value="" selected disabled hidden>Choisir une catégorie</option>
-                            <option value="Communication">Communication</option>
-                            <option value="Cultures">Cultures</option>
-                            <option value="Developpement personnel">Developpement personnel</option>
-                            <option value="Intelligence émotionnelle">Intelligence émotionnelle</option>
-                            <option value="Loisirs">Loisirs</option>
-                            <option value="Monde professionnel">Monde professionnel</option>
-                            <option value="Parentalité">Parentalité</option>
-                            <option value="Qualité de vie">Qualité de vie</option>
-                            <option value="Recherche de sens">Recherche de sens</option>
-                            <option value="Santé physique">Santé physique</option>
-                            <option value="Santé psychique">Santé psychique</option>
-                            <option value="Spiritualité">Spiritualité</option>
-                            <option value="Vie affective">Vie affective</option>
-                        </select>
-                    </div>
-
-                    <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-                        <label class="text-xl" for="typesRessources">Types de ressources :</label>
-                        <select class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
-                            required
-                            defaultValue={ressource?.typeRessource}
-                            name="editRessourcesTypeRessource"
-                            id="typesRessources"
-                            placeholder='Sélectionnez un type de ressource'
-                        >
-
-                            <option value="" selected disabled hidden>Choisir un type de ressources</option>
-                            <option value="Activité / Jeu à réaliser">Activité / Jeu à réaliser</option>
-                            <option value="Article">Article</option>
-                            <option value="Carte défi">Carte défi</option>
-                            <option value="Cours au format PDF">Cours au format PDF</option>
-                            <option value="Exercice / Atelier">Exercice / Atelier</option>
-                            <option value="Fiche de lecture">Fiche de lecture</option>
-                            <option value="Jeu">Jeu en ligne</option>
-                            <option value="Vidéo">Vidéo</option>
-                        </select>
-                    </div>
-
-                    <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-                        <label class="text-xl" for="storyRessource">Texte :</label>
-                        <textarea class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
-                            defaultValue={ressource?.storyRessource}
-                            type="text"
-                            name="editRessourcesStoryRessource"
-                            id="storyRessource"
-                            placeholder='Expliquer votre ressource'
-                        />
-                    </div>
-
-                    <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-                        <label class="text-xl" for="fileRessource">Fichier :</label>
-                        <input
-                            defaultValue={ressource?.fileRessource}
-                            type="file"
-                            name="editRessourcesFileRessource"
-                            id="fileRessource"
-                            placeholder='Insérer une image, un document pdf ou word...'
-                        />
-                    </div>
-
-                    <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-                        <label class="text-xl" for="lienRessource">Entrez un lien url en complément de votre ressource :</label>
-                        <input class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
-                            defaultValue={ressource?.lienRessource}
-                            type="url"
-                            name="editRessourcesLienRessource"
-                            id="lienRessource"
-                            placeholder="https://example.com"
-                            pattern="https://.*"
-                            size="30"
-                        />
-                    </div>
-
-                    <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">*
-                        <label class="text-xl" for="typesRelationRessource">Types de relations :</label>
-                        <select class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
-                            defaultValue={ressource?.typeRelationRessource}
-                            name="editRessourcesRelationRessource"
-                            id="typesRelationRessource"
-                            placeholder='Sélectionnez une ou plusieurs relations'
-                        >
-
-                            <option value="" selected disabled hidden>Choisir un type de relations</option>
-                            <option value="Tous">Tous </option>
-                            <option value="Soi">Soi </option>
-                            <option value="Conjoints">Conjoints</option>
-                            <option value="Famille">Famille</option>
-                            <option value="Professionelle"> Professionnelle : collègues, collaborateurs et managers</option>
-                            <option value="Amis et communautés">Amis et communautés</option>
-                            <option value="Inconnus">Inconnus </option>
-                        </select>
-                    </div>
-
-                    <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-                        <label class="text-xl">Département :</label>
-                        <input class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
-                            defaultValue={ressource?.localisationRessource}
-                            name="editRessourcesLocalisationRessource"
-                            list="departement"
-                            placeholder='Sélectionnez un département'
-                        />
-                        <datalist id="departement">
-                            <option value="" />
-                            <option value="Ain">Ain</option>
-                            <option value="Aisne">Aisne</option>
-                            <option value="Allier">Allier</option>
-                            <option value="Alpes-de-Haute-Provence">Alpes-de-Haute-Provence</option>
-                            <option value="Alpes-Maritimes">Alpes-Maritimes</option>
-                            <option value="Ardennes">Ardennes</option>
-                            <option value="Ardèche">Ardèche</option>
-                            <option value="Ariège">Ariège</option>
-                            <option value="Aube">Aube</option>
-                            <option value="Aude">Aude</option>
-                            <option value="Aveyron">Aveyron</option>
-                            <option value="Bas-Rhin">Bas-Rhin</option>
-                            <option value="Bouches-du-Rhône">Bouches-du-Rhône</option>
-                            <option value="Calvados">Calvados</option>
-                            <option value="Cantal">Cantal</option>
-                            <option value="Charente">Charente</option>
-                            <option value="Charente-Maritime">Charente-Maritime</option>
-                            <option value="Cher">Cher</option>
-                            <option value="Corrèze">Corrèze</option>
-                            <option value="Corse-du-Sud">Corse-du-Sud</option>
-                            <option value="Creuse">Creuse</option>
-                            <option value="Côte-d'Or">Côte-d'Or</option>
-                            <option value="Côtes-d'Armor">Côtes-d'Armor</option>
-                            <option value="Deux-Sèvres">Deux-Sèvres</option>
-                            <option value="Dordogne">Dordogne</option>
-                            <option value="Doubs">Doubs</option>
-                            <option value="Drôme">Drôme</option>
-                            <option value="Essonne">Essonne</option>
-                            <option value="Eure">Eure</option>
-                            <option value="Eure-et-Loir">Eure-et-Loir</option>
-                            <option value="Finistère">Finistère</option>
-                            <option value="Gard">Gard</option>
-                            <option value="Gers">Gers</option>
-                            <option value="Gironde">Gironde</option>
-                            <option value="Guadeloupe">Guadeloupe</option>
-                            <option value="Guyane">Guyane</option>
-                            <option value="Haut-Rhin">Haut-Rhin</option>
-                            <option value="Haute-Corse">Haute-Corse</option>
-                            <option value="Haute-Garonne">Haute-Garonne</option>
-                            <option value="Haute-Loire">Haute-Loire</option>
-                            <option value="Haute-Marne">Haute-Marne</option>
-                            <option value="Haute-Savoie">Haute-Savoie</option>
-                            <option value="Haute-Saône">Haute-Saône</option>
-                            <option value="Haute-Vienne">Haute-Vienne</option>
-                            <option value="Hautes-Alpes">Hautes-Alpes</option>
-                            <option value="Hautes-Pyrénées">Hautes-Pyrénées</option>
-                            <option value="Hauts-de-Seine">Hauts-de-Seine</option>
-                            <option value="Hérault">Hérault</option>
-                            <option value="Ille-et-Vilaine">Ille-et-Vilaine</option>
-                            <option value="Indre">Indre</option>
-                            <option value="Indre-et-Loire">Indre-et-Loire</option>
-                            <option value="Isère">Isère</option>
-                            <option value="Jura">Jura</option>
-                            <option value="La Réunion">La Réunion</option>
-                            <option value="Landes">Landes</option>
-                            <option value="Loir-et-Cher">Loir-et-Cher</option>
-                            <option value="Loire">Loire</option>
-                            <option value="Loire-Atlantique">Loire-Atlantique</option>
-                            <option value="Loiret">Loiret</option>
-                            <option value="Lot">Lot</option>
-                            <option value="Lot-et-Garonne">Lot-et-Garonne</option>
-                            <option value="Lozère">Lozère</option>
-                            <option value="Maine-et-Loire">Maine-et-Loire</option>
-                            <option value="Manche">Manche</option>
-                            <option value="Marne">Marne</option>
-                            <option value="Martinique">Martinique</option>
-                            <option value="Mayenne">Mayenne</option>
-                            <option value="Mayotte">Mayotte</option>
-                            <option value="Meurthe-et-Moselle">Meurthe-et-Moselle</option>
-                            <option value="Meuse">Meuse</option>
-                            <option value="Morbihan">Morbihan</option>
-                            <option value="Moselle">Moselle</option>
-                            <option value="Nièvre">Nièvre</option>
-                            <option value="Nord">Nord</option>
-                            <option value="Oise">Oise</option>
-                            <option value="Orne">Orne</option>
-                            <option value="Paris">Paris</option>
-                            <option value="Pas-de-Calais">Pas-de-Calais</option>
-                            <option value="Puy-de-Dôme">Puy-de-Dôme</option>
-                            <option value="Pyrénées-Atlantiques">Pyrénées-Atlantiques</option>
-                            <option value="Pyrénées-Orientales">Pyrénées-Orientales</option>
-                            <option value="Rhône">Rhône</option>
-                            <option value="Sarthe">Sarthe</option>
-                            <option value="Savoie">Savoie</option>
-                            <option value="Saône-et-Loire">Saône-et-Loire</option>
-                            <option value="Seine-et-Marne">Seine-et-Marne</option>
-                            <option value="Seine-Maritime">Seine-Maritime</option>
-                            <option value="Seine-Saint-Denis">Seine-Saint-Denis</option>
-                            <option value="Somme">Somme</option>
-                            <option value="Tarn">Tarn</option>
-                            <option value="Tarn-et-Garonne">Tarn-et-Garonne</option>
-                            <option value="Territoire de Belfort">Territoire de Belfort</option>
-                            <option value="Val-d'Oise">Val-d'Oise</option>
-                            <option value="Val-de-Marne">Val-de-Marne</option>
-                            <option value="Var">Var</option>
-                            <option value="Vaucluse">Vaucluse</option>
-                            <option value="Vendée">Vendée</option>
-                            <option value="Vienne">Vienne</option>
-                            <option value="Vosges">Vosges</option>
-                            <option value="Yonne">Yonne</option>
-                            <option value="Yvelines">Yvelines</option>
-
-                        </datalist>
-                    </div>
-                    <div>
-                        <input class="mt-2 mb-2 bg-custom-blue hover:bg-custom-blue-200 text-white font-bold text-xl w-fit pr-1 pl-1 rounded-xl block m-auto cursor-pointer rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" type="submit" value="Modifier votre ressource" onClick={() => editRessource()} />
-                    </div>
-                </form >
-            </>
-            ) : false}
-        </div>
-    </>
+        </>
     )
 }
 
@@ -995,6 +995,7 @@ export const RowsRessourcesModRef = ({ ressource }) => {
 ///////////////////////////////////////////// SUPER ADMIN /////////////////////////////////////////////////////
 
 export const RowsCompteSuperAdmin = ({ compte }) => {
+    const formRef = useRef();
 
     function actif(compte) {
         let result;
@@ -1004,6 +1005,19 @@ export const RowsCompteSuperAdmin = ({ compte }) => {
             result = "COMPTE NON ACTIF"
         }
         return result;
+    }
+
+    async function typeUtilisateur() {
+        const {
+            editTypeUtilisateur,
+        } = formRef.current;
+        const typeUtilisateur = editTypeUtilisateur.value;
+        await axios.post("../api/compte/editTypeUtilisateur", {
+            idCompte: (compte?.idCompte),
+            typeUtilisateur,
+
+        });
+        window.location.reload();
     }
 
     return (
@@ -1019,13 +1033,15 @@ export const RowsCompteSuperAdmin = ({ compte }) => {
                 {compte.typeUtilisateur}
             </div>
             <div class="col-start-7 col-span-2">
-                <form>
-                    <select class="w-fit" titreRessource="typeUtilisateur">
-                        <option class="p-1" value="Modérateur">Modérateur</option>
-                        <option class="p-1" value="Administrateur">Administrateur</option>
-                        <option class="p-1" value="Super administrateur">Super administrateur</option>
+                <form ref={formRef}>
+                    <select class="w-fit" name="editTypeUtilisateur"
+                        id="typeUtilisateur">
+                        <option class="p-1" value="USER">Citoyen connecté</option>
+                        <option class="p-1" value="MODERATOR">Modérateur</option>
+                        <option class="p-1" value="ADMINISTRATOR">Administrateur</option>
+                        <option class="p-1" value="SUPER_ADMIN">Super administrateur</option>
                     </select>
-                    <button class="mt-2 mb-2 bg-custom-blue hover:bg-custom-blue-200 text-white font-bold text-xl w-fit pr-1 pl-1 rounded-xl block m-auto cursor-pointer rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" type="submit" >Valider</button>
+                    <button class="mt-2 mb-2 bg-custom-blue hover:bg-custom-blue-200 text-white font-bold text-xl w-fit pr-1 pl-1 rounded-xl block m-auto cursor-pointer rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" type="submit" onClick={() => typeUtilisateur()}>Valider</button>
                 </form>
             </div>
 
