@@ -8,9 +8,9 @@ import prisma from '../../prisma/prisma'
 
 function administrer(props) {
   const ressources = props.ressources;
-  const categories = props.categories;
+  const categorie = props.categorie;
   const comptes = props.comptes;
-
+console.log(categorie)
   return (
     <div class="flex">
       <Head>
@@ -28,7 +28,7 @@ function administrer(props) {
             <input type="submit" href="/createRessource" class="cursor-pointer border-2 bg-white-600 hover:bg-gray-300 rounded-lg
          border-solid font-bold text-base leading-normal  py-3 px-5 uppercase" value="Créer une ressource"></input>
           </a>
-          {ressources?.map((ressource, i) => <RowsRessourcesAdmin ressource={ressource} key={i} />)}
+          {ressources?.map((ressource, i) => <RowsRessourcesAdmin ressource={ressource} categorie={categorie}  key={i} />)}
         </div>}
 
         nomElement2="Catégories" element2={
@@ -40,8 +40,8 @@ function administrer(props) {
             </div>
 
             <div class="grid grid-cols-5 gap-3">
-              {categories?.map((categorie, i) => <li class="shadow-md hover:bg-gray-200 border-gray-200 rounded border-solid border-0 box-border block font-bold text-xs leading-normal py-3 px-5 uppercase no-underline">
-                {categorie.categorieRessource}
+              {categorie?.map((categorie, i) => <li class="shadow-md hover:bg-gray-200 border-gray-200 rounded border-solid border-0 box-border block font-bold text-xs leading-normal py-3 px-5 uppercase no-underline">
+                {categorie.libelleCategorie}
               </li>)}
             </div>
           </div>
@@ -49,10 +49,10 @@ function administrer(props) {
         nomElement3="Comptes utilisateurs" element3={
           <div>
             <p class="py-3 px-5 text-xl">Activer ou désactiver un compte</p>
-          {comptes?.map((compte, i) => <RowsCompteAdmin compte={compte} key={i} />)}
+            {comptes?.map((compte, i) => <RowsCompteAdmin compte={compte} key={i} />)}
           </div>
         }
-      nomElement4="Statistiques"
+        nomElement4="Statistiques"
 
       />
     </div>
@@ -61,23 +61,17 @@ function administrer(props) {
 
 export async function getServerSideProps() {
   const rechercheRessource = await prisma.ressource.findMany({
-    where :{
-      validerRessource : true,
+    where: {
+      validerRessource: true,
     }
   });
-  const rechercheCategorie = await prisma.ressource.findMany({
-    select: {
-      categorieRessource: true,
-    },
-    distinct: ['categorieRessource'],
-
-  });
+  const rechercheCategorie = await prisma.categorie.findMany({});
   const rechercheComptes = await prisma.compte.findMany();
 
   return {
     props: {
       ressources: JSONBig.parse(JSONBig.stringify(rechercheRessource)),
-      categories: JSONBig.parse(JSONBig.stringify(rechercheCategorie)),
+      categorie: JSONBig.parse(JSONBig.stringify(rechercheCategorie)),
       comptes: JSONBig.parse(JSONBig.stringify(rechercheComptes)),
     },
   };

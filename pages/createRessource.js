@@ -6,7 +6,7 @@ export default function createRessource() {
   const [disable, setDisable] = useState(false);
 
   const [titreRessource, setTitreRessource] = useState('')
-  const [categorieRessource, setCategorieRessource] = useState('')
+  const [categorie, setCategorieRessource] = useState('')
   const [typeRessource, setTypeRessource] = useState('')
   const [typeRelationRessource, setRelationRessource] = useState('')
   const [storyRessource, setStoryRessource] = useState('')
@@ -29,7 +29,7 @@ export default function createRessource() {
       addRessourcesLocalisationRessource,
     } = formRef.current;
     const titreRessource = addRessourcesTitreRessource.value;
-    const categorieRessource = addRessourcesCategorieRessource.value;
+    const categorie = addRessourcesCategorieRessource.value;
     const typeRessource = addRessourcesTypeRessource.value;
     const typeRelationRessource = addRessourcesRelationRessource.value;
     const storyRessource = addRessourcesStoryRessource.value;
@@ -39,7 +39,7 @@ export default function createRessource() {
     const dateRessource = (new Date(Date.now())).toISOString();
     await axios.post("/api/ressource/addRessource", {
       titreRessource,
-      categorieRessource,
+      categorie,
       typeRessource,
       typeRelationRessource,
       storyRessource,
@@ -77,13 +77,13 @@ export default function createRessource() {
           </div>
 
           <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-            <label class="text-xl" for="categorieRessource">Catégorie :</label>
+            <label class="text-xl" for="categorie">Catégorie :</label>
             <select class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
               required
               name="addRessourcesCategorieRessource"
-              id="categorieRessource"
+              id="categorie"
               placeholder='Sélectionnez une catégorie'
-              value={categorieRessource}
+              value={categorie}
               onChange={(e) => setCategorieRessource(e.target.value)} >
 
               <option value="" selected disabled hidden>Choisir une catégorie</option>
@@ -315,7 +315,7 @@ export default function createRessource() {
             </div>
 
             <div>
-              <p class="text-xs bg-red-200" id="categorieRessourceOutput">{categorieRessource}</p>
+              <p class="text-xs bg-red-200" id="categorieOutput">{categorie}</p>
               <p class="text-xs bg-custom-blue" id="typesRessourcesOutput">{typeRessource}</p>
               <p class="text-xs bg-green-200" id="typesRelationRessourceOutput">{typeRelationRessource}</p>
             </div>

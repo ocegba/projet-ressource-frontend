@@ -10,6 +10,7 @@ function moderer(props) {
     const commentaires = props.commentaires;
     const ressourcesRef = props.ressourcesRef;
     const ressourcesHold = props.ressourcesHold;
+    const categorie = props.categorie;
     const [openTab, setOpenTab] = React.useState(1);
     return (
         <div class="flex">
@@ -80,12 +81,12 @@ function moderer(props) {
                                             <p class="py-3 px-5 text-xl">Vous pouvez accepter une demande de création d'une ressource en donnant une raison dans le cas contraire.</p>
                                             <p class="py-3 px-5 text-lg">Les demandes de création de ressources en attente :</p>
                                             {
-                                                ressourcesHold?.map((hold, i) => <RowsRessourcesModHold ressource={hold} key={i} />)
+                                                ressourcesHold?.map((hold, i) => <RowsRessourcesModHold ressource={hold} categorie={categorie} key={i} />)
                                             }
 
                                             <p class="py-3 px-5 text-lg">Les demandes de création de ressources refusées :</p>
                                             {
-                                                ressourcesRef?.map((ref, i) => <RowsRessourcesModRef ressource={ref} key={i} />)
+                                                ressourcesRef?.map((ref, i) => <RowsRessourcesModRef ressource={ref} categorie={categorie} key={i} />)
                                             }
                                         </div>
                                     </div>
@@ -113,12 +114,14 @@ export async function getServerSideProps() {
         }
     }
     );
+    const rechercheCategorie = await prisma.categorie.findMany({});
 
     return {
         props: {
             commentaires: JSONBig.parse(JSONBig.stringify(rechercheCommentaire)),
             ressourcesHold: JSONBig.parse(JSONBig.stringify(rechercheResHold)),
             ressourcesRef: JSONBig.parse(JSONBig.stringify(rechercheResRefuser)),
+            categorie: JSONBig.parse(JSONBig.stringify(rechercheCategorie)),
         },
     };
 }

@@ -10,8 +10,8 @@ export default async (req, res) => {
                 titreRessource: {
                     contains: data.titreRessource,
                 },
-                categorieRessource: {
-                    contains: data.categorieRessource,
+                categorie : {
+                    is: data.categorie,
                 },
                 typeRessource: {
                     contains: data.typeRessource,

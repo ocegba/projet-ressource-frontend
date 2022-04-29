@@ -6,7 +6,7 @@ export default async (req, res) => {
   const {
     idRessource,
     titreRessource,
-    categorieRessource,
+    categorie,
     typeRessource,
     typeRelationRessource,
     storyRessource,
@@ -25,7 +25,7 @@ export default async (req, res) => {
       },
       data: {
         titreRessource,
-        categorieRessource,
+        categorie,
         typeRessource,
         typeRelationRessource,
         storyRessource,

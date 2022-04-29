@@ -4,7 +4,7 @@ import axios from "axios";
 export default function Formulaire() {
   const [disable, setDisable] = useState(false)
 
-  const [categorieRessource, setCategorieRessource] = useState('')
+  const [categorie, setCategorieRessource] = useState('')
   const [titreRessource, setTitreRessource] = useState('')
   const [typeRessource, setTypeRessource] = useState('')
   const [typeRelationRessource, setRelationRessource] = useState('')
@@ -26,12 +26,12 @@ export default function Formulaire() {
       </div>
 
       <div class="flex flex-col mt-4 min-h-[80px] w-11/12 h-20 mt-3 mb-3 m-auto pr-2 pl-2 ">
-        <label class="text-xl leading-7" for="categorieRessource">Catégorie :</label>
+        <label class="text-xl leading-7" for="categorie">Catégorie :</label>
         <select class="bg-white text-base font-medium h-14 pl-2 shadow-xl rounded-xl portrait:text-xs"
           name="searchRessourcesCategorieRessource"
-          id="categorieRessource"
+          id="categorie"
           placeholder='Sélectionnez une catégorie'
-          value={categorieRessource}
+          value={categorie}
           onChange={(e) => setCategorieRessource(e.target.value)}>
 
           <option value="" selected disabled hidden>Choisir une catégorie</option>

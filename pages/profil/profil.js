@@ -9,6 +9,8 @@ import { Tabs } from '../../components/Tabs';
 function profil(props) {
     const ressources = props.ressources;
     const commentaires = props.commentaires;
+    const categorie = props.categorie;
+
     return (
         <div class="flex">
             <Head>
@@ -24,7 +26,7 @@ function profil(props) {
                     border-solid font-bold text-base leading-normal py-3 px-5 uppercase" value="Créer une ressource"></input>
 
                 </a>
-                    {ressources?.map((ressource, i) => <RowsRessources ressource={ressource} key={i} />)}
+                    {ressources?.map((ressource, i) => <RowsRessources ressource={ressource} categorie={categorie} key={i} />)}
                 </div>
 
             }
@@ -47,10 +49,12 @@ export async function getServerSideProps() {
             idCompte: 24, //à modifier pck c'est nimp
         }
     });
+    const rechercheCategorie = await prisma.categorie.findMany({});
     return {
         props: {
             ressources: JSONBig.parse(JSONBig.stringify(rechercheRessource)),
             commentaires: JSONBig.parse(JSONBig.stringify(rechercheCommentaire)),
+            categorie: JSONBig.parse(JSONBig.stringify(rechercheCategorie)),
         },
     };
 }

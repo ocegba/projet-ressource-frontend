@@ -9,7 +9,7 @@ function addFavoris() {
   alert("J'ajoute à mes favoris")
 }
 
-export default function Card({ ressource }) {
+export default function Card({ ressource, categorie }) {
   const [open, setOpen] = useState(false);
   const [contenuCommentaire, setCommentaireRessource] = useState('')
 
@@ -33,8 +33,7 @@ export default function Card({ ressource }) {
     })
     window.location.reload();
   }
-
-
+  
   return (
     <div class="flex-1 justify-center	items-center p-14">
       <div class="static w-600 h-550 bg-white rounded-lg drop-shadow-xl">
@@ -45,7 +44,7 @@ export default function Card({ ressource }) {
           </div>
 
           <div>
-            <p class="text-xs bg-red-200" id="categoryOutput">{ressource.categorieRessource}</p>
+            <p class="text-xs bg-red-200" id="categoryOutput">{(categorie[ressource.idCategorie-1]).libelleCategorie}</p>
             <p class="text-xs bg-custom-blue" id="typesRessourcesOutput">{ressource.typeRessource}</p>
             <p class="text-xs bg-green-200" id="typesRelationsOutput">{ressource.typeRelationRessource}</p>
           </div>

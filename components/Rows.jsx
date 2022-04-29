@@ -55,7 +55,7 @@ async function statusCompte(compte) {
 }
 ///////////////////////////////////////////// PROFIL CONNECTE /////////////////////////////////////////////////////
 
-export const RowsRessources = ({ ressource }) => {
+export const RowsRessources = ({ ressource, categorie }) => {
     const formRef = useRef();
     const [open, setOpen] = useState(false);
 
@@ -71,7 +71,7 @@ export const RowsRessources = ({ ressource }) => {
             editRessourcesLocalisationRessource,
         } = formRef.current;
         const titreRessource = editRessourcesTitreRessource.value;
-        const categorieRessource = editRessourcesCategorieRessource.value;
+        const categorie = editRessourcesCategorieRessource.value;
         const typeRessource = editRessourcesTypeRessource.value;
         const typeRelationRessource = editRessourcesRelationRessource.value;
         const storyRessource = editRessourcesStoryRessource.value;
@@ -82,7 +82,7 @@ export const RowsRessources = ({ ressource }) => {
         await axios.put("../api/ressource/editRessource", {
             idRessource: (ressource?.idRessource),
             titreRessource,
-            categorieRessource,
+            categorie,
             typeRessource,
             typeRelationRessource,
             storyRessource,
@@ -127,7 +127,7 @@ export const RowsRessources = ({ ressource }) => {
                     }
                 </div>
                 <div class="col-start-5">
-                    {ressource.categorieRessource}
+                    {(categorie[ressource.idCategorie-1]).libelleCategorie}
                 </div>
                 <div class="col-start-6">
                     {ressource.typeRessource} <br />
@@ -161,12 +161,12 @@ export const RowsRessources = ({ ressource }) => {
                         </div>
 
                         <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-                            <label class="text-xl" for="categorieRessource">Catégorie :</label>
+                            <label class="text-xl" for="categorie">Catégorie :</label>
                             <select class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
                                 required
-                                defaultValue={ressource?.categorieRessource}
+                                defaultValue={ressource?.categorie}
                                 name="editRessourcesCategorieRessource"
-                                id="categorieRessource"
+                                id="categorie"
                                 placeholder='Sélectionnez une catégorie'
                             >
 
@@ -499,7 +499,7 @@ export const RowsFavoris = ({ actions }) => {
 
 ///////////////////////////////////////////// ADMINISTRATEUR /////////////////////////////////////////////////////
 
-export const RowsRessourcesAdmin = ({ ressource }) => {
+export const RowsRessourcesAdmin = ({ ressource, categorie }) => {
     const formRef = useRef();
     const [open, setOpen] = useState(false);
 
@@ -515,7 +515,7 @@ export const RowsRessourcesAdmin = ({ ressource }) => {
             editRessourcesLocalisationRessource,
         } = formRef.current;
         const titreRessource = editRessourcesTitreRessource.value;
-        const categorieRessource = editRessourcesCategorieRessource.value;
+        const categorie = editRessourcesCategorieRessource.value;
         const typeRessource = editRessourcesTypeRessource.value;
         const typeRelationRessource = editRessourcesRelationRessource.value;
         const storyRessource = editRessourcesStoryRessource.value;
@@ -526,7 +526,7 @@ export const RowsRessourcesAdmin = ({ ressource }) => {
         await axios.put("../api/ressource/editRessource", {
             idRessource: (ressource?.idRessource),
             titreRessource,
-            categorieRessource,
+            categorie,
             typeRessource,
             typeRelationRessource,
             storyRessource,
@@ -545,7 +545,7 @@ export const RowsRessourcesAdmin = ({ ressource }) => {
                     crée le {moment(ressource.dateRessource).format("LL")}<br />
                 </div>
                 <div class="col-start-4">
-                    {ressource.categorieRessource}
+                    {(categorie[ressource.idCategorie-1]).libelleCategorie}
                 </div>
                 <div class="col-start-5">
                     {ressource.typeRessource} <br />
@@ -585,12 +585,12 @@ export const RowsRessourcesAdmin = ({ ressource }) => {
                         </div>
 
                         <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-                            <label class="text-xl" for="categorieRessource">Catégorie :</label>
+                            <label class="text-xl" for="categorie">Catégorie :</label>
                             <select class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
                                 required
-                                defaultValue={ressource?.categorieRessource}
+                                defaultValue={ressource?.categorie}
                                 name="editRessourcesCategorieRessource"
-                                id="categorieRessource"
+                                id="categorie"
                                 placeholder='Sélectionnez une catégorie'
                             >
 
@@ -872,7 +872,7 @@ export const RowsCommentairesMod = ({ commentaire }) => {
     )
 }
 
-export const RowsRessourcesModHold = ({ ressource }) => {
+export const RowsRessourcesModHold = ({ ressource, categorie }) => {
     const Raison = useRef();
 
     async function deleteDemandeRessource(ressource) {
@@ -919,7 +919,7 @@ export const RowsRessourcesModHold = ({ ressource }) => {
                 }
             </div>
             <div class="col-start-5">
-                {ressource.categorieRessource}
+                {(categorie[ressource.idCategorie-1]).libelleCategorie}
             </div>
             <div class="col-start-6">
                 {ressource.typeRessource} <br />
@@ -975,7 +975,7 @@ export const RowsRessourcesModRef = ({ ressource }) => {
                 }
             </div>
             <div class="col-start-5">
-                {ressource.categorieRessource}
+                {ressource.categorie}
             </div>
             <div class="col-start-6">
                 {ressource.typeRessource} <br />
