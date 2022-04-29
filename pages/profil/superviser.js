@@ -8,16 +8,16 @@ import prisma from '../../prisma/prisma'
 function superviser(props){
     const comptes =props.comptes;
   return (
-    <div class="flex">
+    <div className="flex">
             <Head>
                 <title>Superviser</title>
                 <meta name="description" content="Superviser" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <SideBar />
-            <div class="p-6">
-                <h1 class="p-4 text-3xl">Création de rôles</h1>
-                    <p class="py-3 px-5 text-xl">Vous pouvez élever le rôle d'un utilisateur.</p>
+            <div className="p-6">
+                <h1 className="p-4 text-3xl">Création de rôles</h1>
+                    <p className="py-3 px-5 text-xl">Vous pouvez élever le rôle d'un utilisateur.</p>
             {
                 comptes?.map((compte, i) => <RowsCompteSuperAdmin compte={compte} key={i}/>)
             }

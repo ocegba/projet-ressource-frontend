@@ -12,7 +12,7 @@ function profil(props) {
     const categorie = props.categorie;
 
     return (
-        <div class="flex">
+        <div className="flex">
             <Head>
                 <title>Mon profil</title>
                 <meta name="description" content="(Re)Sources relationnelles, un guide pour vos relations" />
@@ -22,7 +22,7 @@ function profil(props) {
             <Tabs nomElement1={"Mes ressources crées"} element1={
                 <div>
                     <a href="/createRessource">
-                    <input type="submit" href="/createRessource" class="cursor-pointer border-2 bg-white-600 hover:bg-gray-300 rounded-lg
+                    <input type="submit" href="/createRessource" className="cursor-pointer border-2 bg-white-600 hover:bg-gray-300 rounded-lg
                     border-solid font-bold text-base leading-normal py-3 px-5 uppercase" value="Créer une ressource"></input>
 
                 </a>

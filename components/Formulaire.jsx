@@ -13,10 +13,10 @@ export default function Formulaire() {
   const formRef = useRef();
 
   return (
-    <form ref={formRef} class="flex flex-col justify-center portrait:w-fit">
-      <div class="flex flex-col mt-4 min-h-[80px] w-11/12 h-20 mt-3 mb-3 m-auto pr-2 pl-2">
-        <label class="text-xl leading-7" for="titreRessource">Activités ou ressources :</label>
-        <input class="bg-white text-base font-medium h-14 pl-2 shadow-xl rounded-xl portrait:text-xs "
+    <form ref={formRef} className="flex flex-col justify-center portrait:w-fit">
+      <div className="flex flex-col mt-4 min-h-[80px] w-11/12 h-20 mt-3 mb-3 m-auto pr-2 pl-2">
+        <label className="text-xl leading-7" htmlFor="titreRessource">Activités ou ressources :</label>
+        <input className="bg-white text-base font-medium h-14 pl-2 shadow-xl rounded-xl portrait:text-xs "
           type="text"
           name="searchRessourcesTitreRessource"
           id="titreRessource"
@@ -51,9 +51,9 @@ export default function Formulaire() {
         </select>
       </div>
 
-      <div class="flex flex-col mt-4 min-h-[80px] w-11/12 h-20 mt-3 mb-3 m-auto pr-2 pl-2 ">
-        <label class="text-xl leading-7" for="typesRessources">Types de ressources :</label>
-        <select class="bg-white text-base font-medium h-14 pl-2 shadow-xl rounded-xl portrait:text-xs"
+      <div className="flex flex-col mt-4 min-h-[80px] w-11/12 h-20 mt-3 mb-3 m-auto pr-2 pl-2 ">
+        <label className="text-xl leading-7" htmlFor="typesRessources">Types de ressources :</label>
+        <select className="bg-white text-base font-medium h-14 pl-2 shadow-xl rounded-xl portrait:text-xs"
           name="searchRessourcesTypeRessource"
           id="typesRessources"
           placeholder='Sélectionnez un type de ressource'
@@ -72,9 +72,9 @@ export default function Formulaire() {
         </select>
       </div>
 
-      <div class="flex flex-col mt-4 min-h-[80px] w-11/12 h-20 mt-3 mb-3 m-auto pr-2 pl-2">
-        <label class="text-xl leading-7" for="typesRelationRessource">Types de relations :</label>
-        <select class="bg-white text-base font-medium h-14 pl-2 shadow-xl rounded-xl portrait:text-xs"
+      <div className="flex flex-col mt-4 min-h-[80px] w-11/12 h-20 mt-3 mb-3 m-auto pr-2 pl-2">
+        <label className="text-xl leading-7" htmlFor="typesRelationRessource">Types de relations :</label>
+        <select className="bg-white text-base font-medium h-14 pl-2 shadow-xl rounded-xl portrait:text-xs"
           name="searchRessourcesRelationRessource"
           id="typesRelationRessource"
           placeholder='Sélectionnez une ou plusieurs relations'
@@ -92,9 +92,9 @@ export default function Formulaire() {
         </select>
       </div>
 
-      <div class="flex flex-col mt-4 min-h-[80px] w-11/12 h-20 mt-3 mb-3 m-auto pr-2 pl-2 ">
-        <label class="text-xl leading-7">Département :</label>
-        <input class="bg-white text-base font-medium h-14 pl-2 shadow-xl rounded-xl portrait:text-xs"
+      <div className="flex flex-col mt-4 min-h-[80px] w-11/12 h-20 mt-3 mb-3 m-auto pr-2 pl-2 ">
+        <label className="text-xl leading-7">Département :</label>
+        <input className="bg-white text-base font-medium h-14 pl-2 shadow-xl rounded-xl portrait:text-xs"
           name="searchRessourcesLocalisationRessource"
           list="departement"
           placeholder='Sélectionnez un département'
@@ -209,7 +209,7 @@ export default function Formulaire() {
       </div>
 
       <div >
-        <button class="h-20 mt-3 mb-3 bg-custom-blue text-white font-bold text-3xl w-fit pr-2 pl-2 rounded-xl portrait:text-xs block m-auto cursor-pointer rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300"
+        <button className="h-20 mt-3 mb-3 bg-custom-blue text-white font-bold text-3xl w-fit pr-2 pl-2 rounded-xl portrait:text-xs block m-auto cursor-pointer rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300"
           type="submit" /*  onClick={() => searchNewRessource()} */>Rechercher une ressource</button>
       </div>
     </form >

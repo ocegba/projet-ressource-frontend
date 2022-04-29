@@ -4,17 +4,17 @@ export const Tabs = ({ nomElement1, element1, nomElement2, element2, nomElement3
     const [openTab, setOpenTab] = React.useState(1);
 
     return (
-        <div class="w-full h-full p-4 m-8 overflow-y-auto space-y-10">
-            <ul class="flex text-center border-b border-gray-200">
-                <div className="flex flex-wrap">
-                    <div className="w-full">
+        <div className="w-full h-full p-4 m-8 overflow-y-auto space-y-10">
+            <ul className="flex text-center border-b border-gray-200">
+                <div classNameName="flex flex-wrap">
+                    <div classNameName="w-full">
                         <ul
-                            className="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row"
+                            classNameName="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row"
                             role="tablist"
                         >
-                            <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                            <li classNameName="-mb-px mr-2 last:mr-0 flex-auto text-center">
                                 <a
-                                    className={
+                                    classNameName={
                                         "text-base font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
                                         (openTab === 1
                                             ? "text-custom-blue bg-" + "black" + "-600"
@@ -28,12 +28,12 @@ export const Tabs = ({ nomElement1, element1, nomElement2, element2, nomElement3
                                     href="#link1"
                                     role="tablist"
                                 >
-                                    <i className="fas fa-space-shuttle text-base mr-1"></i> {nomElement1}
+                                    <i classNameName="fas fa-space-shuttle text-base mr-1"></i> {nomElement1}
                                 </a>
                             </li>
-                            <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                            <li classNameName="-mb-px mr-2 last:mr-0 flex-auto text-center">
                                 <a
-                                    className={
+                                    classNameName={
                                         "text-base font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
                                         (openTab === 2
                                             ? "text-custom-blue bg-" + "black" + "-600"
@@ -47,12 +47,12 @@ export const Tabs = ({ nomElement1, element1, nomElement2, element2, nomElement3
                                     href="#link2"
                                     role="tablist"
                                 >
-                                    <i className="fas fa-cog text-base mr-1"></i>  {nomElement2}
+                                    <i classNameName="fas fa-cog text-base mr-1"></i>  {nomElement2}
                                 </a>
                             </li>
-                            <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                            <li classNameName="-mb-px mr-2 last:mr-0 flex-auto text-center">
                                 <a
-                                    className={
+                                    classNameName={
                                         "text-base font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
                                         (openTab === 3
                                             ? "text-custom-blue bg-" + "black" + "-600"
@@ -66,12 +66,12 @@ export const Tabs = ({ nomElement1, element1, nomElement2, element2, nomElement3
                                     href="#link3"
                                     role="tablist"
                                 >
-                                    <i className="fas fa-briefcase text-base mr-1"></i>  {nomElement3}
+                                    <i classNameName="fas fa-briefcase text-base mr-1"></i>  {nomElement3}
                                 </a>
                             </li>
-                            <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                            <li classNameName="-mb-px mr-2 last:mr-0 flex-auto text-center">
                                 <a
-                                    className={
+                                    classNameName={
                                         "text-base font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
                                         (openTab === 4
                                             ? "text-custom-blue bg-" + "black" + "-600"
@@ -85,23 +85,23 @@ export const Tabs = ({ nomElement1, element1, nomElement2, element2, nomElement3
                                     href="#link4"
                                     role="tablist"
                                 >
-                                    <i className="fas fa-briefcase text-base mr-1"></i>  {nomElement4}
+                                    <i classNameName="fas fa-briefcase text-base mr-1"></i>  {nomElement4}
                                 </a>
                             </li>
                         </ul>
                         <div>
-                            <div className="px-4 py-5 flex-auto">
-                                <div className="tab-content tab-space">
-                                    <div className={openTab === 1 ? "block" : "hidden"} id="link1">
+                            <div classNameName="px-4 py-5 flex-auto">
+                                <div classNameName="tab-content tab-space">
+                                    <div classNameName={openTab === 1 ? "block" : "hidden"} id="link1">
                                         {element1}
                                     </div>
-                                    <div className={openTab === 2 ? "block" : "hidden"} id="link2">
+                                    <div classNameName={openTab === 2 ? "block" : "hidden"} id="link2">
                                         {element2}
                                     </div>
-                                    <div className={openTab === 3 ? "block" : "hidden"} id="link3">
+                                    <div classNameName={openTab === 3 ? "block" : "hidden"} id="link3">
                                         {element3}
                                     </div>
-                                    <div className={openTab === 4 ? "block" : "hidden"} id="link3">
+                                    <div classNameName={openTab === 4 ? "block" : "hidden"} id="link3">
                                         {element4}
                                     </div>
                                 </div>
