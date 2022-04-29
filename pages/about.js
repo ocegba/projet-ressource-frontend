@@ -7,19 +7,19 @@ import Head from 'next/head'
 
 const about = () => {
     return (
-        <div class="h-fit w-fit ml-2.5">
+        <div className="h-fit w-fit ml-2.5">
             <Head>
                 <title>À propos</title>
                 <meta name="description" content="Page d'aide" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <p class="w-auto text-justify text-4xl"><b>(Re)Sources relationnelles</b> a été réalisé par l’entreprise <b>4APPS</b> proposé par le <b>ministère des Solidarités et de la Santé.</b></p>
+            <p className="w-auto text-justify text-4xl"><b>(Re)Sources relationnelles</b> a été réalisé par l’entreprise <b>4APPS</b> proposé par le <b>ministère des Solidarités et de la Santé.</b></p>
             <div>
-                <Image class="rounded-3xl" src={logo} alt="loading..." width={260} height={260} />
-                <Image class="rounded-3xl" src={logoentreprise} alt="loading..." width={260} height={260} />
-                <Image class="rounded-3xl" src={logoministere} alt="loading..." width={260} height={260} />
+                <Image className="rounded-3xl" src={logo} alt="loading..." width={260} height={260} />
+                <Image className="rounded-3xl" src={logoentreprise} alt="loading..." width={260} height={260} />
+                <Image className="rounded-3xl" src={logoministere} alt="loading..." width={260} height={260} />
             </div>
-            <p class="w-auto text-justify text-4xl">Cette application permet de renforcer les liens entre les citoyens à travers diverses ressources.</p>
+            <p className="w-auto text-justify text-4xl">Cette application permet de renforcer les liens entre les citoyens à travers diverses ressources.</p>
         </div>
     )
 }

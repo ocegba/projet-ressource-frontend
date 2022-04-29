@@ -20,21 +20,21 @@ const MdpUpdate = () => {
         window.location.reload();
     }
     return (
-        <div class="flex flex-column portrait:flex-col w-full h-fit">
-            <form i d="formUpdate" class="portrait:grid-cols-1">
-                <div class="grid gap-3 grid-cols-2 portrait:grid-cols-1 ">
-                    <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-                        <label class="text-xl" for="mdp">Mot de passe actuel</label>
-                        <input class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-11" maxlength="50"
+        <div className="flex flex-column portrait:flex-col w-full h-fit">
+            <form i d="formUpdate" className="portrait:grid-cols-1">
+                <div className="grid gap-3 grid-cols-2 portrait:grid-cols-1 ">
+                    <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
+                        <label className="text-xl" for="mdp">Mot de passe actuel</label>
+                        <input className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-11" maxlength="50"
                             type="password"
                             name="mdp"
                             id="mdp"
                         />
                     </div>
 
-                    <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-                        <label class="text-xl" for="mdpUtilisateur">Nouveau de mot de passe</label>
-                        <input class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-11" maxlength="50"
+                    <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
+                        <label className="text-xl" for="mdpUtilisateur">Nouveau de mot de passe</label>
+                        <input className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-11" maxlength="50"
                             type="password"
                             name="updateMdp"
                             id="mdpUtilisateur"
@@ -45,15 +45,15 @@ const MdpUpdate = () => {
                             })} />
                     </div>
 
-                    <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-                        <label class="text-xl" for="mdpUtilisateur">Confirmation du mot de passe</label>
-                        <input class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-11" maxlength="50"
+                    <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
+                        <label className="text-xl" for="mdpUtilisateur">Confirmation du mot de passe</label>
+                        <input className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-11" maxlength="50"
                             type="password"  {...register("confirmpassword", { validate: confirmpassword => confirmpassword === updateMdp.current || "Le mot de passe n'est pas identique." })} />
                     </div>
                 </div>
                 <div>
-                    <p class="font-medium leading-5">Mot de passe exigé</p>
-                    <p class="font-normal leading-5 mb-1 text-gray-500">
+                    <p className="font-medium leading-5">Mot de passe exigé</p>
+                    <p className="font-normal leading-5 mb-1 text-gray-500">
                         Assurez-vous que ces exigences sont remplies :</p>
                     <p>
                         Le mot de passe doit contenir une lettre minuscule minimum <br />
@@ -64,8 +64,8 @@ const MdpUpdate = () => {
 
                     </p>
                 </div>
-                <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-                    <button class="h-20 mt-3 mb-3 bg-custom-blue text-white font-bold text-3xl portrait:text-2xl w-fit pr-2 pl-2 rounded-xl block m-auto cursor-pointer rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" type="submit" onClick={() => updateMotdepasse()}>Sauvegarder les changements</button>
+                <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
+                    <button className="h-20 mt-3 mb-3 bg-custom-blue text-white font-bold text-3xl portrait:text-2xl w-fit pr-2 pl-2 rounded-xl block m-auto cursor-pointer rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" type="submit" onClick={() => updateMotdepasse()}>Sauvegarder les changements</button>
                 </div>
             </form>
         </div>

@@ -32,45 +32,45 @@ const InfoUpdate = () => {
         alert("Informations modifiées ! ")
     }
     return (
-        <div class="flex flex-column portrait:flex-col w-full h-fit">
-            <form i ref={formRef} d="formUpdate" class="grid gap-0 grid-cols-2 portrait:grid-cols-1">
+        <div className="flex flex-column portrait:flex-col w-full h-fit">
+            <form i ref={formRef} d="formUpdate" className="grid gap-0 grid-cols-2 portrait:grid-cols-1">
 
-                <div class="flex flex-col min-h-80 mt-15 w-10/12 my-3">
-                    <label class="text-xl" for="prenomUtilisateur">Prénom</label>
-                    <input class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10" maxlength="50"
+                <div className="flex flex-col min-h-80 mt-15 w-10/12 my-3">
+                    <label className="text-xl" for="prenomUtilisateur">Prénom</label>
+                    <input className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10" maxlength="50"
                         type="text"
                         name="updatePrenomUtilisateur"
                         id="prenomUtilisateur"
                     />
                 </div>
 
-                <div class="flex flex-col min-h-80 mt-15 w-10/12 my-3">
-                    <label class="text-xl" for="nomUtilisateur">Nom</label>
-                    <input class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
+                <div className="flex flex-col min-h-80 mt-15 w-10/12 my-3">
+                    <label className="text-xl" for="nomUtilisateur">Nom</label>
+                    <input className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
                         name="updateNomUtilisateur"
                         id="nomUtilisateur"
                     />
                 </div>
 
-                <div class="flex flex-col min-h-80 mt-15 w-10/12 my-3">
-                    <label class="text-xl" for="mailUtilisateur">E-mail</label>
-                    <input class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
+                <div className="flex flex-col min-h-80 mt-15 w-10/12 my-3">
+                    <label className="text-xl" for="mailUtilisateur">E-mail</label>
+                    <input className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
                         type="mail"
                         name="updateMail"
                         id="mailUtilisateur" />
                 </div>
 
-                <div class="flex flex-col min-h-80 mt-15 w-10/12 my-3">
-                    <label class="text-xl" for="ageUtilisateur">Âge</label>
-                    <input type="number" class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
+                <div className="flex flex-col min-h-80 mt-15 w-10/12 my-3">
+                    <label className="text-xl" for="ageUtilisateur">Âge</label>
+                    <input type="number" className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
                         name="updateAge"
                         id="ageUtilisateur"
                         min="1" max="100" />
                 </div>
 
-                <div class="flex flex-col min-h-80 mt-15 w-10/12 my-3">
-                    <label class="text-xl">Département</label>
-                    <input class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
+                <div className="flex flex-col min-h-80 mt-15 w-10/12 my-3">
+                    <label className="text-xl">Département</label>
+                    <input className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
                         name="updateDepartement"
                         list="departement"
                         placeholder='Département'
@@ -183,9 +183,9 @@ const InfoUpdate = () => {
                     </datalist>
                 </div>
 
-                <div class="flex flex-col min-h-80 mt-15 w-10/12 my-3">
-                    <label class="text-xl" for="regionUtilisateur">Régions</label>
-                    <input class="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
+                <div className="flex flex-col min-h-80 mt-15 w-10/12 my-3">
+                    <label className="text-xl" for="regionUtilisateur">Régions</label>
+                    <input className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
                         name="updateRegionUtilisateur"
                         list="regions"
                         id="regionUtilisateur">
@@ -215,8 +215,8 @@ const InfoUpdate = () => {
                     </datalist>
                 </div>
 
-                <div class="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-                    <button class="h-20 mt-3 mb-3 bg-custom-blue text-white font-bold text-3xl portrait:text-2xl w-fit pr-2 pl-2 rounded-xl block m-auto cursor-pointer rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" type="submit" onClick={() => updateCompteInfo()}>Sauvegarder les changements</button>
+                <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
+                    <button className="h-20 mt-3 mb-3 bg-custom-blue text-white font-bold text-3xl portrait:text-2xl w-fit pr-2 pl-2 rounded-xl block m-auto cursor-pointer rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" type="submit" onClick={() => updateCompteInfo()}>Sauvegarder les changements</button>
                 </div>
             </form >
         </div>
