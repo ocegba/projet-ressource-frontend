@@ -6,7 +6,7 @@ export default async (req, res) => {
   const {
     idRessource,
     titreRessource,
-    categorie,
+    idCategorie,
     typeRessource,
     typeRelationRessource,
     storyRessource,
@@ -16,7 +16,6 @@ export default async (req, res) => {
     dateRessource,
     validerRessource,
   } = req.body;
-  console.log(req.body)
 
   try {
     const editRessource = await prisma.ressource.update({
@@ -25,7 +24,7 @@ export default async (req, res) => {
       },
       data: {
         titreRessource,
-        categorie,
+        idCategorie : parseInt(idCategorie),
         typeRessource,
         typeRelationRessource,
         storyRessource,

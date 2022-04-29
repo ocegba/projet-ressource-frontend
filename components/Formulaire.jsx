@@ -34,20 +34,7 @@ export default function Formulaire() {
           value={categorie}
           onChange={(e) => setCategorieRessource(e.target.value)}>
 
-          <option value="" selected disabled hidden>Choisir une catégorie</option>
-          <option value="communication">Communication</option>
-          <option value="cultures">Cultures</option>
-          <option value="developpementpersonnel">Developpement personnel</option>
-          <option value="intelligenceemotionnelle">Intelligence émotionnelle</option>
-          <option value="loisirs">Loisirs</option>
-          <option value="mondeprofessionnel">Monde Professionel</option>
-          <option value="parentalite">Parentalité</option>
-          <option value="qualitedevie">Qualité de vie</option>
-          <option value="recherchedesens">Recherche de sens</option>
-          <option value="santephysique">Santé physique</option>
-          <option value="santepsychique">Santé psychique</option>
-          <option value="spiritualite">Spiritualité</option>
-          <option value="vieaffective">Vie affective</option>
+          {categorie?.map((compte, i) => <option value={compte.idCategorie}>{compte.libelleCategorie}</option>)}
         </select>
       </div>
 

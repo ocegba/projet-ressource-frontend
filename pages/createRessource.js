@@ -1,8 +1,10 @@
 import Head from 'next/head'
 import React, { useRef, useState } from "react"
+import JSONBig from 'json-bigint';
+import prisma from '../prisma/prisma'
 import axios from "axios";
 
-export default function createRessource() {
+export default function createRessource(props) {
   const [disable, setDisable] = useState(false);
 
   const [titreRessource, setTitreRessource] = useState('')
@@ -15,8 +17,10 @@ export default function createRessource() {
   const [localisationRessource, setLocalisationRessource] = useState('')
 
   const formRef = useRef();
+  const categories = props.categories;
 
-  async function addNewRessource(params) {
+
+  async function addNewRessource() {
     setDisable(true);
     const {
       addRessourcesTitreRessource,
@@ -29,7 +33,7 @@ export default function createRessource() {
       addRessourcesLocalisationRessource,
     } = formRef.current;
     const titreRessource = addRessourcesTitreRessource.value;
-    const categorie = addRessourcesCategorieRessource.value;
+    const idCategorie = addRessourcesCategorieRessource.value;
     const typeRessource = addRessourcesTypeRessource.value;
     const typeRelationRessource = addRessourcesRelationRessource.value;
     const storyRessource = addRessourcesStoryRessource.value;
@@ -39,7 +43,7 @@ export default function createRessource() {
     const dateRessource = (new Date(Date.now())).toISOString();
     await axios.post("/api/ressource/addRessource", {
       titreRessource,
-      categorie,
+      idCategorie: parseInt(idCategorie),
       typeRessource,
       typeRelationRessource,
       storyRessource,
@@ -52,7 +56,6 @@ export default function createRessource() {
     alert("Votre ressource a bien été envoyé au modérateur")
     window.location.reload();
   }
-
   return (
     <div className="flex flex-column portrait:flex-col w-full	bg-gray-100 h-fit">
       <Head>
@@ -84,22 +87,9 @@ export default function createRessource() {
               id="categorie"
               placeholder='Sélectionnez une catégorie'
               value={categorie}
-              onChange={(e) => setCategorieRessource(e.target.value)} >
+              onChange={(e) => [setCategorieRessource(e.target.value)]}>
 
-              <option value="" selected disabled hidden>Choisir une catégorie</option>
-              <option value="Communication">Communication</option>
-              <option value="Cultures">Cultures</option>
-              <option value="Developpement personnel">Developpement personnel</option>
-              <option value="Intelligence émotionnelle">Intelligence émotionnelle</option>
-              <option value="Loisirs">Loisirs</option>
-              <option value="Monde professionnel">Monde professionnel</option>
-              <option value="Parentalité">Parentalité</option>
-              <option value="Qualité de vie">Qualité de vie</option>
-              <option value="Recherche de sens">Recherche de sens</option>
-              <option value="Santé physique">Santé physique</option>
-              <option value="Santé psychique">Santé psychique</option>
-              <option value="Spiritualité">Spiritualité</option>
-              <option value="Vie affective">Vie affective</option>
+              {categories?.map((compte, i) => <option value={compte.idCategorie}>{compte.libelleCategorie}</option>)}
             </select>
           </div>
 
@@ -354,4 +344,14 @@ export default function createRessource() {
       </div>
     </div>
   )
+}
+
+export async function getServerSideProps() {
+  const rechercheCategorie = await prisma.categorie.findMany({});
+  return {
+    props: {
+      categories: JSONBig.parse(JSONBig.stringify(rechercheCategorie)),
+
+    },
+  };
 }

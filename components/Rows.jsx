@@ -71,7 +71,7 @@ export const RowsRessources = ({ ressource, categorie }) => {
             editRessourcesLocalisationRessource,
         } = formRef.current;
         const titreRessource = editRessourcesTitreRessource.value;
-        const categorie = editRessourcesCategorieRessource.value;
+        const idCategorie = editRessourcesCategorieRessource.value;
         const typeRessource = editRessourcesTypeRessource.value;
         const typeRelationRessource = editRessourcesRelationRessource.value;
         const storyRessource = editRessourcesStoryRessource.value;
@@ -82,7 +82,7 @@ export const RowsRessources = ({ ressource, categorie }) => {
         await axios.put("../api/ressource/editRessource", {
             idRessource: (ressource?.idRessource),
             titreRessource,
-            categorie,
+            idCategorie : parseInt(idCategorie),
             typeRessource,
             typeRelationRessource,
             storyRessource,
@@ -127,7 +127,7 @@ export const RowsRessources = ({ ressource, categorie }) => {
                     }
                 </div>
                 <div class="col-start-5">
-                    {(categorie[ressource.idCategorie-1]).libelleCategorie}
+                    {(categorie[ressource.idCategorie - 1]).libelleCategorie}
                 </div>
                 <div className="col-start-6">
                     {ressource.typeRessource} <br />
@@ -164,26 +164,12 @@ export const RowsRessources = ({ ressource, categorie }) => {
                             <label className="text-xl" htmlFor="categorieRessource">Catégorie :</label>
                             <select className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
                                 required
-                                defaultValue={ressource?.categorie}
+                                defaultValue={(categorie[ressource.idCategorie - 1]).libelleCategorie}
                                 name="editRessourcesCategorieRessource"
-                                id="categorie"
+                                id="idCategorie"
                                 placeholder='Sélectionnez une catégorie'
                             >
-
-                                <option value="" selected disabled hidden>Choisir une catégorie</option>
-                                <option value="Communication">Communication</option>
-                                <option value="Cultures">Cultures</option>
-                                <option value="Developpement personnel">Developpement personnel</option>
-                                <option value="Intelligence émotionnelle">Intelligence émotionnelle</option>
-                                <option value="Loisirs">Loisirs</option>
-                                <option value="Monde professionnel">Monde professionnel</option>
-                                <option value="Parentalité">Parentalité</option>
-                                <option value="Qualité de vie">Qualité de vie</option>
-                                <option value="Recherche de sens">Recherche de sens</option>
-                                <option value="Santé physique">Santé physique</option>
-                                <option value="Santé psychique">Santé psychique</option>
-                                <option value="Spiritualité">Spiritualité</option>
-                                <option value="Vie affective">Vie affective</option>
+                                {categorie?.map((compte, i) => <option value={compte.idCategorie}>{compte.libelleCategorie}</option>)}
                             </select>
                         </div>
 
@@ -545,7 +531,7 @@ export const RowsRessourcesAdmin = ({ ressource, categorie }) => {
                     crée le {moment(ressource.dateRessource).format("LL")}<br />
                 </div>
                 <div class="col-start-4">
-                    {(categorie[ressource.idCategorie-1]).libelleCategorie}
+                    {(categorie[ressource.idCategorie - 1]).libelleCategorie}
                 </div>
                 <div className="col-start-5">
                     {ressource.typeRessource} <br />
@@ -919,7 +905,7 @@ export const RowsRessourcesModHold = ({ ressource, categorie }) => {
                 }
             </div>
             <div class="col-start-5">
-                {(categorie[ressource.idCategorie-1]).libelleCategorie}
+                {(categorie[ressource.idCategorie - 1]).libelleCategorie}
             </div>
             <div className="col-start-6">
                 {ressource.typeRessource} <br />
