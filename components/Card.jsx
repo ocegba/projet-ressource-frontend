@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react"
 import axios from "axios";
-import { prisma } from "@prisma/client";
 
 function addParticiper() {
   alert("Je participe")
@@ -16,7 +15,7 @@ export default function Card({ ressource }) {
 
   const Comment = useRef();
 
-  async function addNewComment(params) {
+  async function addNewComment() {
     const {
       addCommentaire
     } = Comment.current;
@@ -25,7 +24,7 @@ export default function Card({ ressource }) {
     const idCompte = 24;
     const contenuCommentaire = addCommentaire.value;
     const dateCommentaire = (new Date(Date.now())).toISOString();
-    await axios.comment("../api/commentaires/addnewComment", {
+    await axios.post("../api/commentaires/addnewComment", {
       contenuCommentaire,
       dateCommentaire,
       idRessource,
@@ -101,7 +100,7 @@ export default function Card({ ressource }) {
               </form>
             </div>
             <ul>
-            {/* Anciens commentaires */}
+              {/* Anciens commentaires */}
             </ul>
           </div>
         ) : false}

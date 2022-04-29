@@ -7,6 +7,21 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model action {
+  idAction      BigInt     @id
+  idRessource   BigInt?
+  idCompte      BigInt?
+  libelleAction String?    @db.VarChar
+  compte        compte?    @relation(fields: [idCompte], references: [idCompte], onDelete: NoAction, onUpdate: NoAction, map: "idCompte")
+  ressource     ressource? @relation(fields: [idRessource], references: [idRessource], onDelete: NoAction, onUpdate: NoAction, map: "idRessource")
+}
+
+model categorie {
+  idCategorie      BigInt      @id
+  libelleCategorie String?     @db.VarChar
+  ressource        ressource[]
+}
+
 model commentaire {
   idCommentaire                                  BigInt         @id @default(autoincrement())
   idCompte                                       BigInt?
@@ -34,6 +49,7 @@ model compte {
   tempsMoyenConnexionUtilisateur  BigInt?
   ageUtilisateur                  Int?
   isActive                        Boolean       @default(false)
+  action                          action[]
   commentaire                     commentaire[]
   ressource                       ressource[]
 }
@@ -43,9 +59,8 @@ model discussion {
 }
 
 model ressource {
-  idRessource                                      BigInt           @id @default(autoincrement())
+  idRessource                                      BigInt        @id @default(autoincrement())
   titreRessource                                   String?       @db.VarChar
-  categorieRessource                               String?       @db.VarChar
   typeRessource                                    String?       @db.VarChar
   dateRessource                                    DateTime?     @db.Date
   lienRessource                                    String?       @db.VarChar
@@ -57,8 +72,11 @@ model ressource {
   fileRessource                                    String?       @db.VarChar
   validerRessource                                 Boolean?
   notRaisonRessource                               String?
+  idCategorie                                      BigInt?
+  categorie                                        categorie?    @relation(fields: [idCategorie], references: [idCategorie], onDelete: NoAction, onUpdate: NoAction, map: "idCategorie")
   commentaire_commentaireToressource_idCommentaire commentaire?  @relation("commentaireToressource_idCommentaire", fields: [idCommentaire], references: [idCommentaire], onDelete: NoAction, onUpdate: NoAction, map: "idCommentaire")
   compte                                           compte?       @relation(fields: [idCompte], references: [idCompte], onDelete: NoAction, onUpdate: NoAction, map: "idCompte")
+  action                                           action[]
   commentaire_commentaire_idRessourceToressource   commentaire[] @relation("commentaire_idRessourceToressource")
 }
 
@@ -72,40 +90,6 @@ enum Role {
   MODERATOR
   ADMINISTRATOR
   SUPER_ADMIN
-}
-
-enum categorie {
-  Communication
-  Cultures
-  D_veloppement_personnel @map("Développement personnel")
-  Intelligence__motionnelle @map("Intelligence émotionnelle")
-  Loisirs
-  Monde_professionnel @map("Monde professionnel")
-  Parentalit_ @map("Parentalité")
-  Qualit__de_vie @map("Qualité de vie")
-  Recherche_de_sens @map("Recherche de sens")
-  Sant__physique @map("Santé physique")
-  Sant__psychique @map("Santé psychique")
-  Spiritualit_ @map("Spiritualité")
-  Vie_affective @map("Vie affective")
-}
-
-enum cat_gories {
-  Communication
-  Cultures
-  D_veloppement_personnel @map("Développement personnel")
-  Intelligence__motionnelle @map("Intelligence émotionnelle")
-  Loisirs
-  Monde_professionnel @map("Monde professionnel")
-  Parentalit_ @map("Parentalité")
-  Qualit__de_vie @map("Qualité de vie")
-  Recherche_de_sens @map("Recherche de sens")
-  Sant__physique @map("Santé physique")
-  Sant__psychique @map("Santé psychique")
-  Spiritualit_ @map("Spiritualité")
-  Vie_affective @map("Vie affective")
-
-  @@map("catégories")
 }
 
 enum relations {

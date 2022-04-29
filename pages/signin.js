@@ -35,6 +35,7 @@ function signin() {
                 <button className="h-20 bg-custom-blue text-white font-bold text-3xl w-fit pr-2 pl-2 rounded-xl block m-auto cursor-pointer rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300">
                     <span>S'identifier</span>
                 </button>
+<<<<<<< HEAD
                 <div>
                     <div className="block text-sm text-right text-indigo-700 pr-3 underline pointer" >
                         <a className="pointer" onClick={() => setOpen(!open)}>Mot de passe perdu ?</a>
@@ -63,6 +64,9 @@ function signin() {
                         ) : false}
                     </div>
                 </div>
+=======
+                <p class="pl-2">Si perte de mot de passe, contactez le support technique</p>
+>>>>>>> 8aeccb04a1f7df5db8f9ab873dfd12d413b1c951
 
             </form>
         </div >
