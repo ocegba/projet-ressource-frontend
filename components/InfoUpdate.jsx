@@ -36,8 +36,8 @@ const InfoUpdate = () => {
             <form i ref={formRef} d="formUpdate" className="grid gap-0 grid-cols-2 portrait:grid-cols-1">
 
                 <div className="flex flex-col min-h-80 mt-15 w-10/12 my-3">
-                    <label className="text-xl" for="prenomUtilisateur">Prénom</label>
-                    <input className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10" maxlength="50"
+                    <label className="text-xl" htmlFor="prenomUtilisateur">Prénom</label>
+                    <input className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10" maxLength="50"
                         type="text"
                         name="updatePrenomUtilisateur"
                         id="prenomUtilisateur"
@@ -45,7 +45,7 @@ const InfoUpdate = () => {
                 </div>
 
                 <div className="flex flex-col min-h-80 mt-15 w-10/12 my-3">
-                    <label className="text-xl" for="nomUtilisateur">Nom</label>
+                    <label className="text-xl" htmlFor="nomUtilisateur">Nom</label>
                     <input className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
                         name="updateNomUtilisateur"
                         id="nomUtilisateur"
@@ -53,7 +53,7 @@ const InfoUpdate = () => {
                 </div>
 
                 <div className="flex flex-col min-h-80 mt-15 w-10/12 my-3">
-                    <label className="text-xl" for="mailUtilisateur">E-mail</label>
+                    <label className="text-xl" htmlFor="mailUtilisateur">E-mail</label>
                     <input className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
                         type="mail"
                         name="updateMail"
@@ -61,7 +61,7 @@ const InfoUpdate = () => {
                 </div>
 
                 <div className="flex flex-col min-h-80 mt-15 w-10/12 my-3">
-                    <label className="text-xl" for="ageUtilisateur">Âge</label>
+                    <label className="text-xl" htmlFor="ageUtilisateur">Âge</label>
                     <input type="number" className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
                         name="updateAge"
                         id="ageUtilisateur"
@@ -184,7 +184,7 @@ const InfoUpdate = () => {
                 </div>
 
                 <div className="flex flex-col min-h-80 mt-15 w-10/12 my-3">
-                    <label className="text-xl" for="regionUtilisateur">Régions</label>
+                    <label className="text-xl" htmlFor="regionUtilisateur">Régions</label>
                     <input className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
                         name="updateRegionUtilisateur"
                         list="regions"

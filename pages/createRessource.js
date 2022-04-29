@@ -65,7 +65,7 @@ export default function createRessource() {
         <form i ref={formRef} d="formCreate" className="flex flex-col">
 
           <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-            <label className="text-xl" for="titreRessource">Titre de la ressource :</label>
+            <label className="text-xl" htmlFor="titreRessource">Titre de la ressource :</label>
             <input className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10" maxlength="50"
               type="text"
               name="addRessourcesTitreRessource"
@@ -77,7 +77,7 @@ export default function createRessource() {
           </div>
 
           <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-            <label className="text-xl" for="categorieRessource">Catégorie :</label>
+            <label className="text-xl" htmlFor="categorieRessource">Catégorie :</label>
             <select className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
               required
               name="addRessourcesCategorieRessource"
@@ -104,7 +104,7 @@ export default function createRessource() {
           </div>
 
           <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-            <label className="text-xl" for="typesRessources">Types de ressources :</label>
+            <label className="text-xl" htmlFor="typesRessources">Types de ressources :</label>
             <select className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
               required
               name="addRessourcesTypeRessource"
@@ -126,7 +126,7 @@ export default function createRessource() {
           </div>
 
           <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-            <label className="text-xl" for="storyRessource">Texte :</label>
+            <label className="text-xl" htmlFor="storyRessource">Texte :</label>
             <textarea className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
               type="text"
               name="addRessourcesStoryRessource"
@@ -137,7 +137,7 @@ export default function createRessource() {
           </div>
 
           <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-            <label className="text-xl" for="fileRessource">Fichier :</label>
+            <label className="text-xl" htmlFor="fileRessource">Fichier :</label>
             <input
               type="file"
               name="addRessourcesFileRessource"
@@ -148,7 +148,7 @@ export default function createRessource() {
           </div>
 
           <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-            <label className="text-xl" for="lienRessource">Entrez un lien url en complément de votre ressource :</label>
+            <label className="text-xl" htmlFor="lienRessource">Entrez un lien url en complément de votre ressource :</label>
             <input className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
               type="url"
               name="addRessourcesLienRessource"
@@ -162,7 +162,7 @@ export default function createRessource() {
           </div>
 
           <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-            <label className="text-xl" for="typesRelationRessource">Types de relations :</label>
+            <label className="text-xl" htmlFor="typesRelationRessource">Types de relations :</label>
             <select className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
               required
               name="addRessourcesRelationRessource"

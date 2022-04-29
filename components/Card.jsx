@@ -93,7 +93,7 @@ export default function Card({ ressource }) {
               <h2 className=" text-xl">Commentaires</h2>
               <form ref={Comment}>
                 <textarea className="border-0 rounded-2xl resize-y	font-medium shadow-xl"
-                  id="contenuCommentaire" maxlength="70" type="text" cols="30"
+                  id="contenuCommentaire" maxLength="70" type="text" cols="30"
                   name="addCommentaire"
                 />
                 <button className="mt-2 mb-2 bg-custom-blue text-white font-bold text-xl w-fit pr-1 pl-1 rounded-xl block m-auto cursor-pointer rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" type="submit" onClick={() => addNewComment()}>Commenter</button>

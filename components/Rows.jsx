@@ -150,8 +150,8 @@ export const RowsRessources = ({ ressource }) => {
                     <form ref={formRef} d="formCreate" className="flex flex-col">
 
                         <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-                            <label className="text-xl" for="titreRessource">Titre de la ressource :</label>
-                            <input className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10" maxlength="50"
+                            <label className="text-xl" htmlFor="titreRessource">Titre de la ressource :</label>
+                            <input className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10" maxLength="50"
                                 type="text"
                                 defaultValue={ressource?.titreRessource}
                                 name="editRessourcesTitreRessource"
@@ -161,7 +161,7 @@ export const RowsRessources = ({ ressource }) => {
                         </div>
 
                         <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-                            <label className="text-xl" for="categorieRessource">Catégorie :</label>
+                            <label className="text-xl" htmlFor="categorieRessource">Catégorie :</label>
                             <select className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
                                 required
                                 defaultValue={ressource?.categorieRessource}
@@ -188,7 +188,7 @@ export const RowsRessources = ({ ressource }) => {
                         </div>
 
                         <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-                            <label className="text-xl" for="typesRessources">Types de ressources :</label>
+                            <label className="text-xl" htmlFor="typesRessources">Types de ressources :</label>
                             <select className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
                                 required
                                 defaultValue={ressource?.typeRessource}
@@ -210,7 +210,7 @@ export const RowsRessources = ({ ressource }) => {
                         </div>
 
                         <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-                            <label className="text-xl" for="storyRessource">Texte :</label>
+                            <label className="text-xl" htmlFor="storyRessource">Texte :</label>
                             <textarea className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
                                 defaultValue={ressource?.storyRessource}
                                 type="text"
@@ -221,7 +221,7 @@ export const RowsRessources = ({ ressource }) => {
                         </div>
 
                         <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-                            <label className="text-xl" for="fileRessource">Fichier :</label>
+                            <label className="text-xl" htmlFor="fileRessource">Fichier :</label>
                             <input
                                 defaultValue={ressource?.fileRessource}
                                 type="file"
@@ -232,7 +232,7 @@ export const RowsRessources = ({ ressource }) => {
                         </div>
 
                         <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-                            <label className="text-xl" for="lienRessource">Entrez un lien url en complément de votre ressource :</label>
+                            <label className="text-xl" htmlFor="lienRessource">Entrez un lien url en complément de votre ressource :</label>
                             <input className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
                                 defaultValue={ressource?.lienRessource}
                                 type="url"
@@ -245,7 +245,7 @@ export const RowsRessources = ({ ressource }) => {
                         </div>
 
                         <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">*
-                            <label className="text-xl" for="typesRelationRessource">Types de relations :</label>
+                            <label className="text-xl" htmlFor="typesRelationRessource">Types de relations :</label>
                             <select className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
                                 defaultValue={ressource?.typeRelationRessource}
                                 name="editRessourcesRelationRessource"
@@ -574,8 +574,8 @@ export const RowsRessourcesAdmin = ({ ressource }) => {
                     <form ref={formRef} d="formCreate" className="flex flex-col">
 
                         <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-                            <label className="text-xl" for="titreRessource">Titre de la ressource :</label>
-                            <input className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10" maxlength="50"
+                            <label className="text-xl" htmlFor="titreRessource">Titre de la ressource :</label>
+                            <input className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10" maxLength="50"
                                 type="text"
                                 defaultValue={ressource?.titreRessource}
                                 name="editRessourcesTitreRessource"
@@ -585,7 +585,7 @@ export const RowsRessourcesAdmin = ({ ressource }) => {
                         </div>
 
                         <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-                            <label className="text-xl" for="categorieRessource">Catégorie :</label>
+                            <label className="text-xl" htmlFor="categorieRessource">Catégorie :</label>
                             <select className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
                                 required
                                 defaultValue={ressource?.categorieRessource}
@@ -612,7 +612,7 @@ export const RowsRessourcesAdmin = ({ ressource }) => {
                         </div>
 
                         <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-                            <label className="text-xl" for="typesRessources">Types de ressources :</label>
+                            <label className="text-xl" htmlFor="typesRessources">Types de ressources :</label>
                             <select className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
                                 required
                                 defaultValue={ressource?.typeRessource}
@@ -634,7 +634,7 @@ export const RowsRessourcesAdmin = ({ ressource }) => {
                         </div>
 
                         <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-                            <label className="text-xl" for="storyRessource">Texte :</label>
+                            <label className="text-xl" htmlFor="storyRessource">Texte :</label>
                             <textarea className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
                                 defaultValue={ressource?.storyRessource}
                                 type="text"
@@ -645,7 +645,7 @@ export const RowsRessourcesAdmin = ({ ressource }) => {
                         </div>
 
                         <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-                            <label className="text-xl" for="fileRessource">Fichier :</label>
+                            <label className="text-xl" htmlFor="fileRessource">Fichier :</label>
                             <input
                                 defaultValue={ressource?.fileRessource}
                                 type="file"
@@ -656,7 +656,7 @@ export const RowsRessourcesAdmin = ({ ressource }) => {
                         </div>
 
                         <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-                            <label className="text-xl" for="lienRessource">Entrez un lien url en complément de votre ressource :</label>
+                            <label className="text-xl" htmlFor="lienRessource">Entrez un lien url en complément de votre ressource :</label>
                             <input className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
                                 defaultValue={ressource?.lienRessource}
                                 type="url"
@@ -669,7 +669,7 @@ export const RowsRessourcesAdmin = ({ ressource }) => {
                         </div>
 
                         <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">*
-                            <label className="text-xl" for="typesRelationRessource">Types de relations :</label>
+                            <label className="text-xl" htmlFor="typesRelationRessource">Types de relations :</label>
                             <select className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
                                 defaultValue={ressource?.typeRelationRessource}
                                 name="editRessourcesRelationRessource"

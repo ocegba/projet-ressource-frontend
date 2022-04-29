@@ -24,8 +24,8 @@ const MdpUpdate = () => {
             <form i d="formUpdate" className="portrait:grid-cols-1">
                 <div className="grid gap-3 grid-cols-2 portrait:grid-cols-1 ">
                     <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-                        <label className="text-xl" for="mdp">Mot de passe actuel</label>
-                        <input className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-11" maxlength="50"
+                        <label className="text-xl" htmlFor="mdp">Mot de passe actuel</label>
+                        <input className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-11" maxLength="50"
                             type="password"
                             name="mdp"
                             id="mdp"
@@ -33,8 +33,8 @@ const MdpUpdate = () => {
                     </div>
 
                     <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-                        <label className="text-xl" for="mdpUtilisateur">Nouveau de mot de passe</label>
-                        <input className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-11" maxlength="50"
+                        <label className="text-xl" htmlFor="mdpUtilisateur">Nouveau de mot de passe</label>
+                        <input className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-11" maxLength="50"
                             type="password"
                             name="updateMdp"
                             id="mdpUtilisateur"
@@ -46,8 +46,8 @@ const MdpUpdate = () => {
                     </div>
 
                     <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-                        <label className="text-xl" for="mdpUtilisateur">Confirmation du mot de passe</label>
-                        <input className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-11" maxlength="50"
+                        <label className="text-xl" htmlFor="mdpUtilisateur">Confirmation du mot de passe</label>
+                        <input className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-11" maxLength="50"
                             type="password"  {...register("confirmpassword", { validate: confirmpassword => confirmpassword === updateMdp.current || "Le mot de passe n'est pas identique." })} />
                     </div>
                 </div>

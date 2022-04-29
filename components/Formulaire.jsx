@@ -15,7 +15,7 @@ export default function Formulaire() {
   return (
     <form ref={formRef} className="flex flex-col justify-center portrait:w-fit">
       <div className="flex flex-col mt-4 min-h-[80px] w-11/12 h-20 mt-3 mb-3 m-auto pr-2 pl-2">
-        <label className="text-xl leading-7" for="titreRessource">Activités ou ressources :</label>
+        <label className="text-xl leading-7" htmlFor="titreRessource">Activités ou ressources :</label>
         <input className="bg-white text-base font-medium h-14 pl-2 shadow-xl rounded-xl portrait:text-xs "
           type="text"
           name="searchRessourcesTitreRessource"
@@ -26,7 +26,7 @@ export default function Formulaire() {
       </div>
 
       <div className="flex flex-col mt-4 min-h-[80px] w-11/12 h-20 mt-3 mb-3 m-auto pr-2 pl-2 ">
-        <label className="text-xl leading-7" for="categorieRessource">Catégorie :</label>
+        <label className="text-xl leading-7" htmlFor="categorieRessource">Catégorie :</label>
         <select className="bg-white text-base font-medium h-14 pl-2 shadow-xl rounded-xl portrait:text-xs"
           name="searchRessourcesCategorieRessource"
           id="categorieRessource"
@@ -52,7 +52,7 @@ export default function Formulaire() {
       </div>
 
       <div className="flex flex-col mt-4 min-h-[80px] w-11/12 h-20 mt-3 mb-3 m-auto pr-2 pl-2 ">
-        <label className="text-xl leading-7" for="typesRessources">Types de ressources :</label>
+        <label className="text-xl leading-7" htmlFor="typesRessources">Types de ressources :</label>
         <select className="bg-white text-base font-medium h-14 pl-2 shadow-xl rounded-xl portrait:text-xs"
           name="searchRessourcesTypeRessource"
           id="typesRessources"
@@ -73,7 +73,7 @@ export default function Formulaire() {
       </div>
 
       <div className="flex flex-col mt-4 min-h-[80px] w-11/12 h-20 mt-3 mb-3 m-auto pr-2 pl-2">
-        <label className="text-xl leading-7" for="typesRelationRessource">Types de relations :</label>
+        <label className="text-xl leading-7" htmlFor="typesRelationRessource">Types de relations :</label>
         <select className="bg-white text-base font-medium h-14 pl-2 shadow-xl rounded-xl portrait:text-xs"
           name="searchRessourcesRelationRessource"
           id="typesRelationRessource"
