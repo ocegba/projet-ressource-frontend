@@ -8,16 +8,16 @@ datasource db {
 }
 
 model action {
-  idAction      BigInt     @id
   idRessource   BigInt?
   idCompte      BigInt?
   libelleAction String?    @db.VarChar
+  idAction      BigInt     @id @default(autoincrement())
   compte        compte?    @relation(fields: [idCompte], references: [idCompte], onDelete: NoAction, onUpdate: NoAction, map: "idCompte")
   ressource     ressource? @relation(fields: [idRessource], references: [idRessource], onDelete: NoAction, onUpdate: NoAction, map: "idRessource")
 }
 
 model categorie {
-  idCategorie      BigInt      @id
+  idCategorie      BigInt      @id @default(autoincrement())
   libelleCategorie String?     @db.VarChar
   ressource        ressource[]
 }

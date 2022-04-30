@@ -89,6 +89,7 @@ export default function createRessource(props) {
               value={categorie}
               onChange={(e) => [setCategorieRessource(e.target.value)]}>
 
+              <option value="">Choisir une catégorie</option>
               {categories?.map((compte, i) => <option value={compte.idCategorie}>{compte.libelleCategorie}</option>)}
             </select>
           </div>
