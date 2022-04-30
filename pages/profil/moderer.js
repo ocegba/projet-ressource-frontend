@@ -22,15 +22,15 @@ function moderer(props) {
             <SideBar />
             <div className="w-full h-full p-4 m-8 overflow-y-auto space-y-10">
                 <ul className="flex text-center border-b border-gray-200">
-                    <div classNameName="flex flex-wrap">
-                        <div classNameName="w-full">
+                    <div className="flex flex-wrap">
+                        <div className="w-full">
                             <ul
-                                classNameName="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row"
+                                className="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row"
                                 role="tablist"
                             >
-                                <li classNameName="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                                <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
                                     <a
-                                        classNameName={
+                                        className={
                                             "text-base font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
                                             (openTab === 1
                                                 ? "text-custom-blue bg-" + "black" + "-600"
@@ -44,12 +44,12 @@ function moderer(props) {
                                         href="#link1"
                                         role="tablist"
                                     >
-                                        <i classNameName="fas fa-space-shuttle text-base mr-1"></i>Modérer les échanges
+                                        <i className="fas fa-space-shuttle text-base mr-1"></i>Modérer les échanges
                                     </a>
                                 </li>
-                                <li classNameName="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                                <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
                                     <a
-                                        classNameName={
+                                        className={
                                             "text-base font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
                                             (openTab === 2
                                                 ? "text-custom-blue bg-" + "black" + "-600"
@@ -63,21 +63,21 @@ function moderer(props) {
                                         href="#link2"
                                         role="tablist"
                                     >
-                                        <i classNameName="fas fa-cog text-base mr-1"></i>  Valider les ressources crées
+                                        <i className="fas fa-cog text-base mr-1"></i>  Valider les ressources crées
                                     </a>
                                 </li>
 
                             </ul>
                             <div>
-                                <div classNameName="px-4 py-5 flex-auto">
-                                    <div classNameName="tab-content tab-space">
-                                        <div classNameName={openTab === 1 ? "block" : "hidden"} id="link1">
+                                <div className="px-4 py-5 flex-auto">
+                                    <div className="tab-content tab-space">
+                                        <div className={openTab === 1 ? "block" : "hidden"} id="link1">
                                             <p className="py-3 px-5 text-xl">Vous pouvez répondre à un message ou supprimer un message.</p>
                                             {
                                                 commentaires?.map((commentaire, i) => <RowsCommentairesMod commentaire={commentaire} key={i} />)
                                             }
                                         </div>
-                                        <div classNameName={openTab === 2 ? "block" : "hidden"} id="link2">
+                                        <div className={openTab === 2 ? "block" : "hidden"} id="link2">
                                             <p className="py-3 px-5 text-xl">Vous pouvez accepter une demande de création d'une ressource en donnant une raison dans le cas contraire.</p>
                                             <p className="py-3 px-5 text-lg">Les demandes de création de ressources en attente :</p>
                                             {

@@ -430,11 +430,13 @@ export const RowsCommentaires = ({ commentaire }) => {
     )
 }
 
-export const RowsParticipate = ({ actions }) => {
+export const RowsParticipate = ({ ressource, actions }) => {
+    console.log(actions.idRessource)
+    console.log(ressource)
     return (
         <div className="grid grid-cols-8 gap-4 px-4 py-5 relative flex flex-col min-w-0 break-words bg-white w-full mb-3 shadow-lg rounded-lg cursor-pointer shadow-lg shadow">
             <div className="col-start-1 col-span-4 text-justify	">
-                titre <br />
+                 <br />
                 crée le <br />
             </div>
             <div className="col-start-5">

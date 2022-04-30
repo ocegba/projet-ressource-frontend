@@ -306,9 +306,9 @@ export default function createRessource(props) {
             </div>
 
             <div>
-              <p class="text-xs bg-red-200" id="categorieOutput">{categorie}</p>
-              <p class="text-xs bg-custom-blue" id="typesRessourcesOutput">{typeRessource}</p>
-              <p class="text-xs bg-green-200" id="typesRelationRessourceOutput">{typeRelationRessource}</p>
+              <p className="text-xs bg-red-200" id="categorieOutput">{categorie}</p>
+              <p className="text-xs bg-custom-blue" id="typesRessourcesOutput">{typeRessource}</p>
+              <p className="text-xs bg-green-200" id="typesRelationRessourceOutput">{typeRelationRessource}</p>
             </div>
 
             <div className="cursor-pointer">
