@@ -8,9 +8,8 @@ import prisma from '../../prisma/prisma'
 
 function administrer(props) {
   const ressources = props.ressources;
-  const categorie = props.categorie;
+  const categories = props.categories;
   const comptes = props.comptes;
-console.log(categorie)
   return (
     <div className="flex">
       <Head>
@@ -28,7 +27,7 @@ console.log(categorie)
             <input type="submit" href="/createRessource" className="cursor-pointer border-2 bg-white-600 hover:bg-gray-300 rounded-lg
          border-solid font-bold text-base leading-normal  py-3 px-5 uppercase" value="Créer une ressource"></input>
           </a>
-          {ressources?.map((ressource, i) => <RowsRessourcesAdmin ressource={ressource} categorie={categorie}  key={i} />)}
+          {ressources?.map((ressource, i) => <RowsRessourcesAdmin ressource={ressource} categorie={categories} key={i} />)}
         </div>}
 
         nomElement2="Catégories" element2={
@@ -41,7 +40,7 @@ console.log(categorie)
 
             <div className="grid grid-cols-5 gap-3">
               {categories?.map((categorie, i) => <li className="shadow-md hover:bg-gray-200 border-gray-200 rounded border-solid border-0 box-border block font-bold text-xs leading-normal py-3 px-5 uppercase no-underline">
-                {categorie.categorieRessource}
+                {categorie.libelleCategorie}
               </li>)}
             </div>
           </div>
@@ -49,7 +48,7 @@ console.log(categorie)
         nomElement3="Comptes utilisateurs" element3={
           <div>
             <p className="py-3 px-5 text-xl">Activer ou désactiver un compte</p>
-          {comptes?.map((compte, i) => <RowsCompteAdmin compte={compte} key={i} />)}
+            {comptes?.map((compte, i) => <RowsCompteAdmin compte={compte} key={i} />)}
           </div>
         }
         nomElement4="Statistiques"
@@ -71,7 +70,7 @@ export async function getServerSideProps() {
   return {
     props: {
       ressources: JSONBig.parse(JSONBig.stringify(rechercheRessource)),
-      categorie: JSONBig.parse(JSONBig.stringify(rechercheCategorie)),
+      categories: JSONBig.parse(JSONBig.stringify(rechercheCategorie)),
       comptes: JSONBig.parse(JSONBig.stringify(rechercheComptes)),
     },
   };
