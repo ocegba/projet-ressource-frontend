@@ -1,15 +1,46 @@
-import React from 'react'
+import React, { useState, useRef } from 'react'
 import Head from 'next/head'
 import SideBar from '../../components/SideBar'
 import { Tabs } from '../../components/Tabs'
 import { RowsCompteAdmin, RowsRessourcesAdmin } from '../../components/Rows';
 import JSONBig from 'json-bigint';
 import prisma from '../../prisma/prisma'
+import axios from "axios";
 
 function administrer(props) {
   const ressources = props.ressources;
   const categories = props.categories;
   const comptes = props.comptes;
+
+  const formAddRef = useRef();
+  const formDelRef = useRef();
+  const [open, setOpen] = useState("");
+  const [openDel, setOpenDel] = useState("");
+  const [openEdit, setOpenEdit] = useState("");
+
+  async function addCategorie() {
+    const {
+      addCategorieAdmin,
+    } = formAddRef.current;
+    const libelleCategorie = addCategorieAdmin.value;
+    await axios.post("../api/actions/addCategorieAdmin", {
+      libelleCategorie,
+
+    });
+    window.location.reload();
+  }
+
+  async function deleteCategorie() {
+    const {
+      deleteCategorieAdmin,
+    } = formDelRef.current;
+    const idCategorie = deleteCategorieAdmin.value;
+    await axios.post("../api/actions/deleteCategorieAdmin", {
+      idCategorie: parseInt(idCategorie),
+    });
+    window.location.reload();
+  }
+
   return (
     <div className="flex">
       <Head>
@@ -33,16 +64,34 @@ function administrer(props) {
         nomElement2="Catégories" element2={
           <div>
             <div className="grid grid-cols-3 gap-2 p-4">
-              <button className="shadow-md hover:bg-gray-200 border-gray-200 rounded border-solid border-0 box-border block font-bold text-base leading-normal py-3 px-5 uppercase no-underline">Ajouter une catégorie</button>
-              <button className="shadow-md hover:bg-gray-200 border-gray-200 rounded border-solid border-0 box-border block font-bold text-base leading-normal py-3 px-5 uppercase no-underline">Editer une catégorie</button>
-              <button className="shadow-md hover:bg-gray-200 border-gray-200 rounded border-solid border-0 box-border block font-bold text-base leading-normal py-3 px-5 uppercase no-underline">Supprimer une catégorie</button>
+              <button onClick={() => setOpen(!open) && setOpenDel(openDel) && setOpenEdit(openEdit)} className="shadow-md hover:bg-gray-200 border-gray-200 rounded border-solid border-0 box-border block font-bold text-base leading-normal py-3 px-5 uppercase no-underline">Ajouter une catégorie</button>
+              <button onClick={() => setOpenDel(openDel) && setOpen(!open) && setOpenEdit(!openEdit)} className="shadow-md hover:bg-gray-200 border-gray-200 rounded border-solid border-0 box-border block font-bold text-base leading-normal py-3 px-5 uppercase no-underline">Editer une catégorie</button>
+              <button onClick={() => setOpenDel(!openDel) && setOpen(open) && setOpenEdit(openEdit)} className="shadow-md hover:bg-gray-200 border-gray-200 rounded border-solid border-0 box-border block font-bold text-base leading-normal py-3 px-5 uppercase no-underline">Supprimer une catégorie</button>
             </div>
 
-            <div className="grid grid-cols-5 gap-3">
+            {!(open || openDel || openEdit) ? (<div className="grid grid-cols-5 gap-3">
               {categories?.map((categorie, i) => <li className="shadow-md hover:bg-gray-200 border-gray-200 rounded border-solid border-0 box-border block font-bold text-xs leading-normal py-3 px-5 uppercase no-underline">
                 {categorie.libelleCategorie}
               </li>)}
-            </div>
+            </div>) : false}
+
+            {open ? (<div className="">
+              <p className="border-gray-200 border-solid border-0 box-border text-xl leading-7 m-0 py-3 px-5">Ajouter une nouvelle catégorie :</p>
+              <form ref={formAddRef}>
+                <input className="border-black border-solid border-2 box-border text-xl m-0 py-3 px-5" name="addCategorieAdmin" id="libelleCategorie" />
+                <button className="mt-2 mb-2 bg-custom-blue hover:bg-custom-blue-200 text-white font-bold text-xl w-fit pr-1 pl-1 rounded-xl block m-auto cursor-pointer rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" type="submit" onClick={() => addCategorie()}>Valider</button>
+              </form>
+            </div>) : false}
+
+            {openDel ? (<div className="">
+              <p className="border-gray-200 border-solid border-0 box-border text-xl leading-7 m-0 py-3 px-5">Supprimer une catégorie :</p>
+              <form ref={formDelRef}>
+                <select className="w-fit" name="deleteCategorieAdmin" id="idCategorie">
+                  {categories?.map((categorie) => <option value={categorie.libelleCategorie}>{categorie.libelleCategorie}</option>)}
+                </select>
+                <button className="mt-2 mb-2 bg-custom-blue hover:bg-custom-blue-200 text-white font-bold text-xl w-fit pr-1 pl-1 rounded-xl block m-auto cursor-pointer rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" type="submit" onClick={() => deleteCategorie()}>Valider</button>
+              </form>
+            </div>) : false}
           </div>
         }
         nomElement3="Comptes utilisateurs" element3={

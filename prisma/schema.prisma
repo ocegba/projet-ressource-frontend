@@ -17,7 +17,7 @@ model action {
 }
 
 model categorie {
-  idCategorie      BigInt      @id @default(autoincrement())
+  idCategorie      Int      @id @default(autoincrement())
   libelleCategorie String?     @db.VarChar
   ressource        ressource[]
 }
@@ -72,7 +72,7 @@ model ressource {
   fileRessource                                    String?       @db.VarChar
   validerRessource                                 Boolean?
   notRaisonRessource                               String?
-  idCategorie                                      BigInt?
+  idCategorie                                      Int?
   categorie                                        categorie?    @relation(fields: [idCategorie], references: [idCategorie], onDelete: NoAction, onUpdate: NoAction, map: "idCategorie")
   commentaire_commentaireToressource_idCommentaire commentaire?  @relation("commentaireToressource_idCommentaire", fields: [idCommentaire], references: [idCommentaire], onDelete: NoAction, onUpdate: NoAction, map: "idCommentaire")
   compte                                           compte?       @relation(fields: [idCompte], references: [idCompte], onDelete: NoAction, onUpdate: NoAction, map: "idCompte")
