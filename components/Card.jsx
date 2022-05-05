@@ -56,7 +56,7 @@ export default function Card({ ressource, categorie, commentaire }) {
           </div>
 
           <div>
-            <p className="text-xs bg-red-200" id="categoryOutput">{(categorie[ressource.idCategorie - 1]).libelleCategorie}</p>
+            <p className="text-xs bg-red-200" id="categoryOutput">{(categorie[ressource.idCategorie - 1])["libelleCategorie"]}</p>
             <p className="text-xs bg-custom-blue" id="typesRessourcesOutput">{ressource.typeRessource}</p>
             <p className="text-xs bg-green-200" id="typesRelationsOutput">{ressource.typeRelationRessource}</p>
           </div>
