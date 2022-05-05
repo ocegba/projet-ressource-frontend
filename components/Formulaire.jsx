@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react"
 import axios from "axios";
 
-export default function Formulaire() {
+export default function Formulaire(props) {
   const [disable, setDisable] = useState(false)
 
   const [categorie, setCategorieRessource] = useState('')
@@ -11,6 +11,7 @@ export default function Formulaire() {
   const [localisationRessource, setLocalisationRessource] = useState('')
 
   const formRef = useRef();
+  const categories = props.categories;
 
   return (
     <form ref={formRef} className="flex flex-col justify-center portrait:w-fit">
@@ -25,16 +26,17 @@ export default function Formulaire() {
         />
       </div>
 
-      <div class="flex flex-col mt-4 min-h-[80px] w-11/12 h-20 mt-3 mb-3 m-auto pr-2 pl-2 ">
-        <label class="text-xl leading-7" for="categorie">Catégorie :</label>
-        <select class="bg-white text-base font-medium h-14 pl-2 shadow-xl rounded-xl portrait:text-xs"
+      <div className="flex flex-col mt-4 min-h-[80px] w-11/12 h-20 mt-3 mb-3 m-auto pr-2 pl-2 ">
+        <label className="text-xl leading-7" for="categorie">Catégorie :</label>
+        <select className="bg-white text-base font-medium h-14 pl-2 shadow-xl rounded-xl portrait:text-xs"
           name="searchRessourcesCategorieRessource"
           id="categorie"
           placeholder='Sélectionnez une catégorie'
           value={categorie}
           onChange={(e) => setCategorieRessource(e.target.value)}>
 
-          {categorie?.map((compte, i) => <option value={compte.idCategorie}>{compte.libelleCategorie}</option>)}
+          <option value="">Choisir une catégorie :</option>
+          {categories?.map((compte, i) => <option value={compte.idCategorie}>{compte.libelleCategorie}</option>)}
         </select>
       </div>
 
@@ -201,4 +203,14 @@ export default function Formulaire() {
       </div>
     </form >
   )
+}
+
+export async function getServerSideProps() {
+  const rechercheCategorie = await prisma.categorie.findMany({});
+  return {
+    props: {
+      categories: JSONBig.parse(JSONBig.stringify(rechercheCategorie)),
+
+    },
+  };
 }

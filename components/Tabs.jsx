@@ -5,7 +5,7 @@ export const Tabs = ({ nomElement1, element1, nomElement2, element2, nomElement3
 
     return (
         <div className="w-full h-full p-4 m-8 overflow-y-auto space-y-10">
-            <ul className="flex text-center border-b border-gray-200">
+            <ul className="flex text-justify border-b border-gray-200">
                 <div className="flex flex-wrap">
                     <div className="w-full">
                         <ul
