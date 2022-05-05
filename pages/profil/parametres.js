@@ -23,7 +23,7 @@ const parametres = () => {
                 <div className="grid lg:grid-cols-2 portait:grid-cols-1">
                     <div className="bg-custom-blue/50 rounded-3xl flex-1 justify-center	items-center p-8 m-4 h-fit w-fit">
                         <h3 className="font-semibold text-xl pr-8 leading-7 m-0 text-gray-900 sm:text-2xl sm:leading-8 w-fit">Changement de mot de passe</h3>
-                        <MdpUpdate />
+                        {/* <MdpUpdate /> */}
 
                     </div>
                     <div className="bg-custom-blue/50 rounded-3xl flex-1 justify-center	items-center p-8 m-4 h-fit w-fit">

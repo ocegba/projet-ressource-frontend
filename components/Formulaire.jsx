@@ -2,7 +2,6 @@ import React, { useRef, useState } from "react"
 import axios from "axios";
 
 export default function Formulaire(props) {
-  const [disable, setDisable] = useState(false)
 
   const [categorie, setCategorieRessource] = useState('')
   const [titreRessource, setTitreRessource] = useState('')
