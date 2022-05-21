@@ -1,16 +1,40 @@
 import Head from 'next/head'
-import React, { useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import JSONBig from 'json-bigint';
 import prisma from '../prisma/prisma'
 import axios from "axios";
 
+import { Dropdown } from 'primereact/dropdown';
+import { MultiSelect } from 'primereact/multiselect';
+import 'primeicons/primeicons.css';
+import 'primereact/resources/themes/lara-light-indigo/theme.css';
+import 'primereact/resources/primereact.css';
+import { Checkbox } from 'primereact/checkbox';
+
 export default function createRessource(props) {
   const [disable, setDisable] = useState(false);
 
+  const relations = [{ name: "Tous", key: "relationstous" },
+  { name: "Soi", key: "relationssoi" },
+  { name: "Conjoints", key: "relationsconjoints" },
+  { name: "Famille", key: "relationsfamille" },
+  { name: "Professionnelle : collègues, collaborateurs et managers", key: "relationspro" },
+  { name: "Amis et communautés", key: "relationsamis" },
+  { name: "Inconnus", key: "relationsinconnus" }]
+
+  const options1 = [{ name: 'Activité / Jeu à réaliser', value: 'Activité / Jeu à réaliser' },
+  { name: 'Article', value: 'Article' },
+  { name: 'Carte défi', value: 'Carte défi' },
+  { name: 'Cours au format PDF', value: 'Cours au format PDF' },
+  { name: 'Exercice / Atelier', value: 'Exercice / Atelier' },
+  { name: 'Fiche de lecture', value: 'Fiche de lecture' },
+  { name: 'Jeu', value: 'Jeu en ligne' },
+  { name: 'Vidéo', value: 'Vidéo' }]
+
   const [titreRessource, setTitreRessource] = useState('')
   const [categorie, setCategorieRessource] = useState('')
-  const [typeRessource, setTypeRessource] = useState('')
-  const [typeRelationRessource, setRelationRessource] = useState('')
+  const [typeRessource1, setTypeRessource] = useState(null)
+  const [typeRelationRessource1, setRelationRessource] = useState(relations.slice(0, 1));
   const [storyRessource, setStoryRessource] = useState('')
   const [fileRessource, setFileRessource] = useState('')
   const [lienRessource, setLienRessource] = useState('')
@@ -19,14 +43,11 @@ export default function createRessource(props) {
   const formRef = useRef();
   const categories = props.categories;
 
-
   async function addNewRessource() {
     setDisable(true);
     const {
       addRessourcesTitreRessource,
       addRessourcesCategorieRessource,
-      addRessourcesTypeRessource,
-      addRessourcesRelationRessource,
       addRessourcesStoryRessource,
       addRessourcesFileRessource,
       addRessourcesLienRessource,
@@ -34,28 +55,67 @@ export default function createRessource(props) {
     } = formRef.current;
     const titreRessource = addRessourcesTitreRessource.value;
     const idCategorie = addRessourcesCategorieRessource.value;
-    const typeRessource = addRessourcesTypeRessource.value;
-    const typeRelationRessource = addRessourcesRelationRessource.value;
+    const typeRessource = typeRessource1;
     const storyRessource = addRessourcesStoryRessource.value;
     const fileRessource = addRessourcesFileRessource.value;
     const lienRessource = addRessourcesLienRessource.value;
     const localisationRessource = addRessourcesLocalisationRessource.value;
     const dateRessource = (new Date(Date.now())).toISOString();
+
+    const relationstous = typeRelationRessource1.some(item => (item.key) === "relationstous");
+    const relationssoi = typeRelationRessource1.some(item => (item.key) === "relationssoi");
+    const relationsconjoints = typeRelationRessource1.some(item => (item.key) === "relationsconjoints");
+    const relationsfamille = typeRelationRessource1.some(item => (item.key) === "relationsfamille");
+    const relationspro = typeRelationRessource1.some(item => (item.key) === "relationspro");
+    const relationsamis = typeRelationRessource1.some(item => (item.key) === "relationsamis");
+    const relationsinconnus = typeRelationRessource1.some(item => (item.key) === "relationsinconnus");
+
     await axios.post("/api/ressource/addRessource", {
       titreRessource,
       idCategorie: parseInt(idCategorie),
       typeRessource,
-      typeRelationRessource,
       storyRessource,
       fileRessource,
       lienRessource,
       localisationRessource,
       dateRessource,
+      relationstous,
+      relationssoi,
+      relationsconjoints,
+      relationsfamille,
+      relationspro,
+      relationsamis,
+      relationsinconnus,
+
     });
     setDisable(false);
     alert("Votre ressource a bien été envoyé au modérateur")
     window.location.reload();
   }
+
+  const onTypeRessource = (e) => {
+    setTypeRessource(e.target.value);
+  }
+
+  const onRelationChange = (e) => {
+    let _setRelationRessource = [...typeRelationRessource1];
+
+    if (e.checked) {
+      _setRelationRessource.push(e.value);
+    }
+    else {
+      for (let i = 0; i < _setRelationRessource.length; i++) {
+        const selectedCategory = _setRelationRessource[i];
+
+        if (selectedCategory.key === e.value.key) {
+          _setRelationRessource.splice(i, 1);
+          break;
+        }
+      }
+    }
+    setRelationRessource(_setRelationRessource);
+  }
+
   return (
     <div className="flex flex-column portrait:flex-col w-full	bg-gray-100 h-fit">
       <Head>
@@ -75,7 +135,7 @@ export default function createRessource(props) {
               id="titreRessource"
               placeholder='ex: Chasse aux trésors'
               value={titreRessource}
-              onChange={(e) => setTitreRessource(e.target.value)}
+              required onChange={(e) => setTitreRessource(e.target.value)}
             />
           </div>
 
@@ -96,29 +156,20 @@ export default function createRessource(props) {
 
           <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
             <label className="text-xl" htmlFor="typesRessources">Types de ressources :</label>
-            <select className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
+            <Dropdown
               required
               name="addRessourcesTypeRessource"
               id="typesRessources"
               placeholder='Sélectionnez un type de ressource'
-              value={typeRessource}
-              onChange={(e) => setTypeRessource(e.target.value)} >
-
-              <option value="" selected disabled hidden>Choisir un type de ressources</option>
-              <option value="Activité / Jeu à réaliser">Activité / Jeu à réaliser</option>
-              <option value="Article">Article</option>
-              <option value="Carte défi">Carte défi</option>
-              <option value="Cours au format PDF">Cours au format PDF</option>
-              <option value="Exercice / Atelier">Exercice / Atelier</option>
-              <option value="Fiche de lecture">Fiche de lecture</option>
-              <option value="Jeu">Jeu en ligne</option>
-              <option value="Vidéo">Vidéo</option>
-            </select>
+              options={options1}
+              value={typeRessource1}
+              onChange={onTypeRessource} optionLabel="name" editable />
           </div>
 
           <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
             <label className="text-xl" htmlFor="storyRessource">Texte :</label>
             <textarea className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
+              required
               type="text"
               name="addRessourcesStoryRessource"
               id="storyRessource"
@@ -154,23 +205,15 @@ export default function createRessource(props) {
 
           <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
             <label className="text-xl" htmlFor="typesRelationRessource">Types de relations :</label>
-            <select className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
-              required
-              name="addRessourcesRelationRessource"
-              id="typesRelationRessource"
-              placeholder='Sélectionnez une ou plusieurs relations'
-              value={typeRelationRessource}
-              onChange={(e) => setRelationRessource(e.target.value)}>
+            {
+              relations.map((relation, i) =>
+                <div key={relation.key} className="field-checkbox">
+                  <Checkbox inputId={relation.key} name="relation" value={relation} onChange={onRelationChange} checked={typeRelationRessource1.some((item) => item.key === relation.key)} />
+                  <label htmlFor={relation.key}>{relation.name}</label>
+                </div>
+              )
+            }
 
-              <option value="" selected disabled hidden>Choisir un type de relations</option>
-              <option value="Tous">Tous </option>
-              <option value="Soi">Soi </option>
-              <option value="Conjoints">Conjoints</option>
-              <option value="Famille">Famille</option>
-              <option value="Professionelle"> Professionnelle : collègues, collaborateurs et managers</option>
-              <option value="Amis et communautés">Amis et communautés</option>
-              <option value="Inconnus">Inconnus </option>
-            </select>
           </div>
 
           <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
@@ -307,8 +350,12 @@ export default function createRessource(props) {
 
             <div>
               <p className="text-xs bg-red-200" id="categorieOutput">{categorie}</p>
-              <p className="text-xs bg-custom-blue" id="typesRessourcesOutput">{typeRessource}</p>
-              <p className="text-xs bg-green-200" id="typesRelationRessourceOutput">{typeRelationRessource}</p>
+              <p className="text-xs bg-custom-blue" id="typesRessourcesOutput">{typeRessource1}</p>
+              {
+                typeRelationRessource1.map((x) =>
+                  <p className="text-xs bg-green-200" id="typesRelationRessourceOutput"> {x.name}</p>
+                )
+              }
             </div>
 
             <div className="cursor-pointer">
