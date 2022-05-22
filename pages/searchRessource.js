@@ -8,17 +8,28 @@ import axios from "axios";
 
 import { Card } from 'primereact/card';
 import { InputText } from 'primereact/inputtext';
+import 'primeicons/primeicons.css';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
+import 'primereact/resources/primereact.css';
 import Link from 'next/link';
+import { Checkbox } from 'primereact/checkbox';
 
 function searchRessource(props) {
   const ressources = props.ressources;
   const categorie = props.categorie;
   const Comment = useRef();
 
+  const relations = [{ name: "Tous", key: "relationstous" },
+  { name: "Soi", key: "relationssoi" },
+  { name: "Conjoints", key: "relationsconjoints" },
+  { name: "Famille", key: "relationsfamille" },
+  { name: "Professionnelle : collègues, collaborateurs et managers", key: "relationspro" },
+  { name: "Amis et communautés", key: "relationsamis" },
+  { name: "Inconnus", key: "relationsinconnus" }]
+
   const [searchParam] = useState(["titreRessource"])
   const [selectionnerCategorie, setSelectionnerCat] = useState(["Toutes"])
-  const [selectionnerRelations, setSelectionnerRel] = useState("")
+  const [selectionnerRelations, setSelectionnerRel] = useState(relations.slice(0, 1));
   const [selectionnerAct, setSelectionnerAct] = useState("")
   const [value, setValue] = useState("")
   const [value2, setValue2] = useState("")
@@ -73,9 +84,52 @@ function searchRessource(props) {
     openModal("Fav")
   };
 
+  const onRelationChange = (e) => {
+    let _setSelectionnerRel = [...selectionnerRelations];
+
+    if (e.checked) {
+      _setSelectionnerRel.push(e.value);
+    }
+    else {
+      for (let i = 0; i < _setSelectionnerRel.length; i++) {
+        const selectedCategory = _setSelectionnerRel[i];
+
+        if (selectedCategory.key === e.value.key) {
+          _setSelectionnerRel.splice(i, 1);
+          break;
+        }
+      }
+    }
+    setSelectionnerRel(_setSelectionnerRel);
+  }
+
+  function voirRelations(item) {
+    if (item.relationstous) {
+      return "Tous"
+    }
+    else if (item.relationssoi) {
+      return "Soi"
+    }
+    else if (item.relationsconjoints) {
+      return "Conjoints"
+    }
+    else if (item.relationsfamille) {
+      return "Famille"
+    }
+    else if (item.relationspro) {
+      return "Professionnelle : collègues, collaborateurs et managers"
+    }
+    else if (item.relationsamis) {
+      return "Amis et communautés"
+    }
+    else if (item.relationsinconnus) {
+      return "Inconnus"
+    }
+  }
+
   function search(items) {
     return items.filter((item) => {
-      if ((item.idCategorie == selectionnerCategorie) && (item.typeRelationRessource == selectionnerRelations || selectionnerRelations == "") && (item.typeRessource == selectionnerAct || selectionnerAct == "")) {
+      if ((item.idCategorie == selectionnerCategorie) && ((voirRelations(item) == selectionnerRelations.map((x)=>x.name)) || selectionnerRelations =="") && (item.typeRessource == selectionnerAct || selectionnerAct == "")) {
         return searchParam.some((newItem) => {
           return (
             item[newItem]
@@ -85,7 +139,7 @@ function searchRessource(props) {
           );
         })
       }
-      else if ((selectionnerCategorie == "Toutes") && (item.typeRelationRessource == selectionnerRelations || selectionnerRelations == "") && (item.typeRessource == selectionnerAct || selectionnerAct == "")) {
+      else if ((selectionnerCategorie == "Toutes") && ((voirRelations(item) == selectionnerRelations.map((x)=>x.name)) || selectionnerRelations =="") && (item.typeRessource == selectionnerAct || selectionnerAct == "")) {
         return searchParam.some((newItem) => {
           return (
             item[newItem]
@@ -98,9 +152,11 @@ function searchRessource(props) {
     });
   }
 
+
+
   const listRessources = search(ressources).map((item) => (<Card className='border-black' title={item.titreRessource} subTitle={(categorie[item.idCategorie - 1]).libelleCategorie}>
     <p className="text-lg">{item.typeRessource}</p>
-    <p className="text-lg">{item.typeRelationRessource}</p>
+    <p className="text-lg">{voirRelations(item)}</p>
     <div className="box-border flex justify-between pt-2">
       <Link href={{
         pathname: `/post/[id]`,
@@ -109,7 +165,13 @@ function searchRessource(props) {
           title: item.titreRessource,
           idCategorie: (categorie[item.idCategorie - 1]).libelleCategorie,
           typeRessource: item.typeRessource,
-          typeRelationRessource: item.typeRelationRessource,
+          relationstous: item.relationstous,
+          relationssoi: item.relationssoi,
+          relationsconjoints: item.relationsconjoints,
+          relationsfamille: item.relationsfamille,
+          relationspro: item.relationspro,
+          relationsamis: item.relationsamis,
+          relationsinconnus: item.relationsinconnus,
           localisationRessource: item.localisationRessource,
           lienRessource: item.lienRessource,
           fileRessource: item.fileRessource,
@@ -125,6 +187,7 @@ function searchRessource(props) {
     </div>
   </Card >))
 
+  
   function closeModal(type) {
     if (type == "Norm") {
       setIsOpen(false)
@@ -156,7 +219,7 @@ function searchRessource(props) {
         Rechercher une ressource
       </div>
       <div className="rounded-lg box-border p-8">
-        <div className="grid grid-cols-4  justify-items-center bg-gray-50 border-solid border-r-0 border-l-0 border-t border-b box-border font-bold p-4 justify-between">
+        <div className="portrait:grid-cols-1 grid grid-cols-4  justify-items-center bg-gray-50 border-solid border-r-0 border-l-0 border-t border-b box-border font-bold p-4 justify-between">
           <div>
             <select className="appearance-none bg-white rounded-md border-solid border box-border text-base m-0 p-3 hover:border-indigo-500" style={{ width: 250 }}
               onChange={(e) => setSelectionnerCat(e.target.value)}>
@@ -165,21 +228,19 @@ function searchRessource(props) {
             </select>
           </div>
           <div>
-            <select className="appearance-none bg-white rounded-md border-solid border box-border text-base m-0 p-3 hover:border-indigo-500" style={{ width: 250 }}
-              onChange={(e) => setSelectionnerRel(e.target.value)}>
-              <option value="">Tous types de relations</option>
-              <option value="Tous">Tous</option>
-              <option value="Soi">Soi</option>
-              <option value="Conjoints">Conjoints</option>
-              <option value="Amis et communautés">Amis et communautés</option>
-              <option value="Famille">Famille</option>
-              <option value="Professionelle">Professionelle</option>
-              <option value="Inconnus">Inconnus</option>
-            </select>
+            {
+              relations.map((relation, i) =>
+                <p key={relation.key} className="field-checkbox">
+                  <Checkbox inputId={relation.key} name="relation" value={relation} onChange={onRelationChange} checked={selectionnerRelations.some((item) => item.key === relation.key)} />
+                  <label htmlFor={relation.key}>{relation.name}</label>
+                </p>
+              )
+            }
           </div>
           <div>
             <select className="appearance-none bg-white rounded-md border-solid border box-border text-base m-0 p-3 hover:border-indigo-500" style={{ width: 250 }}
               onChange={(e) => setSelectionnerAct(e.target.value)}>
+              {/* table pour recup les nvx types de ressources */}
               <option value="">Tous types de ressources</option>
               <option value="Activité / Jeu à réaliser">Activité / Jeu à réaliser</option>
               <option value="Article">Article</option>
@@ -199,7 +260,7 @@ function searchRessource(props) {
         </div>
       </div>
       <div className="col-12 md:col-4 p-4">
-        <div className="grid grid-cols-4 gap-4">
+        <div className=" portrait:grid-cols-1 grid grid-cols-4 gap-4">
           {listRessources}
           <Transition appear show={isOpenPart} as={Fragment}>
             <Dialog as="div" className="relative z-10" onClose={() => closeModal("Part")}>

@@ -26,7 +26,30 @@ const Post = (props) => {
         })
         window.location.reload();
     }
-    console.log(props.id)
+
+    function voirRelations(item) {
+        if (item.relationstous) {
+          return "Tous"
+        }
+        else if (item.relationssoi) {
+          return "Soi"
+        }
+        else if (item.relationsconjoints) {
+          return "Conjoints"
+        }
+        else if (item.relationsfamille) {
+          return "Famille"
+        }
+        else if (item.relationspro) {
+          return "Professionnelle : collègues, collaborateurs et managers"
+        }
+        else if (item.relationsamis) {
+          return "Amis et communautés"
+        }
+        else if (item.relationsinconnus) {
+          return "Inconnus"
+        }
+      }
     return (
         <div className="py-4 dark:bg-gray-600">
             <Head>
@@ -41,9 +64,9 @@ const Post = (props) => {
                     <div className='text-lg p-2'>
                         <p>Catégorie : {props.idCategorie}</p>
                         <p>Type de ressources : {props.typeRessource}</p>
-                        <p>Type de relations : {props.typeRelationRessource}</p>
+                        <p>Type de relations : {voirRelations(props)}</p>
                         <p>Lieu : {props.localisationRessource}</p>
-                        <p>Lien de la ressource : {props.lienRessource}</p>
+                        <p>Lien de la ressource : <a href={props.lienRessource}>{props.lienRessource}</a></p>
                         <p>Fichier : {props.fileRessource}</p>
                         <p>Description de la ressource : {props.storyRessource}</p>
                         <p>Créée le {moment(props.dateRessource).format("LL")}</p>
