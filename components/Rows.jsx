@@ -16,15 +16,26 @@ async function deleteRessource(ressource) {
             idRessource: ressource.idRessource,
         });
     };
+    window.location.reload()
 }
 
 async function deleteCommentaire(commentaire) {
-    if (window.confirm("Souhaitez-vous vraiment supprimer cette ressource ?")) {
+    if (window.confirm("Souhaitez-vous vraiment supprimer ce commentaire ?")) {
 
         await axios.post("../api/commentaires/deleteCommentaire", {
             idCommentaire: commentaire.idCommentaire,
         });
     };
+    window.location.reload()
+}
+
+async function deleteActions(action, libelle) {
+    await axios.post("../api/actions/deleteAction", {
+        idRessource: parseInt(action.idRessource),
+        libelleAction: libelle
+    });
+    window.location.reload()
+
 }
 
 async function validerRessource(ressource) {
@@ -549,54 +560,30 @@ export const RowsCommentaires = ({ commentaire }) => {
     )
 }
 
-export const RowsParticipate = ({ ressource, actions }) => {
+export const RowsParticipate = ({ participations }) => {
     return (
-        <div className="grid grid-cols-8 gap-4 px-4 py-5 relative flex flex-col min-w-0 break-words bg-white w-full mb-3 shadow-lg rounded-lg cursor-pointer shadow-lg shadow">
-            <div className="col-start-1 col-span-4 text-justify	">
-                <br />
-                crée le <br />
+        <div className="grid grid-cols-4 gap-4 px-4 py-5 relative flex flex-col min-w-0 break-words bg-white w-full mb-3 shadow-lg rounded-lg cursor-pointer shadow-lg shadow">
+            <div className="col-start-1 col-span-3 text-justify	">
+                {participations.titreRessource}<br />
+                créée le {moment(participations.dateRessource).format("LL")}<br />
             </div>
-            <div className="col-start-5">
-                catégories
-            </div>
-            <div className="col-start-6">
-                relations
-            </div>
-            <div className="flex items-center justify-center">
-                <svg className="bg-blue-400 hover:bg-blue-500 p-3 rounded-lg cursor-pointer shadow-lg shadow-blue-300" xmlns="http://www.w3.org/2000/svg" width="50" viewBox="0 0 560 550">
-                    <path d="M279.6 160.4C282.4 160.1 285.2 160 288 160C341 160 384 202.1 384 256C384 309 341 352 288 352C234.1 352 192 309 192 256C192 253.2 192.1 250.4 192.4 247.6C201.7 252.1 212.5 256 224 256C259.3 256 288 227.3 288 192C288 180.5 284.1 169.7 279.6 160.4zM480.6 112.6C527.4 156 558.7 207.1 573.5 243.7C576.8 251.6 576.8 260.4 573.5 268.3C558.7 304 527.4 355.1 480.6 399.4C433.5 443.2 368.8 480 288 480C207.2 480 142.5 443.2 95.42 399.4C48.62 355.1 17.34 304 2.461 268.3C-.8205 260.4-.8205 251.6 2.461 243.7C17.34 207.1 48.62 156 95.42 112.6C142.5 68.84 207.2 32 288 32C368.8 32 433.5 68.84 480.6 112.6V112.6zM288 112C208.5 112 144 176.5 144 256C144 335.5 208.5 400 288 400C367.5 400 432 335.5 432 256C432 176.5 367.5 112 288 112z" />                </svg>
-            </div>
-            <div className="flex items-center justify-center">
-                <svg className="bg-red-500 hover:bg-red-600 p-3 rounded-lg cursor-pointer shadow-lg shadow-red-400" xmlns="http://www.w3.org/2000/svg" width="50" viewBox="0 0 550 550">
-                    <path d="M135.2 17.69C140.6 6.848 151.7 0 163.8 0H284.2C296.3 0 307.4 6.848 312.8 17.69L320 32H416C433.7 32 448 46.33 448 64C448 81.67 433.7 96 416 96H32C14.33 96 0 81.67 0 64C0 46.33 14.33 32 32 32H128L135.2 17.69zM394.8 466.1C393.2 492.3 372.3 512 346.9 512H101.1C75.75 512 54.77 492.3 53.19 466.1L31.1 128H416L394.8 466.1z" />
-                </svg>
+            <div onClick={() => deleteActions(participations, "participer")} className="hover:text-white flex items-center justify-center bg-red-500 hover:bg-red-600 p-3 rounded-lg cursor-pointer shadow-lg shadow-red-400 text-lg font-bold">
+                Enlever de mes participations
             </div>
         </div>
     )
+
 }
 
-export const RowsFavoris = ({ actions }) => {
+export const RowsFavoris = ({ favoris }) => {
     return (
-        <div className="grid grid-cols-8 gap-4 px-4 py-5 relative flex flex-col min-w-0 break-words bg-white w-full mb-3 shadow-lg rounded-lg cursor-pointer shadow-lg shadow">
-            <div className="col-start-1 col-span-4 text-justify	">
-                titre <br />
-                crée le <br />
+        <div className="grid grid-cols-4 gap-4 px-4 py-5 relative flex flex-col min-w-0 break-words bg-white w-full mb-3 shadow-lg rounded-lg cursor-pointer shadow-lg shadow">
+            <div className="col-start-1 col-span-3 text-justify	">
+                {favoris.titreRessource}<br />
+                créée le {moment(favoris.dateRessource).format("LL")}<br />
             </div>
-            <div className="col-start-5">
-                catégories
-            </div>
-            <div className="col-start-6">
-                relations
-            </div>
-            <div className="flex items-center justify-center">
-                <svg className="bg-blue-400 hover:bg-blue-500 p-3 rounded-lg cursor-pointer shadow-lg shadow-blue-300" xmlns="http://www.w3.org/2000/svg" width="50" viewBox="0 0 560 550">
-                    <path d="M279.6 160.4C282.4 160.1 285.2 160 288 160C341 160 384 202.1 384 256C384 309 341 352 288 352C234.1 352 192 309 192 256C192 253.2 192.1 250.4 192.4 247.6C201.7 252.1 212.5 256 224 256C259.3 256 288 227.3 288 192C288 180.5 284.1 169.7 279.6 160.4zM480.6 112.6C527.4 156 558.7 207.1 573.5 243.7C576.8 251.6 576.8 260.4 573.5 268.3C558.7 304 527.4 355.1 480.6 399.4C433.5 443.2 368.8 480 288 480C207.2 480 142.5 443.2 95.42 399.4C48.62 355.1 17.34 304 2.461 268.3C-.8205 260.4-.8205 251.6 2.461 243.7C17.34 207.1 48.62 156 95.42 112.6C142.5 68.84 207.2 32 288 32C368.8 32 433.5 68.84 480.6 112.6V112.6zM288 112C208.5 112 144 176.5 144 256C144 335.5 208.5 400 288 400C367.5 400 432 335.5 432 256C432 176.5 367.5 112 288 112z" />
-                </svg>
-            </div>
-            <div className="flex items-center justify-center">
-                <svg className="bg-yellow-300 hover:bg-yellow-400 p-3 rounded-lg cursor-pointer shadow-lg shadow-yellow-200" xmlns="http://www.w3.org/2000/svg" width="50" viewBox="0 0 560 550">
-                    <path d="M381.2 150.3L524.9 171.5C536.8 173.2 546.8 181.6 550.6 193.1C554.4 204.7 551.3 217.3 542.7 225.9L438.5 328.1L463.1 474.7C465.1 486.7 460.2 498.9 450.2 506C440.3 513.1 427.2 514 416.5 508.3L288.1 439.8L159.8 508.3C149 514 135.9 513.1 126 506C116.1 498.9 111.1 486.7 113.2 474.7L137.8 328.1L33.58 225.9C24.97 217.3 21.91 204.7 25.69 193.1C29.46 181.6 39.43 173.2 51.42 171.5L195 150.3L259.4 17.97C264.7 6.954 275.9-.0391 288.1-.0391C300.4-.0391 311.6 6.954 316.9 17.97L381.2 150.3z" />
-                </svg>
+            <div onClick={() => deleteActions(favoris, "favoris")} className="hover:text-white flex items-center justify-center bg-yellow-300 hover:bg-yellow-400 p-3 rounded-lg cursor-pointer shadow-lg shadow-yellow-200 text-lg font-bold">
+                Enlever de mes favoris
             </div>
         </div>
     )
@@ -633,7 +620,6 @@ export const RowsRessourcesAdmin = ({ ressource, categorie }) => {
     const [typeRelationRessource1, setRelationRessource] = useState(arr);
 
     const onRelationChange = (e) => {
-        console.log(e)
         let _setRelationRessource = [...typeRelationRessource1];
         if (e.checked) {
             _setRelationRessource.push(e.value);
