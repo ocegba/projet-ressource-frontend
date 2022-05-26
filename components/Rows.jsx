@@ -4,6 +4,11 @@ import 'moment/locale/fr'
 import axios from "axios";
 moment.locale('fr')
 
+import 'primeicons/primeicons.css';
+import 'primereact/resources/themes/lara-light-indigo/theme.css';
+import 'primereact/resources/primereact.css';
+import { Checkbox } from 'primereact/checkbox';
+
 async function deleteRessource(ressource) {
     if (window.confirm("Souhaitez-vous vraiment supprimer cette ressource ?")) {
 
@@ -53,46 +58,165 @@ async function statusCompte(compte) {
     });
     window.location.reload()
 }
+
+function voirRelations(obj) {
+    let array = []
+
+    for (const item in obj) {
+        var id = obj[item]
+        if (id === true && item.includes("relations")) {
+            array.push(item)
+        }
+    }
+
+    if (typeof array !== 'undefined' && array.length > 0) {
+        array.forEach(function (item, i) {
+            if (item == "relationstous") {
+                array[i] = "Tous";
+            }
+            if (item == "relationssoi") {
+                array[i] = "Soi";
+            }
+            if (item == "relationsconjoints") {
+                array[i] = "Conjoints";
+            }
+            if (item == "relationsfamille") {
+                array[i] = "Famille";
+            }
+            if (item == "relationspro") {
+                array[i] = "Professionnelle : collègues, collaborateurs et managers";
+            }
+            if (item == "relationsamis") {
+                array[i] = "Amis et communautés";
+            }
+            if (item == "relationsinconnus") {
+                array[i] = "Inconnus";
+            }
+        })
+        return array
+    }
+
+}
+
+function getCategorie(categorie, libelleCategorie) {
+    let array = []
+    let cat = []
+    categorie.map((item) => {
+        array = Object.values(item)
+        for (var i = 0; i < array.length; i++) {
+            if (array[i] == libelleCategorie) {
+                cat = [array[i], array[i + 1]]
+            }
+        }
+    })
+    return cat
+}
 ///////////////////////////////////////////// PROFIL CONNECTE /////////////////////////////////////////////////////
 
 export const RowsRessources = ({ ressource, categorie }) => {
     const formRef = useRef();
+
     const [open, setOpen] = useState(false);
+    var arr = [];
+
+    const relations = [{ name: "Tous", key: "relationstous" },
+    { name: "Soi", key: "relationssoi" },
+    { name: "Conjoints", key: "relationsconjoints" },
+    { name: "Famille", key: "relationsfamille" },
+    { name: "Professionnelle : collègues, collaborateurs et managers", key: "relationspro" },
+    { name: "Amis et communautés", key: "relationsamis" },
+    { name: "Inconnus", key: "relationsinconnus" }];
+
+    Object.entries(relations).map(entry => {
+        let key = entry[0];
+        let tab = entry[1];
+
+        var array = voirRelations(ressource);
+        for (var i = 0; i < array.length; i++) {
+            if (tab.name == array[i]) {
+                arr.push(relations[key])
+            }
+        }
+    });
+
+    const [typeRelationRessource1, setRelationRessource] = useState(arr);
+
+    const onRelationChange = (e) => {
+        let _setRelationRessource = [...typeRelationRessource1];
+        if (e.checked) {
+            _setRelationRessource.push(e.value);
+        }
+        else {
+            for (let i = 0; i < _setRelationRessource.length; i++) {
+                const selected = _setRelationRessource[i];
+
+                if (selected.key === e.value.key) {
+                    _setRelationRessource.splice(i, 1);
+                    break;
+                }
+            }
+        }
+        setRelationRessource(_setRelationRessource);
+    }
 
     async function editRessource() {
         const {
             editRessourcesTitreRessource,
             editRessourcesCategorieRessource,
             editRessourcesTypeRessource,
-            editRessourcesRelationRessource,
+            editrelationstous,
+            editrelationssoi,
+            editrelationsconjoints,
+            editrelationsfamille,
+            editrelationspro,
+            editrelationsamis,
+            editrelationsinconnus,
             editRessourcesStoryRessource,
             editRessourcesFileRessource,
             editRessourcesLienRessource,
             editRessourcesLocalisationRessource,
         } = formRef.current;
+
         const titreRessource = editRessourcesTitreRessource.value;
         const idCategorie = editRessourcesCategorieRessource.value;
         const typeRessource = editRessourcesTypeRessource.value;
-        const typeRelationRessource = editRessourcesRelationRessource.value;
         const storyRessource = editRessourcesStoryRessource.value;
         const fileRessource = editRessourcesFileRessource.value;
         const lienRessource = editRessourcesLienRessource.value;
         const localisationRessource = editRessourcesLocalisationRessource.value;
         const validerRessource = null;
+        const dateRessource = (new Date(Date.now())).toISOString();
+
+        const relationstous = Boolean(editrelationstous.checked);
+        const relationssoi = Boolean(editrelationssoi.checked);
+        const relationsconjoints = Boolean(editrelationsconjoints.checked);
+        const relationsfamille = Boolean(editrelationsfamille.checked);
+        const relationspro = Boolean(editrelationspro.checked);
+        const relationsamis = Boolean(editrelationsamis.checked);
+        const relationsinconnus = Boolean(editrelationsinconnus.checked);
+
         await axios.put("../api/ressource/editRessource", {
             idRessource: (ressource?.idRessource),
             titreRessource,
             idCategorie: parseInt(idCategorie),
             typeRessource,
-            typeRelationRessource,
             storyRessource,
             fileRessource,
             lienRessource,
             localisationRessource,
-            validerRessource
+            dateRessource,
+            validerRessource,
+            relationstous,
+            relationssoi,
+            relationsconjoints,
+            relationsfamille,
+            relationspro,
+            relationsamis,
+            relationsinconnus,
         });
         window.location.reload();
     }
+
     return (
         <>
             <div className="grid grid-cols-8 gap-4 px-4 py-5 relative flex flex-col min-w-0 break-words bg-white w-full my-3 shadow-lg rounded-lg shadow-lg shadow">
@@ -127,13 +251,13 @@ export const RowsRessources = ({ ressource, categorie }) => {
                     }
                 </div>
                 <div className="col-start-4">
-                    {(categorie[ressource.idCategorie - 1]).libelleCategorie}
+                    {getCategorie(categorie, ressource.idCategorie)[1]}
                 </div>
                 <div className="col-start-5">
                     {ressource.typeRessource}
                 </div>
                 <div className="col-start-6">
-                    {ressource.typeRelationRessource}
+                    {voirRelations(ressource).map((item) => <p className="col-start-6"> {item} </p>)}
                 </div>
                 <div className="flex items-center justify-center">
                     <svg onClick={() => setOpen(!open)} className="bg-blue-400 hover:bg-blue-500 p-3 rounded-lg cursor-pointer shadow-lg shadow-blue-300" xmlns="http://www.w3.org/2000/svg" width="50" viewBox="0 0 450 535">
@@ -166,7 +290,7 @@ export const RowsRessources = ({ ressource, categorie }) => {
                             <label className="text-xl" htmlFor="categorieRessource">Catégorie :</label>
                             <select className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
                                 required
-                                defaultValue={(categorie[ressource.idCategorie - 1]).libelleCategorie}
+                                defaultValue={getCategorie(categorie, ressource.idCategorie)[1]}
                                 name="editRessourcesCategorieRessource"
                                 id="idCategorie"
                                 placeholder='Sélectionnez une catégorie'
@@ -232,24 +356,17 @@ export const RowsRessources = ({ ressource, categorie }) => {
                             />
                         </div>
 
-                        <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">*
+                        <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
                             <label className="text-xl" htmlFor="typesRelationRessource">Types de relations :</label>
-                            <select className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
-                                defaultValue={ressource?.typeRelationRessource}
-                                name="editRessourcesRelationRessource"
-                                id="typesRelationRessource"
-                                placeholder='Sélectionnez une ou plusieurs relations'
-                            >
+                            {
+                                relations.map((relation) =>
 
-                                <option value="" selected disabled hidden>Choisir un type de relations</option>
-                                <option value="Tous">Tous </option>
-                                <option value="Soi">Soi </option>
-                                <option value="Conjoints">Conjoints</option>
-                                <option value="Famille">Famille</option>
-                                <option value="Professionelle"> Professionnelle : collègues, collaborateurs et managers</option>
-                                <option value="Amis et communautés">Amis et communautés</option>
-                                <option value="Inconnus">Inconnus </option>
-                            </select>
+                                    <p key={relation.key} className="field-checkbox">
+                                        <Checkbox inputId={relation.key} name={"edit" + relation.key} value={relation} onChange={onRelationChange} checked={typeRelationRessource1.some((item) => item.name === relation.name)} />
+                                        <label htmlFor={relation.key}>{relation.name}</label>
+                                    </p>
+                                )
+                            }
                         </div>
 
                         <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
@@ -489,42 +606,109 @@ export const RowsFavoris = ({ actions }) => {
 
 export const RowsRessourcesAdmin = ({ ressource, categorie }) => {
     const formRef = useRef();
+
     const [open, setOpen] = useState(false);
+    var arr = [];
+
+    const relations = [{ name: "Tous", key: "relationstous" },
+    { name: "Soi", key: "relationssoi" },
+    { name: "Conjoints", key: "relationsconjoints" },
+    { name: "Famille", key: "relationsfamille" },
+    { name: "Professionnelle : collègues, collaborateurs et managers", key: "relationspro" },
+    { name: "Amis et communautés", key: "relationsamis" },
+    { name: "Inconnus", key: "relationsinconnus" }];
+
+    Object.entries(relations).map(entry => {
+        let key = entry[0];
+        let tab = entry[1];
+
+        var array = voirRelations(ressource);
+        for (var i = 0; i < array.length; i++) {
+            if (tab.name == array[i]) {
+                arr.push(relations[key])
+            }
+        }
+    });
+
+    const [typeRelationRessource1, setRelationRessource] = useState(arr);
+
+    const onRelationChange = (e) => {
+        console.log(e)
+        let _setRelationRessource = [...typeRelationRessource1];
+        if (e.checked) {
+            _setRelationRessource.push(e.value);
+        }
+        else {
+            for (let i = 0; i < _setRelationRessource.length; i++) {
+                const selected = _setRelationRessource[i];
+
+                if (selected.key === e.value.key) {
+                    _setRelationRessource.splice(i, 1);
+                    break;
+                }
+            }
+        }
+        setRelationRessource(_setRelationRessource);
+    }
 
     async function editRessource() {
         const {
             editRessourcesTitreRessource,
             editRessourcesCategorieRessource,
             editRessourcesTypeRessource,
-            editRessourcesRelationRessource,
+            editrelationstous,
+            editrelationssoi,
+            editrelationsconjoints,
+            editrelationsfamille,
+            editrelationspro,
+            editrelationsamis,
+            editrelationsinconnus,
             editRessourcesStoryRessource,
             editRessourcesFileRessource,
             editRessourcesLienRessource,
             editRessourcesLocalisationRessource,
         } = formRef.current;
+
         const titreRessource = editRessourcesTitreRessource.value;
-        const categorie = editRessourcesCategorieRessource.value;
+        const idCategorie = editRessourcesCategorieRessource.value;
         const typeRessource = editRessourcesTypeRessource.value;
-        const typeRelationRessource = editRessourcesRelationRessource.value;
         const storyRessource = editRessourcesStoryRessource.value;
         const fileRessource = editRessourcesFileRessource.value;
         const lienRessource = editRessourcesLienRessource.value;
         const localisationRessource = editRessourcesLocalisationRessource.value;
         const validerRessource = null;
+        const dateRessource = (new Date(Date.now())).toISOString();
+
+        const relationstous = Boolean(editrelationstous.checked);
+        const relationssoi = Boolean(editrelationssoi.checked);
+        const relationsconjoints = Boolean(editrelationsconjoints.checked);
+        const relationsfamille = Boolean(editrelationsfamille.checked);
+        const relationspro = Boolean(editrelationspro.checked);
+        const relationsamis = Boolean(editrelationsamis.checked);
+        const relationsinconnus = Boolean(editrelationsinconnus.checked);
+
         await axios.put("../api/ressource/editRessource", {
             idRessource: (ressource?.idRessource),
             titreRessource,
-            categorie,
+            idCategorie: parseInt(idCategorie),
             typeRessource,
-            typeRelationRessource,
             storyRessource,
             fileRessource,
             lienRessource,
             localisationRessource,
-            validerRessource
+            dateRessource,
+            validerRessource,
+            relationstous,
+            relationssoi,
+            relationsconjoints,
+            relationsfamille,
+            relationspro,
+            relationsamis,
+            relationsinconnus,
         });
         window.location.reload();
     }
+
     return (
         <>
             <div className="grid grid-cols-9 gap-4 px-4 py-5 relative flex flex-col min-w-0 bg-white w-full my-3 shadow-lg rounded-lg cursor-pointer shadow-lg shadow">
@@ -533,14 +717,12 @@ export const RowsRessourcesAdmin = ({ ressource, categorie }) => {
                     crée le {moment(ressource.dateRessource).format("LL")}<br />
                 </div>
                 <div className="col-start-4">
-                    {(categorie[ressource.idCategorie - 1])["libelleCategorie"]}
+                    {getCategorie(categorie, ressource.idCategorie)[1]}
                 </div>
                 <div className="col-start-5">
                     {ressource.typeRessource}
                 </div>
-                <div className="col-start-6">
-                    {ressource.typeRelationRessource}
-                </div>
+                {voirRelations(ressource).map((item) => <p className="col-start-6"> {item} </p>)}
                 <div className="flex items-center justify-center">
                     <svg onClick={() => setOpen(!open)} className="bg-blue-400 hover:bg-blue-500 p-3 rounded-lg cursor-pointer shadow-lg shadow-blue-300" xmlns="http://www.w3.org/2000/svg" width="50" viewBox="0 0 450 535">
                         <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V299.6L289.3 394.3C281.1 402.5 275.3 412.8 272.5 424.1L257.4 484.2C255.1 493.6 255.7 503.2 258.8 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256zM564.1 250.1C579.8 265.7 579.8 291 564.1 306.7L534.7 336.1L463.8 265.1L493.2 235.7C508.8 220.1 534.1 220.1 549.8 235.7L564.1 250.1zM311.9 416.1L441.1 287.8L512.1 358.7L382.9 487.9C378.8 492 373.6 494.9 368 496.3L307.9 511.4C302.4 512.7 296.7 511.1 292.7 507.2C288.7 503.2 287.1 497.4 288.5 491.1L303.5 431.8C304.9 426.2 307.8 421.1 311.9 416.1V416.1z" />
@@ -574,29 +756,15 @@ export const RowsRessourcesAdmin = ({ ressource, categorie }) => {
                         </div>
 
                         <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-                            <label className="text-xl" for="categorie">Catégorie :</label>
-                            <select className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
+                            <label className="text-xl" htmlFor="categorieRessource">Catégorie :</label>
+                            <select className="bg-white border-0 rounded-2xl   medium shadow-xl h-14 pl-10"
                                 required
-                                defaultValue={ressource?.categorie}
+                                defaultValue={getCategorie(categorie, ressource.idCategorie)[1]}
                                 name="editRessourcesCategorieRessource"
-                                id="categorie"
+                                id="idCategorie"
                                 placeholder='Sélectionnez une catégorie'
                             >
-
-                                <option value="" selected disabled hidden>Choisir une catégorie</option>
-                                <option value="Communication">Communication</option>
-                                <option value="Cultures">Cultures</option>
-                                <option value="Developpement personnel">Developpement personnel</option>
-                                <option value="Intelligence émotionnelle">Intelligence émotionnelle</option>
-                                <option value="Loisirs">Loisirs</option>
-                                <option value="Monde professionnel">Monde professionnel</option>
-                                <option value="Parentalité">Parentalité</option>
-                                <option value="Qualité de vie">Qualité de vie</option>
-                                <option value="Recherche de sens">Recherche de sens</option>
-                                <option value="Santé physique">Santé physique</option>
-                                <option value="Santé psychique">Santé psychique</option>
-                                <option value="Spiritualité">Spiritualité</option>
-                                <option value="Vie affective">Vie affective</option>
+                                {categorie?.map((compte, i) => <option value={compte.idCategorie}>{compte.libelleCategorie}</option>)}
                             </select>
                         </div>
 
@@ -657,24 +825,17 @@ export const RowsRessourcesAdmin = ({ ressource, categorie }) => {
                             />
                         </div>
 
-                        <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">*
+                        <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
                             <label className="text-xl" htmlFor="typesRelationRessource">Types de relations :</label>
-                            <select className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
-                                defaultValue={ressource?.typeRelationRessource}
-                                name="editRessourcesRelationRessource"
-                                id="typesRelationRessource"
-                                placeholder='Sélectionnez une ou plusieurs relations'
-                            >
+                            {
+                                relations.map((relation) =>
 
-                                <option value="" selected disabled hidden>Choisir un type de relations</option>
-                                <option value="Tous">Tous </option>
-                                <option value="Soi">Soi </option>
-                                <option value="Conjoints">Conjoints</option>
-                                <option value="Famille">Famille</option>
-                                <option value="Professionelle"> Professionnelle : collègues, collaborateurs et managers</option>
-                                <option value="Amis et communautés">Amis et communautés</option>
-                                <option value="Inconnus">Inconnus </option>
-                            </select>
+                                    <p key={relation.key} className="field-checkbox">
+                                        <Checkbox inputId={relation.key} name={"edit" + relation.key} value={relation} onChange={onRelationChange} checked={typeRelationRessource1.some((item) => item.name === relation.name)} />
+                                        <label htmlFor={relation.key}>{relation.name}</label>
+                                    </p>
+                                )
+                            }
                         </div>
 
                         <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
@@ -869,7 +1030,7 @@ export const RowsRessourcesModHold = ({ ressource, categorie }) => {
             const {
                 raison
             } = Raison.current;
-            const idRessource = ressource.idRessource;
+            const idRessource = (ressource?.idRessource);
             const validerRessource = false;
             const notRaisonRessource = raison.value;
             await axios.post("../api/ressource/deleteRessource", {
@@ -881,6 +1042,7 @@ export const RowsRessourcesModHold = ({ ressource, categorie }) => {
         window.location.reload();
     }
 
+    let array = [voirRelations(ressource)];
     return (
         <div className="grid grid-cols-8 gap-4 px-4 py-5 relative flex flex-col min-w-0 break-words bg-white w-full mb-3 shadow-lg rounded-lg shadow-lg shadow">
             <div className="col-start-1 col-span-3 text-justify	">
@@ -908,11 +1070,19 @@ export const RowsRessourcesModHold = ({ ressource, categorie }) => {
                 }
             </div>
             <div className="col-start-5">
-                {(categorie[ressource.idCategorie - 1])["libelleCategorie"]}
+                {getCategorie(categorie, ressource.idCategorie)[1]}
             </div>
             <div className="col-start-6">
                 {ressource.typeRessource} <br />
-                {ressource.typeRelationRessource}
+                {
+                    array.map((items) => {
+                        return items.map((id) => {
+                            return <p className="col-start-6">  {id} </p>
+                        }
+                        )
+                    })
+                }
+
             </div>
             <div className="flex items-center justify-center">
                 <svg onClick={() => validerRessource(ressource)} className="bg-green-400 hover:bg-green-500 p-3 rounded-lg cursor-pointer shadow-lg shadow-green-300 hover:bg-green-500" xmlns="http://www.w3.org/2000/svg" width="50" viewBox="0 0 450 535">
@@ -921,7 +1091,7 @@ export const RowsRessourcesModHold = ({ ressource, categorie }) => {
             </div>
             <div className="flex items-center justify-center">
                 <form className="p-4" ref={Raison}>
-                    <textarea id="notRaisonRessource" titreRessource="raison" type="text" rows="2" cols="10" />
+                    <textarea id="notRaisonRessource" name="raison" type="text" rows="2" cols="10" />
                     <button className="bg-red-500 hover:bg-red-600 p-3 rounded-lg cursor-pointer shadow-lg shadow-red-400 text-white " onClick={() => deleteDemandeRessource(ressource)}>Envoyer la raison du refus</button>
                 </form>
             </div>
@@ -931,6 +1101,7 @@ export const RowsRessourcesModHold = ({ ressource, categorie }) => {
 }
 
 export const RowsRessourcesModRef = ({ ressource, categorie }) => {
+    let array = [voirRelations(ressource)];
     return (
         <div className="grid grid-cols-8 gap-4 px-4 py-5 relative flex flex-col min-w-0 break-words bg-white w-full mb-3 shadow-lg rounded-lg shadow-lg shadow">
             <div className="col-start-1 col-span-3 text-justify	">
@@ -964,11 +1135,18 @@ export const RowsRessourcesModRef = ({ ressource, categorie }) => {
                 }
             </div>
             <div className="col-start-5">
-                {(categorie[ressource.idCategorie - 1])["libelleCategorie"]}
+                {getCategorie(categorie, ressource.idCategorie)[1]}
             </div>
             <div className="col-start-6">
                 {ressource.typeRessource} <br />
-                {ressource.typeRelationRessource}
+                {
+                    array.map((items) => {
+                        return items.map((id) => {
+                            return <p className="col-start-6">  {id} </p>
+                        }
+                        )
+                    })
+                }
             </div>
             <div className="flex items-center justify-center">
             </div>

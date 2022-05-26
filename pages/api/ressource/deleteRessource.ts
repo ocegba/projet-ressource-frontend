@@ -6,7 +6,7 @@ export default async (req, res) => {
   try {
     const deleteRessource = await prisma.ressource.delete({
       where: {
-        idRessource,
+        idRessource: idRessource,
       },
     });
     res.status(200).json(JSONBig.parse(JSONBig.stringify((deleteRessource))));
