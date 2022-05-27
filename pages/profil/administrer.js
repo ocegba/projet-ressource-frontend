@@ -6,6 +6,8 @@ import { RowsCompteAdmin, RowsRessourcesAdmin } from '../../components/Rows';
 import JSONBig from 'json-bigint';
 import prisma from '../../prisma/prisma'
 import axios from "axios";
+import { Checkbox } from 'primereact/checkbox';
+import { InputText } from 'primereact/inputtext';
 
 function administrer(props) {
   const ressources = props.ressources;
@@ -19,6 +21,19 @@ function administrer(props) {
   const [open, setOpen] = useState("");
   const [openDel, setOpenDel] = useState("");
   const [openEdit, setOpenEdit] = useState("");
+
+  const relations = [{ name: "Tous", key: "relationstous" },
+  { name: "Soi", key: "relationssoi" },
+  { name: "Conjoints", key: "relationsconjoints" },
+  { name: "Famille", key: "relationsfamille" },
+  { name: "Professionnelle : collègues, collaborateurs et managers", key: "relationspro" },
+  { name: "Amis et communautés", key: "relationsamis" },
+  { name: "Inconnus", key: "relationsinconnus" }]
+  const [searchParam] = useState(["titreRessource"])
+  const [selectionnerCategorie, setSelectionnerCat] = useState(["Toutes"])
+  const [selectionnerRelations, setSelectionnerRel] = useState(relations.slice(0, 1));
+  const [selectionnerAct, setSelectionnerAct] = useState("")
+  const [value, setValue] = useState("")
 
   async function addCategorie() {
     const {
@@ -57,6 +72,74 @@ function administrer(props) {
     alert("Informations modifiées ! ")
   }
 
+  function voirRelations(item) {
+    if (item.relationstous) {
+      return "Tous"
+    }
+    else if (item.relationssoi) {
+      return "Soi"
+    }
+    else if (item.relationsconjoints) {
+      return "Conjoints"
+    }
+    else if (item.relationsfamille) {
+      return "Famille"
+    }
+    else if (item.relationspro) {
+      return "Professionnelle : collègues, collaborateurs et managers"
+    }
+    else if (item.relationsamis) {
+      return "Amis et communautés"
+    }
+    else if (item.relationsinconnus) {
+      return "Inconnus"
+    }
+  }
+
+  const onRelationChange = (e) => {
+    let _setSelectionnerRel = [...selectionnerRelations];
+
+    if (e.checked) {
+      _setSelectionnerRel.push(e.value);
+    }
+    else {
+      for (let i = 0; i < _setSelectionnerRel.length; i++) {
+        const selectedCategory = _setSelectionnerRel[i];
+
+        if (selectedCategory.key === e.value.key) {
+          _setSelectionnerRel.splice(i, 1);
+          break;
+        }
+      }
+    }
+    setSelectionnerRel(_setSelectionnerRel);
+  }
+
+  function search(items) {
+    return items.filter((item) => {
+      if ((item.idCategorie == selectionnerCategorie) && ((voirRelations(item) == selectionnerRelations.map((x) => x.name)) || selectionnerRelations == "") && (item.typeRessource == selectionnerAct || selectionnerAct == "")) {
+        return searchParam.some((newItem) => {
+          return (
+            item[newItem]
+              .toString()
+              .toLowerCase()
+              .indexOf(value.toLowerCase()) > -1
+          );
+        })
+      }
+      else if ((selectionnerCategorie == "Toutes") && ((voirRelations(item) == selectionnerRelations.map((x) => x.name)) || selectionnerRelations == "") && (item.typeRessource == selectionnerAct || selectionnerAct == "")) {
+        return searchParam.some((newItem) => {
+          return (
+            item[newItem]
+              .toString()
+              .toLowerCase()
+              .indexOf(value.toLowerCase()) > -1
+          );
+        })
+      }
+    });
+  }
+
   return (
     <div className="flex">
       <Head>
@@ -70,11 +153,54 @@ function administrer(props) {
         <div>
           <p className="py-3 px-5 text-xl" >Vous pouvez créer, modifier, suspendre ou supprimer une ressource qui a été publiée</p>
 
-          <a className="py-3 px-5" href="/createRessource">
+          <div className="py-3 px-5" href="/createRessource">
             <input type="submit" href="/createRessource" className="cursor-pointer border-2 bg-white-600 hover:bg-gray-300 rounded-lg
          border-solid font-bold text-base leading-normal  py-3 px-5 uppercase" value="Créer une ressource"></input>
-          </a>
-          {ressources?.map((ressource, i) => <RowsRessourcesAdmin ressource={ressource} categorie={categories} key={i} />)}
+          </div>
+
+          <div className="rounded-lg box-border p-8">
+            <div className="portrait:grid-cols-1 grid grid-cols-4  justify-items-center bg-gray-50 border-solid border-r-0 border-l-0 border-t border-b box-border font-bold p-4 justify-between">
+              <div>
+                <select className="appearance-none bg-white rounded-md border-solid border box-border text-base m-0 p-3 hover:border-indigo-500" style={{ width: 250 }}
+                  onChange={(e) => setSelectionnerCat(e.target.value)}>
+                  <option value="Toutes">Toutes les catégories</option>
+                  {categories.map((x) => <option value={x.idCategorie}>{x.libelleCategorie}</option>)}
+                </select>
+              </div>
+              <div>
+                {
+                  relations.map((relation, i) =>
+                    <p key={relation.key} className="field-checkbox">
+                      <Checkbox inputId={relation.key} name="relation" value={relation} onChange={onRelationChange} checked={selectionnerRelations.some((item) => item.key === relation.key)} />
+                      <label htmlFor={relation.key}>{relation.name}</label>
+                    </p>
+                  )
+                }
+              </div>
+              <div>
+                <select className="appearance-none bg-white rounded-md border-solid border box-border text-base m-0 p-3 hover:border-indigo-500" style={{ width: 250 }}
+                  onChange={(e) => setSelectionnerAct(e.target.value)}>
+                  {/* table pour recup les nvx types de ressources */}
+                  <option value="">Tous types de ressources</option>
+                  <option value="Activité / Jeu à réaliser">Activité / Jeu à réaliser</option>
+                  <option value="Article">Article</option>
+                  <option value="Carte défi">Carte défi</option>
+                  <option value="Cours au format PDF">Cours au format PDF</option>
+                  <option value="Exercice / Atelier">Exercice / Atelier</option>
+                  <option value="Fiche de lecture">Fiche de lecture</option>
+                  <option value="Jeu en ligne">Jeu en ligne</option>
+                  <option value="Vidéo">Vidéo</option>
+                </select>
+
+              </div>
+              <div>
+                <InputText value={value} onChange={(e) => setValue(e.target.value)} placeholder="Rechercher" />
+              </div>
+
+            </div>
+          </div>
+
+          {search(ressources).map((ressource, i) => <RowsRessourcesAdmin ressource={ressource} categorie={categories} key={i} />)}
         </div>}
 
         nomElement2="Catégories" element2={
