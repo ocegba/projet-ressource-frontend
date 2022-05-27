@@ -14,6 +14,8 @@ function administrer(props) {
 
   const formAddRef = useRef();
   const formDelRef = useRef();
+  const formEditRef = useRef();
+
   const [open, setOpen] = useState("");
   const [openDel, setOpenDel] = useState("");
   const [openEdit, setOpenEdit] = useState("");
@@ -34,11 +36,25 @@ function administrer(props) {
     const {
       deleteCategorieAdmin,
     } = formDelRef.current;
-    const idCategorie = deleteCategorieAdmin.value;
+    const libelleCategorie = deleteCategorieAdmin.value;
     await axios.post("../api/actions/deleteCategorieAdmin", {
-      idCategorie: parseInt(idCategorie),
+      libelleCategorie: libelleCategorie,
     });
     window.location.reload();
+  }
+
+  async function updateCategorie() {
+    const {
+      newCat,
+      formerCat,
+    } = formEditRef.current;
+    const libelleCategorie = newCat.value;
+    const formerCategorie = formerCat.value;
+    await axios.put("../api/actions/updateCategorie", {
+      libelleCategorie,
+      formerCategorie,
+    });
+    alert("Informations modifiées ! ")
   }
 
   return (
@@ -65,7 +81,7 @@ function administrer(props) {
           <div>
             <div className="grid grid-cols-3 gap-2 p-4">
               <button onClick={() => setOpen(!open) && setOpenDel(openDel) && setOpenEdit(openEdit)} className="shadow-md hover:bg-gray-200 border-gray-200 rounded border-solid border-0 box-border block font-bold text-base leading-normal py-3 px-5 uppercase no-underline">Ajouter une catégorie</button>
-              <button onClick={() => setOpenDel(openDel) && setOpen(!open) && setOpenEdit(!openEdit)} className="shadow-md hover:bg-gray-200 border-gray-200 rounded border-solid border-0 box-border block font-bold text-base leading-normal py-3 px-5 uppercase no-underline">Editer une catégorie</button>
+              <button onClick={() => setOpenEdit(!openEdit) && setOpenDel(openDel) && setOpen(open)} className="shadow-md hover:bg-gray-200 border-gray-200 rounded border-solid border-0 box-border block font-bold text-base leading-normal py-3 px-5 uppercase no-underline">Editer une catégorie</button>
               <button onClick={() => setOpenDel(!openDel) && setOpen(open) && setOpenEdit(openEdit)} className="shadow-md hover:bg-gray-200 border-gray-200 rounded border-solid border-0 box-border block font-bold text-base leading-normal py-3 px-5 uppercase no-underline">Supprimer une catégorie</button>
             </div>
 
@@ -80,6 +96,17 @@ function administrer(props) {
               <form ref={formAddRef}>
                 <input className="border-black border-solid border-2 box-border text-xl m-0 py-3 px-5" name="addCategorieAdmin" id="libelleCategorie" />
                 <button className="mt-2 mb-2 bg-custom-blue hover:bg-custom-blue-200 text-white font-bold text-xl w-fit pr-1 pl-1 rounded-xl block m-auto cursor-pointer rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" type="submit" onClick={() => addCategorie()}>Valider</button>
+              </form>
+            </div>) : false}
+
+            {openEdit ? (<div>
+              <p className="border-gray-200 border-solid border-0 box-border text-xl leading-7 m-0 py-3 px-5">Editer une nouvelle catégorie :</p>
+              <form className="grid grid-cols-2 gap-1" ref={formEditRef}>
+                <select className="rounded-lg" name="formerCat" id="idCategorie">
+                  {categories?.map((categorie) => <option value={categorie.libelleCategorie}>{categorie.libelleCategorie}</option>)}
+                </select>
+                <input name="newCat" className="rounded-lg ml-2 w-full" placeholder='Editer la catégorie sélectionnée'></input>
+                <button className="col-span-2 mt-2 mb-2 bg-custom-blue hover:bg-custom-blue-200 text-white font-bold text-xl w-fit pr-1 pl-1 rounded-xl block m-auto cursor-pointer rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" type="submit" onClick={() => updateCategorie()}>Valider</button>
               </form>
             </div>) : false}
 
