@@ -27,27 +27,41 @@ const Post = (props) => {
         window.location.reload();
     }
 
-    function voirRelations(item) {
-        if (item.relationstous) {
-            return "Tous"
+    function voirRelations(obj) {
+        let array = []
+
+        for (const item in obj) {
+            var id = obj[item]
+            if (id === "true" && item.includes("relations")) {
+                array.push(item)
+            }
         }
-        else if (item.relationssoi) {
-            return "Soi"
-        }
-        else if (item.relationsconjoints) {
-            return "Conjoints"
-        }
-        else if (item.relationsfamille) {
-            return "Famille"
-        }
-        else if (item.relationspro) {
-            return "Professionnelle : collègues, collaborateurs et managers"
-        }
-        else if (item.relationsamis) {
-            return "Amis et communautés"
-        }
-        else if (item.relationsinconnus) {
-            return "Inconnus"
+
+        if (typeof array !== 'undefined' && array.length > 0) {
+            array.forEach(function (item, i) {
+                if (item == "relationstous") {
+                    array[i] = "Tous";
+                }
+                if (item == "relationssoi") {
+                    array[i] = "Soi";
+                }
+                if (item == "relationsconjoints") {
+                    array[i] = "Conjoints";
+                }
+                if (item == "relationsfamille") {
+                    array[i] = "Famille";
+                }
+                if (item == "relationspro") {
+                    array[i] = "Professionnelle : collègues, collaborateurs et managers";
+                }
+                if (item == "relationsamis") {
+                    array[i] = "Amis et communautés";
+                }
+                if (item == "relationsinconnus") {
+                    array[i] = "Inconnus";
+                }
+            })
+            return array
         }
     }
 
@@ -61,7 +75,7 @@ const Post = (props) => {
         }
         return array
     }
-
+    (voirRelations(props)).map((x) => console.log(x))
     return (
         <div className="py-4 dark:bg-gray-600">
             <Head>
@@ -76,7 +90,7 @@ const Post = (props) => {
                     <div className='text-lg p-2'>
                         <p>Catégorie : {props.idCategorie}</p>
                         <p>Type de ressources : {props.typeRessource}</p>
-                        <p>Type de relations : {voirRelations(props)}</p>
+                        <p>Type de relations : {(voirRelations(props)).map(function(x){ return ( x+ "  " )})}</p>
                         <p>Lieu : {props.localisationRessource}</p>
                         <p>Lien de la ressource : <a href={props.lienRessource}>{props.lienRessource}</a></p>
                         <p>Fichier : {props.fileRessource}</p>

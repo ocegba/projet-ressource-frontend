@@ -29,7 +29,7 @@ function searchRessource(props) {
 
   const [searchParam] = useState(["titreRessource"])
   const [selectionnerCategorie, setSelectionnerCat] = useState(["Toutes"])
-  const [selectionnerRelations, setSelectionnerRel] = useState(relations.slice(0, 1));
+  const [selectionnerRelations, setSelectionnerRel] = useState(relations.slice(0,0));
   const [selectionnerAct, setSelectionnerAct] = useState("")
   const [value, setValue] = useState("")
   const [value2, setValue2] = useState("")
@@ -103,60 +103,77 @@ function searchRessource(props) {
     setSelectionnerRel(_setSelectionnerRel);
   }
 
-  function voirRelations(item) {
-    if (item.relationstous) {
-      return "Tous"
+  function voirRelations(obj) {
+    let array = []
+
+    for (const item in obj) {
+      var id = obj[item]
+      if (id === true && item.includes("relations")) {
+        array.push(item)
+      }
     }
-    else if (item.relationssoi) {
-      return "Soi"
+
+    if (typeof array !== 'undefined' && array.length > 0) {
+      array.forEach(function (item, i) {
+        if (item == "relationstous") {
+          array[i] = "Tous";
+        }
+        if (item == "relationssoi") {
+          array[i] = "Soi";
+        }
+        if (item == "relationsconjoints") {
+          array[i] = "Conjoints";
+        }
+        if (item == "relationsfamille") {
+          array[i] = "Famille";
+        }
+        if (item == "relationspro") {
+          array[i] = "Professionnelle : collègues, collaborateurs et managers";
+        }
+        if (item == "relationsamis") {
+          array[i] = "Amis et communautés";
+        }
+        if (item == "relationsinconnus") {
+          array[i] = "Inconnus";
+        }
+      })
+      return array
     }
-    else if (item.relationsconjoints) {
-      return "Conjoints"
-    }
-    else if (item.relationsfamille) {
-      return "Famille"
-    }
-    else if (item.relationspro) {
-      return "Professionnelle : collègues, collaborateurs et managers"
-    }
-    else if (item.relationsamis) {
-      return "Amis et communautés"
-    }
-    else if (item.relationsinconnus) {
-      return "Inconnus"
-    }
+
   }
 
   function search(items) {
     return items.filter((item) => {
-      if ((item.idCategorie == selectionnerCategorie) && ((voirRelations(item) == selectionnerRelations.map((x)=>x.name)) || selectionnerRelations =="") && (item.typeRessource == selectionnerAct || selectionnerAct == "")) {
-        return searchParam.some((newItem) => {
-          return (
-            item[newItem]
-              .toString()
-              .toLowerCase()
-              .indexOf(value.toLowerCase()) > -1
-          );
-        })
-      }
-      else if ((selectionnerCategorie == "Toutes") && ((voirRelations(item) == selectionnerRelations.map((x)=>x.name)) || selectionnerRelations =="") && (item.typeRessource == selectionnerAct || selectionnerAct == "")) {
-        return searchParam.some((newItem) => {
-          return (
-            item[newItem]
-              .toString()
-              .toLowerCase()
-              .indexOf(value.toLowerCase()) > -1
-          );
-        })
+      for (var i = 0; i < [voirRelations(item)].length; i++) {
+        if ((item.idCategorie == selectionnerCategorie) && ((voirRelations(item)[i] == selectionnerRelations[i]?.name) || selectionnerRelations == "") && (item.typeRessource == selectionnerAct || selectionnerAct == "")) {
+          return searchParam.some((newItem) => {
+            return (
+              item[newItem]
+                .toString()
+                .toLowerCase()
+                .indexOf(value.toLowerCase()) > -1
+            );
+          })
+        }
+        else if ((selectionnerCategorie == "Toutes") && ((voirRelations(item)[i] == selectionnerRelations[i]?.name) || selectionnerRelations == "") && (item.typeRessource == selectionnerAct || selectionnerAct == "")) {
+          return searchParam.some((newItem) => {
+            return (
+              item[newItem]
+                .toString()
+                .toLowerCase()
+                .indexOf(value.toLowerCase()) > -1
+            );
+          })
+        }
       }
     });
   }
 
-
-
   const listRessources = search(ressources).map((item) => (<Card className='border-black' title={item.titreRessource} subTitle={(categorie[item.idCategorie - 1]).libelleCategorie}>
     <p className="text-lg">{item.typeRessource}</p>
-    <p className="text-lg">{voirRelations(item)}</p>
+    {voirRelations(item).map(function (x) {
+      return (<p className="text-lg">{x}<br /></p>)
+    })}
     <div className="box-border flex justify-between pt-2">
       <Link href={{
         pathname: `/post/[id]`,
@@ -187,7 +204,7 @@ function searchRessource(props) {
     </div>
   </Card >))
 
-  
+
   function closeModal(type) {
     if (type == "Norm") {
       setIsOpen(false)
