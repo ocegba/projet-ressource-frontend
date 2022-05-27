@@ -29,27 +29,39 @@ const Post = (props) => {
 
     function voirRelations(item) {
         if (item.relationstous) {
-          return "Tous"
+            return "Tous"
         }
         else if (item.relationssoi) {
-          return "Soi"
+            return "Soi"
         }
         else if (item.relationsconjoints) {
-          return "Conjoints"
+            return "Conjoints"
         }
         else if (item.relationsfamille) {
-          return "Famille"
+            return "Famille"
         }
         else if (item.relationspro) {
-          return "Professionnelle : collègues, collaborateurs et managers"
+            return "Professionnelle : collègues, collaborateurs et managers"
         }
         else if (item.relationsamis) {
-          return "Amis et communautés"
+            return "Amis et communautés"
         }
         else if (item.relationsinconnus) {
-          return "Inconnus"
+            return "Inconnus"
         }
-      }
+    }
+
+    function seeCom(val) {
+        let array = []
+        if (val.includes("Réponse au commentaire : ")) {
+            array = val.split("\t")
+            return array
+        } else if (!val.includes("Réponse au commentaire : ")) {
+            array = val
+        }
+        return array
+    }
+
     return (
         <div className="py-4 dark:bg-gray-600">
             <Head>
@@ -78,9 +90,17 @@ const Post = (props) => {
                             <h2 className='text-xl p-4 text-center'>Chat</h2>
                         </div>
                         <div>
-                            {props.commentaires.map((x) => <div className='rounded-lg p-5'>
-                                <p>{x.contenuCommentaire} le {moment(x.dateCommentaire).format("LL")}</p>
-                            </div>)}
+                            {props.commentaires.map(function (x) {
+                                if (seeCom(x.contenuCommentaire).length == 2) {
+                                    return (<div className='rounded-lg p-5'>
+                                        <p><p className='text-red-500 text-lg text-bold'>{seeCom(x.contenuCommentaire)[0]}</p><p className='text-xl text-bold'>{seeCom(x.contenuCommentaire)[1]}</p>le {moment(x.dateCommentaire).format("LL")}</p>
+                                    </div>)
+                                } else {
+                                    return (<div className='rounded-lg p-5'>
+                                        <p><p className='text-xl text-bold'>{seeCom(x.contenuCommentaire)}</p>le {moment(x.dateCommentaire).format("LL")}</p>
+                                    </div>)
+                                }
+                            })}
                         </div>
                         <div className='content-center justify-center p-4'>
                             <form ref={Comment}>

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, Fragment } from 'react'
 import moment from 'moment'
 import 'moment/locale/fr'
 import axios from "axios";
@@ -8,6 +8,7 @@ import 'primeicons/primeicons.css';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.css';
 import { Checkbox } from 'primereact/checkbox';
+import { Dialog, Transition } from '@headlessui/react'
 
 async function deleteRessource(ressource) {
     if (window.confirm("Souhaitez-vous vraiment supprimer cette ressource ?")) {
@@ -987,24 +988,134 @@ export const RowsCompteAdmin = ({ compte }) => {
 ///////////////////////////////////////////// MODERATEUR /////////////////////////////////////////////////////
 
 export const RowsCommentairesMod = ({ commentaire }) => {
+    const Comment = useRef();
+
+    async function addNewComment(data) {
+        const {
+            addPrefill,
+            addCommentaire
+        } = Comment.current;
+        const idRessource = data.idRessource;
+        const isCommentaireSupprime = false;
+        const idCompte = 24;
+        const contenuCommentaire = addPrefill.value + addCommentaire.value;
+        const dateCommentaire = (new Date(Date.now())).toISOString();
+        await axios.post("../api/commentaires/addnewComment", {
+            contenuCommentaire,
+            dateCommentaire,
+            idRessource,
+            isCommentaireSupprime,
+            idCompte
+        })
+        window.location.reload();
+    }
+    let [isOpen, setIsOpen] = useState(false)
+
+    function closeModal(type) {
+        if (type == "Norm") {
+            setIsOpen(false)
+        } else if (type == "Part") {
+            setIsOpenPart(false)
+        } else if (type == "Fav") {
+            setIsOpenFav(false)
+        }
+    }
+
+    function openModal(type) {
+        if (type == "Norm") {
+            setIsOpen(true)
+        } else if (type == "Part") {
+            setIsOpenPart(true)
+        } else if (type == "Fav") {
+            setIsOpenFav(true)
+        }
+    }
+
+    let val = "Réponse au commentaire : " + commentaire.contenuCommentaire +"\t"
+
     return (
-        <div className="grid grid-cols-8 gap-4 px-4 py-5 relative flex flex-col min-w-0 break-words bg-white w-full mb-3 shadow-lg rounded-lg cursor-pointer shadow-lg shadow">
-            <div className="col-start-1 col-span-4 text-justify">
-                {commentaire.contenuCommentaire} <br />
-                crée le {moment(commentaire.dateCommentaire).format("LL")}<br />
+        <>
+            <div className="grid grid-cols-8 gap-4 px-4 py-5 relative flex flex-col min-w-0 break-words bg-white w-full mb-3 shadow-lg rounded-lg cursor-pointer shadow-lg shadow">
+                <div className="col-start-1 col-span-4 text-justify">
+                    {commentaire.contenuCommentaire} <br />
+                    crée le {moment(commentaire.dateCommentaire).format("LL")}<br />
+                </div>
+                <div className="col-start-5"></div>
+                <div className="col-start-6"></div>
+                <div className="flex items-center justify-center">
+                    <svg onClick={() => { openModal("Norm") }} className="bg-green-400 hover:bg-green-500 p-3 rounded-lg cursor-pointer shadow-lg shadow-gren-300 " xmlns="http://www.w3.org/2000/svg" width="50" viewBox="0 0 655 535">
+                        <path d="M256 32C114.6 32 .0272 125.1 .0272 240c0 49.63 21.35 94.98 56.97 130.7c-12.5 50.37-54.27 95.27-54.77 95.77c-2.25 2.25-2.875 5.734-1.5 8.734C1.979 478.2 4.75 480 8 480c66.25 0 115.1-31.76 140.6-51.39C181.2 440.9 217.6 448 256 448c141.4 0 255.1-93.13 255.1-208S397.4 32 256 32z" />                </svg>
+                </div>
+                <div className="flex items-center justify-center">
+                    <svg onClick={() => deleteCommentaire(commentaire)} className="bg-red-500 hover:bg-red-600 p-3 rounded-lg cursor-pointer shadow-lg shadow-red-400" xmlns="http://www.w3.org/2000/svg" width="50" viewBox="0 0 450 535">
+                        <path d="M135.2 17.69C140.6 6.848 151.7 0 163.8 0H284.2C296.3 0 307.4 6.848 312.8 17.69L320 32H416C433.7 32 448 46.33 448 64C448 81.67 433.7 96 416 96H32C14.33 96 0 81.67 0 64C0 46.33 14.33 32 32 32H128L135.2 17.69zM394.8 466.1C393.2 492.3 372.3 512 346.9 512H101.1C75.75 512 54.77 492.3 53.19 466.1L31.1 128H416L394.8 466.1z" />
+                    </svg>
+                </div>
             </div>
-            <div className="col-start-5"></div>
-            <div className="col-start-6"></div>
-            <div className="flex items-center justify-center">
-                <svg className="bg-green-400 hover:bg-green-500 p-3 rounded-lg cursor-pointer shadow-lg shadow-gren-300 " xmlns="http://www.w3.org/2000/svg" width="50" viewBox="0 0 655 535">
-                    <path d="M256 32C114.6 32 .0272 125.1 .0272 240c0 49.63 21.35 94.98 56.97 130.7c-12.5 50.37-54.27 95.27-54.77 95.77c-2.25 2.25-2.875 5.734-1.5 8.734C1.979 478.2 4.75 480 8 480c66.25 0 115.1-31.76 140.6-51.39C181.2 440.9 217.6 448 256 448c141.4 0 255.1-93.13 255.1-208S397.4 32 256 32z" />                </svg>
+            <div className=" portrait:grid-cols-1 grid grid-cols-4 gap-4">
+                <Transition appear show={isOpen} as={Fragment}>
+                    <Dialog as="div" className="relative z-10" onClose={() => closeModal("Norm")}>
+                        <Transition.Child
+                            as={Fragment}
+                            enter="ease-out duration-300"
+                            enterFrom="opacity-0"
+                            enterTo="opacity-100"
+                            leave="ease-in duration-200"
+                            leaveFrom="opacity-100"
+                            leaveTo="opacity-0"
+                        >
+                            <div className="fixed inset-0 bg-black bg-opacity-25" />
+                        </Transition.Child>
+
+                        <div className="fixed inset-0 overflow-y-auto">
+                            <div className="flex min-h-full items-center justify-center p-4 text-center ">
+                                <Transition.Child
+                                    as={Fragment}
+                                    enter="ease-out duration-300"
+                                    enterFrom="opacity-0 scale-95"
+                                    enterTo="opacity-100 scale-100"
+                                    leave="ease-in duration-200"
+                                    leaveFrom="opacity-100 scale-100"
+                                    leaveTo="opacity-0 scale-95"
+                                >
+                                    <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                                        <Dialog.Title
+                                            as="h2"
+                                            className="text-3xl font-medium leading-6 text-gray-900"
+                                        >
+                                            Commentaires
+                                        </Dialog.Title>
+                                        <div className="mt-2">
+                                            <div>
+                                                <form ref={Comment}>
+                                                    <input name="addPrefill" type="text" className='text-lg text-red-500 border-transparent' value={val} size="50" />
+                                                    <textarea name="addCommentaire" className="border-0 rounded-2xl resize-y font-medium shadow-xl" maxLength="70" type="text" cols="30" />
+
+                                                    <div className="mt-4">
+
+                                                        <button
+                                                            type="button"
+                                                            className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                                                            onClick={() => { closeModal("Norm"); addNewComment(commentaire); }}
+                                                        >
+                                                            Commenter
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+
+
+                                    </Dialog.Panel>
+                                </Transition.Child>
+                            </div>
+                        </div>
+                    </Dialog>
+                </Transition>
             </div>
-            <div className="flex items-center justify-center">
-                <svg onClick={() => deleteCommentaire(commentaire)} className="bg-red-500 hover:bg-red-600 p-3 rounded-lg cursor-pointer shadow-lg shadow-red-400" xmlns="http://www.w3.org/2000/svg" width="50" viewBox="0 0 450 535">
-                    <path d="M135.2 17.69C140.6 6.848 151.7 0 163.8 0H284.2C296.3 0 307.4 6.848 312.8 17.69L320 32H416C433.7 32 448 46.33 448 64C448 81.67 433.7 96 416 96H32C14.33 96 0 81.67 0 64C0 46.33 14.33 32 32 32H128L135.2 17.69zM394.8 466.1C393.2 492.3 372.3 512 346.9 512H101.1C75.75 512 54.77 492.3 53.19 466.1L31.1 128H416L394.8 466.1z" />
-                </svg>
-            </div>
-        </div>
+        </>
+
+
     )
 }
 
