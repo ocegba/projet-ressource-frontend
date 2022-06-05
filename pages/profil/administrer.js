@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react'
 import Head from 'next/head'
 import SideBar from '../../components/SideBar'
 import { Tabs } from '../../components/Tabs'
-import { RowsCompteAdmin, RowsRessourcesAdmin } from '../../components/Rows';
+import { RowsCompteAdmin, RowsRessourcesAdmin, PieChartDemo } from '../../components/Rows';
 import JSONBig from 'json-bigint';
 import prisma from '../../prisma/prisma'
 import axios from "axios";
@@ -13,6 +13,9 @@ function administrer(props) {
   const ressources = props.ressources;
   const categories = props.categories;
   const comptes = props.comptes;
+  const categoriesLib = props.categoriesLib;
+  const participations = props.participations;
+  const favoris = props.favoris;
 
   const formAddRef = useRef();
   const formDelRef = useRef();
@@ -140,6 +143,8 @@ function administrer(props) {
     });
   }
 
+  console.log(participations)
+
   return (
     <div className="flex">
       <Head>
@@ -253,8 +258,25 @@ function administrer(props) {
             {comptes?.map((compte, i) => <RowsCompteAdmin compte={compte} key={i} />)}
           </div>
         }
-        nomElement4="Statistiques"
 
+        nomElement4="Statistiques" element4={
+        <div>
+              <PieChartDemo labels={categoriesLib.map(function (x) { return x.libelleCategorie })}
+                data={[
+                  {
+                    data: categoriesLib.map(function (x) { return parseInt((x.ressource).length) }),
+                    backgroundColor: [
+                      '#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080', '#ffffff', '#000000'
+                    ],
+                    hoverBackgroundColor: [
+                      '#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080', '#ffffff', '#000000'
+                    ]
+                  }
+                ]}
+                title="Nombre de ressources en fonction des catégories"
+              />
+        </div> 
+            }
       />
     </div>
   )
@@ -266,14 +288,47 @@ export async function getServerSideProps() {
       validerRessource: true,
     }
   });
+
   const rechercheCategorie = await prisma.categorie.findMany({});
   const rechercheComptes = await prisma.compte.findMany();
+  const rechercheCategorieLib = await prisma.categorie.findMany({
+    select: {
+      libelleCategorie: true,
+      ressource: true
+    }
 
+  });
+  const Part = await prisma.action.findMany({
+    where: {
+      libelleAction: "participer"
+    }, select: {
+      idRessource: true,
+    }
+  });
+
+  const recherchePart = await prisma.action.findMany({
+    where: {
+      libelleAction: "participer"
+    }, select: {
+      idRessource: true,
+    }
+  });
+
+  const rechercheFav = await prisma.action.findMany({
+    where: {
+      libelleAction: "favoris"
+    }, select: {
+      idRessource: true,
+    }
+  });
   return {
     props: {
       ressources: JSONBig.parse(JSONBig.stringify(rechercheRessource)),
       categories: JSONBig.parse(JSONBig.stringify(rechercheCategorie)),
       comptes: JSONBig.parse(JSONBig.stringify(rechercheComptes)),
+      categoriesLib: JSONBig.parse(JSONBig.stringify(rechercheCategorieLib)),
+      participations: JSONBig.parse(JSONBig.stringify(recherchePart)),
+      favoris: JSONBig.parse(JSONBig.stringify(rechercheFav)),
     },
   };
 }

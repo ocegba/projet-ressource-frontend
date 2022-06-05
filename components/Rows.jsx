@@ -9,6 +9,7 @@ import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.css';
 import { Checkbox } from 'primereact/checkbox';
 import { Dialog, Transition } from '@headlessui/react'
+import { Chart } from 'primereact/chart';
 
 async function deleteRessource(ressource) {
     if (window.confirm("Souhaitez-vous vraiment supprimer cette ressource ?")) {
@@ -985,6 +986,33 @@ export const RowsCompteAdmin = ({ compte }) => {
     )
 }
 
+export const PieChartDemo = ({ labels, data, title }) => {
+
+    const [chartData] = useState({
+        labels: labels,
+        datasets: data
+    });
+
+    const [lightOptions] = useState({
+        plugins: {
+            legend: {
+                labels: {
+                    color: '#495057'
+                }
+            }
+        }
+    });
+
+    return (
+        <div className="">
+            <div className="card">
+                <h2>{title}</h2>
+                <Chart type="doughnut" data={chartData} options={lightOptions} style={{ position: 'relative', width: '90%' }} />
+            </div>
+        </div>
+    )
+}
+
 ///////////////////////////////////////////// MODERATEUR /////////////////////////////////////////////////////
 
 export const RowsCommentairesMod = ({ commentaire }) => {
@@ -1031,7 +1059,7 @@ export const RowsCommentairesMod = ({ commentaire }) => {
         }
     }
 
-    let val = "Réponse au commentaire : " + commentaire.contenuCommentaire +"\t"
+    let val = "Réponse au commentaire : " + commentaire.contenuCommentaire + "\t"
 
     return (
         <>
