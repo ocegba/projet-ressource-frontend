@@ -175,7 +175,7 @@ function SearchRessource(props) {
       return (<p key={"id" + x} className="text-lg">{x}<br /></p>)
     })}
     <div className="box-border flex justify-between pt-2">
-      <Link href={{
+      <Link passHref href={{
         pathname: `/post/[id]`,
         query: {
           id: item.idRessource,

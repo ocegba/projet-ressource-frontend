@@ -24,7 +24,7 @@ function Profil(props) {
             <SideBar />
             <Tabs nomElement1={"Mes ressources crées"} element1={
                 <div>
-                    <Link href="/createRessource">
+                    <Link passHref href="/createRessource">
                         <input type="submit" href="/createRessource" className="cursor-pointer border-2 bg-white-600 hover:bg-gray-300 rounded-lg
                     border-solid font-bold text-base leading-normal py-3 px-5 uppercase" value="Créer une ressource"></input>
 
