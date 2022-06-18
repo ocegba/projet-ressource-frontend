@@ -74,19 +74,19 @@ function moderer(props) {
                                         <div className={openTab === 1 ? "block" : "hidden"} id="link1">
                                             <p className="py-3 px-5 text-xl">Vous pouvez répondre à un message ou supprimer un message.</p>
                                             {
-                                                commentaires?.map((commentaire, i) => <RowsCommentairesMod commentaire={commentaire} key={i} />)
+                                                commentaires?.map((commentaire, i) => <RowsCommentairesMod commentaire={commentaire} key={commentaire.idCommentaire} />)
                                             }
                                         </div>
                                         <div className={openTab === 2 ? "block" : "hidden"} id="link2">
                                             <p className="py-3 px-5 text-xl">Vous pouvez accepter une demande de création d'une ressource en donnant une raison dans le cas contraire.</p>
                                             <p className="py-3 px-5 text-lg">Les demandes de création de ressources en attente :</p>
                                             {
-                                                ressourcesHold?.map((hold, i) => <RowsRessourcesModHold ressource={hold} categorie={categorie} key={i} />)
+                                                ressourcesHold?.map((hold, i) => <RowsRessourcesModHold ressource={hold} categorie={categorie} key={hold.idRessource + hold.dateRessource} />)
                                             }
 
                                             <p className="py-3 px-5 text-lg">Les demandes de création de ressources refusées :</p>
                                             {
-                                                ressourcesRef?.map((ref, i) => <RowsRessourcesModRef ressource={ref} categorie={categorie} key={i} />)
+                                                ressourcesRef?.map((ref, i) => <RowsRessourcesModRef ressource={ref} categorie={categorie} key={ref.idRessource + ref.dateRessource}/>)
                                             }
                                         </div>
                                     </div>

@@ -75,7 +75,6 @@ const Post = (props) => {
         }
         return array
     }
-    (voirRelations(props)).map((x) => console.log(x))
     return (
         <div className="py-4 dark:bg-gray-600">
             <Head>

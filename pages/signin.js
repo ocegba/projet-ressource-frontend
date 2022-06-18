@@ -35,35 +35,7 @@ function signin() {
                 <button className="h-20 bg-custom-blue text-white font-bold text-3xl w-fit pr-2 pl-2 rounded-xl block m-auto cursor-pointer rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300">
                     <span>S'identifier</span>
                 </button>
-                <div>
-                    <div className="block text-sm text-right text-indigo-700 pr-3 underline pointer" >
-                        <a className="pointer" onClick={() => setOpen(!open)}>Mot de passe perdu ?</a>
-                        {!open ? (
-                            <div className="popup-box">
-                                <div className="box">
-                                    <div>
-                                        <form className="bg-custom-blue/50 border-gray-200 rounded-3xl border-solid border-0 box-border justify-center w-3/5 h-5/6 shadow-xl">
-                                            <p className="appearance-none bg-white rounded-2xl border-solid border-2 box-border block leading-6 w-10/12 mx-auto mt-2.5 mb-2.5 px-2.5 py-3.5 text-black transition-all focus:border-l-[35px] focus:border-custom-blue ">Entrez votre adresse email, nous vous enverons un lien de réinitilalisation</p>
-                                            <input
-                                                type="email"
-                                                id="email"
-                                                name="email"
-                                                placeholder="Adresse mail"
-                                                {...register("email", { required: "Un email valide est requis.", pattern: { value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/ } })} />
-                                            {errors.email && <p className="text-red-700 mr-12 text-right">{errors.email.message}</p>}
-
-                                            <button>
-                                                <span className="h-20 bg-custom-blue text-white font-bold text-3xl w-fit pr-2 pl-2 rounded-xl block m-auto cursor-pointer rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300">Reset</span>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-
-                        ) : false}
-                    </div>
-                </div>
-                <p className="pl-2">Si perte de mot de passe, contactez le support technique</p>
+                <p className="ml-7 pl-2">Si perte de mot de passe, contactez le support technique</p>
 
             </form>
         </div >

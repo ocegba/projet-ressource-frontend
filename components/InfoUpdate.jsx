@@ -33,7 +33,7 @@ const InfoUpdate = () => {
     }
     return (
         <div className="flex flex-column portrait:flex-col w-full h-fit">
-            <form i ref={formRef} d="formUpdate" className="grid gap-0 grid-cols-2 portrait:grid-cols-1">
+            <form ref={formRef} d="formUpdate" className="grid gap-0 grid-cols-2 portrait:grid-cols-1">
 
                 <div className="flex flex-col min-h-80 mt-15 w-10/12 my-3">
                     <label className="text-xl" htmlFor="prenomUtilisateur">Prénom</label>

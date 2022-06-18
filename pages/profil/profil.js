@@ -28,16 +28,16 @@ function profil(props) {
                     border-solid font-bold text-base leading-normal py-3 px-5 uppercase" value="Créer une ressource"></input>
 
                     </a>
-                    {ressources?.map((ressource, i) => <RowsRessources ressource={ressource} categorie={categorie} />)}
+                    {ressources?.map((ressource, i) => <RowsRessources key={ressource.idRessource} ressource={ressource} categorie={categorie} />)}
                 </div>
 
             }
-                nomElement2={"Mes commentaires"} element2={commentaires.map((commentaire, i) => <RowsCommentaires commentaire={commentaire} />)}
+                nomElement2={"Mes commentaires"} element2={commentaires.map((commentaire, i) => <RowsCommentaires key={commentaire.idCommentaire} commentaire={commentaire} />)}
 
                 nomElement3={"Mes participations"} element3={
                     participations.map((items) => {
                         return items.map((val) => {
-                            return <RowsParticipate participations={val} />
+                            return <RowsParticipate key={"participation" + val.idRessource} participations={val} />
                         }
                         )
                     })
@@ -45,7 +45,7 @@ function profil(props) {
                 nomElement4={"Mes favoris"} element4={
                     favoris.map((items) => {
                         return items.map((val) => {
-                            return <RowsFavoris favoris={val} />
+                            return <RowsFavoris key={"favoris" + val.idRessource}  favoris={val} />
                         }
                         )
                     })

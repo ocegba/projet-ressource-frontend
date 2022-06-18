@@ -143,8 +143,6 @@ function administrer(props) {
     });
   }
 
-  console.log(participations)
-
   return (
     <div className="flex">
       <Head>
@@ -168,17 +166,17 @@ function administrer(props) {
               <div>
                 <select className="appearance-none bg-white rounded-md border-solid border box-border text-base m-0 p-3 hover:border-indigo-500" style={{ width: 250 }}
                   onChange={(e) => setSelectionnerCat(e.target.value)}>
-                  <option value="Toutes">Toutes les catégories</option>
-                  {categories.map((x) => <option value={x.idCategorie}>{x.libelleCategorie}</option>)}
+                  <option key="defaultToutes" value="Toutes">Toutes les catégories</option>
+                  {categories.map((x) => <option key={"key" + x.idCategorie} value={x.idCategorie}>{x.libelleCategorie}</option>)}
                 </select>
               </div>
               <div>
                 {
                   relations.map((relation, i) =>
-                    <p key={relation.key} className="field-checkbox">
+                    <div key={relation.key} className="field-checkbox">
                       <Checkbox inputId={relation.key} name="relation" value={relation} onChange={onRelationChange} checked={selectionnerRelations.some((item) => item.key === relation.key)} />
                       <label htmlFor={relation.key}>{relation.name}</label>
-                    </p>
+                    </div>
                   )
                 }
               </div>
@@ -186,15 +184,15 @@ function administrer(props) {
                 <select className="appearance-none bg-white rounded-md border-solid border box-border text-base m-0 p-3 hover:border-indigo-500" style={{ width: 250 }}
                   onChange={(e) => setSelectionnerAct(e.target.value)}>
                   {/* table pour recup les nvx types de ressources */}
-                  <option value="">Tous types de ressources</option>
-                  <option value="Activité / Jeu à réaliser">Activité / Jeu à réaliser</option>
-                  <option value="Article">Article</option>
-                  <option value="Carte défi">Carte défi</option>
-                  <option value="Cours au format PDF">Cours au format PDF</option>
-                  <option value="Exercice / Atelier">Exercice / Atelier</option>
-                  <option value="Fiche de lecture">Fiche de lecture</option>
-                  <option value="Jeu en ligne">Jeu en ligne</option>
-                  <option value="Vidéo">Vidéo</option>
+                  <option key="" value="">Tous types de ressources</option>
+                  <option key="Activité / Jeu à réaliser" value="Activité / Jeu à réaliser">Activité / Jeu à réaliser</option>
+                  <option key="Article" value="Article">Article</option>
+                  <option key="Cartedéfi" value="Carte défi">Carte défi</option>
+                  <option key="Cours au format PDF" value="Cours au format PDF">Cours au format PDF</option>
+                  <option key="Exercie" value="Exercice / Atelier">Exercice / Atelier</option>
+                  <option key="fiche" value="Fiche de lecture">Fiche de lecture</option>
+                  <option key="jeu" value="Jeu en ligne">Jeu en ligne</option>
+                  <option key="video" value="Vidéo">Vidéo</option>
                 </select>
 
               </div>
@@ -217,7 +215,7 @@ function administrer(props) {
             </div>
 
             {!(open || openDel || openEdit) ? (<div className="grid grid-cols-5 gap-3">
-              {categories?.map((categorie, i) => <li className="shadow-md hover:bg-gray-200 border-gray-200 rounded border-solid border-0 box-border block font-bold text-xs leading-normal py-3 px-5 uppercase no-underline">
+              {categories?.map((categorie, i) => <li key={"key" + categorie.libelleCategorie} className="shadow-md hover:bg-gray-200 border-gray-200 rounded border-solid border-0 box-border block font-bold text-xs leading-normal py-3 px-5 uppercase no-underline">
                 {categorie.libelleCategorie}
               </li>)}
             </div>) : false}
@@ -234,9 +232,9 @@ function administrer(props) {
               <p className="border-gray-200 border-solid border-0 box-border text-xl leading-7 m-0 py-3 px-5">Editer une nouvelle catégorie :</p>
               <form className="grid grid-cols-2 gap-1" ref={formEditRef}>
                 <select className="rounded-lg" name="formerCat" id="idCategorie">
-                  {categories?.map((categorie) => <option value={categorie.libelleCategorie}>{categorie.libelleCategorie}</option>)}
+                  {categories?.map((categorie) => <option key={"key" + categorie.idCategorie} value={categorie.libelleCategorie}>{categorie.libelleCategorie}</option>)}
                 </select>
-                <input name="newCat" className="rounded-lg ml-2 w-full" placeholder='Editer la catégorie sélectionnée'></input>
+                <input name="newCat" className="border-black border-2 rounded-lg ml-2 w-full" placeholder='Editer la catégorie sélectionnée'></input>
                 <button className="col-span-2 mt-2 mb-2 bg-custom-blue hover:bg-custom-blue-200 text-white font-bold text-xl w-fit pr-1 pl-1 rounded-xl block m-auto cursor-pointer rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" type="submit" onClick={() => updateCategorie()}>Valider</button>
               </form>
             </div>) : false}
@@ -245,7 +243,7 @@ function administrer(props) {
               <p className="border-gray-200 border-solid border-0 box-border text-xl leading-7 m-0 py-3 px-5">Supprimer une catégorie :</p>
               <form ref={formDelRef}>
                 <select className="w-fit" name="deleteCategorieAdmin" id="idCategorie">
-                  {categories?.map((categorie) => <option value={categorie.libelleCategorie}>{categorie.libelleCategorie}</option>)}
+                  {categories?.map((categorie) => <option key={"key" + categorie.idCategorie} value={categorie.libelleCategorie}>{categorie.libelleCategorie}</option>)}
                 </select>
                 <button className="mt-2 mb-2 bg-custom-blue hover:bg-custom-blue-200 text-white font-bold text-xl w-fit pr-1 pl-1 rounded-xl block m-auto cursor-pointer rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" type="submit" onClick={() => deleteCategorie()}>Valider</button>
               </form>

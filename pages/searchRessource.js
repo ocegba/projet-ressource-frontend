@@ -169,10 +169,10 @@ function searchRessource(props) {
     });
   }
 
-  const listRessources = search(ressources).map((item) => (<Card className='border-black' title={item.titreRessource} subTitle={(categorie[item.idCategorie - 1]).libelleCategorie}>
-    <p className="text-lg">{item.typeRessource}</p>
+  const listRessources = search(ressources).map((item) => (<Card key={"cardSearch" + item.idRessource} className='border-black' title={item.titreRessource} subTitle={(categorie[item.idCategorie - 1]).libelleCategorie}>
+    <p key={"id" + item.typeRessource} className="text-lg">{item.typeRessource}</p>
     {voirRelations(item).map(function (x) {
-      return (<p className="text-lg">{x}<br /></p>)
+      return (<p key={"id" + x} className="text-lg">{x}<br /></p>)
     })}
     <div className="box-border flex justify-between pt-2">
       <Link href={{
@@ -240,17 +240,17 @@ function searchRessource(props) {
           <div>
             <select className="appearance-none bg-white rounded-md border-solid border box-border text-base m-0 p-3 hover:border-indigo-500" style={{ width: 250 }}
               onChange={(e) => setSelectionnerCat(e.target.value)}>
-              <option value="Toutes">Toutes les catégories</option>
-              {categorie.map((x) => <option value={x.idCategorie}>{x.libelleCategorie}</option>)}
+              <option key="defaultCategorie" value="Toutes">Toutes les catégories</option>
+              {categorie.map((x) => <option key={(x.libelleCategorie).toString()} value={x.idCategorie}>{x.libelleCategorie}</option>)}
             </select>
           </div>
           <div>
             {
               relations.map((relation, i) =>
-                <p key={relation.key} className="field-checkbox">
-                  <Checkbox inputId={relation.key} name="relation" value={relation} onChange={onRelationChange} checked={selectionnerRelations.some((item) => item.key === relation.key)} />
+                <div key={relation.key} className="field-checkbox">
+                  <Checkbox key={relation.key} inputId={relation.key} name="relation" value={relation} onChange={onRelationChange} checked={selectionnerRelations.some((item) => item.key === relation.key)} />
                   <label htmlFor={relation.key}>{relation.name}</label>
-                </p>
+                </div>
               )
             }
           </div>
@@ -271,7 +271,7 @@ function searchRessource(props) {
 
           </div>
           <div>
-            <InputText value={value} onChange={(e) => setValue(e.target.value)} placeholder="Rechercher" />
+            <InputText key="inputText" value={value} onChange={(e) => setValue(e.target.value)} placeholder="Rechercher" />
           </div>
 
         </div>

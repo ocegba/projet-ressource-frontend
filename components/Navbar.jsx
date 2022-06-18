@@ -13,8 +13,8 @@ const Navbar = () => {
   return (
     <nav className="bg-black border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-800">
       <div className="container flex flex-wrap justify-between items-center mx-auto">
-        <a href="#" className="flex items-center">
-          <a href="/" alt="loading..."><Image className="rounded-2xl" src={logo} width={80} height={80} /></a>
+        <a href="/" className="flex items-center">
+            <Image className="rounded-2xl" src={logo} width={80} height={80} />
         </a>
         <div className="flex pt-5 md:order-2">
           <li>

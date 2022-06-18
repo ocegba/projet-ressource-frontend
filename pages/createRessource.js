@@ -132,11 +132,11 @@ export default function createRessource(props) {
       </Head>
       <div className="bg-custom-blue/50 rounded-3xl flex-1 justify-center	items-center p-8 m-4 h-fit">
         <h1 className="flex justify-center items-center align-justify font-extrabold text-4xl">Créer votre ressource</h1>
-        <form i ref={formRef} d="formCreate" className="flex flex-col">
+        <form ref={formRef} d="formCreate" className="flex flex-col">
 
           <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
             <label className="text-xl" htmlFor="titreRessource">Titre de la ressource :</label>
-            <input className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10" maxlength="50"
+            <input className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10" maxLength="50"
               type="text"
               name="addRessourcesTitreRessource"
               id="titreRessource"
@@ -156,8 +156,8 @@ export default function createRessource(props) {
               value={categorie} label={nomcategorie}
               onChange={categorieChange}>
 
-              <option value="">Choisir une catégorie</option>
-              {categories?.map((compte, i) => <option value={compte.idCategorie} label={compte.libelleCategorie} >{compte.libelleCategorie}</option>)}
+              <option key="defaultCategorie" value="">Choisir une catégorie</option>
+              {categories?.map((compte, i) => <option key={"id" + compte.libelleCategorie} value={compte.idCategorie} label={compte.libelleCategorie} >{compte.libelleCategorie}</option>)}
             </select>
           </div>
 
@@ -349,11 +349,11 @@ export default function createRessource(props) {
       <div className="flex-1 justify-center	items-center p-14">
         <p className="p-6 text-lg">Un modérateur vérifiera la ressource avant sa publication alors vérifier bien les informations inscrites.</p>
         <div className="static w-600 h-550 bg-white rounded-lg drop-shadow-xl">
-          <Card className='border-black' title={titreRessource} subTitle={categorie}>
-          <p className="text-lg">{typeRessource1}</p>
+          <Card key="cardExample" className='border-black' title={titreRessource} subTitle={categorie}>
+          <p className="text-lg" key={"id" + typeRessource1}>{typeRessource1}</p>
             {
               typeRelationRessource1.map((x) =>
-                <p className="text-lg" id="typesRelationRessourceOutput">{x.name}<br /></p>
+                <p className="text-lg" key={"id" + x.name}>{x.name}<br /></p>
               )
             }
             <div className="box-border flex justify-between pt-2">

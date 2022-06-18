@@ -92,16 +92,16 @@ export const Tabs = ({ nomElement1, element1, nomElement2, element2, nomElement3
                         <div>
                             <div className="px-4 py-5 flex-auto">
                                 <div className="tab-content tab-space">
-                                    <div className={openTab === 1 ? "block" : "hidden"} id="link1">
+                                    <div className={openTab === 1 ? "block" : "hidden"} key="link1" id="link1">
                                         {element1}
                                     </div>
-                                    <div className={openTab === 2 ? "block" : "hidden"} id="link2">
+                                    <div className={openTab === 2 ? "block" : "hidden"} key="link2" id="link2">
                                         {element2}
                                     </div>
-                                    <div className={openTab === 3 ? "block" : "hidden"} id="link3">
+                                    <div className={openTab === 3 ? "block" : "hidden"} key="link3" id="link3">
                                         {element3}
                                     </div>
-                                    <div className={openTab === 4 ? "block" : "hidden"} id="link3">
+                                    <div className={openTab === 4 ? "block" : "hidden"} key="link4" id="link4">
                                         {element4}
                                     </div>
                                 </div>
