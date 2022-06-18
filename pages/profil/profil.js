@@ -5,6 +5,7 @@ import prisma from '../../prisma/prisma'
 import JSONBig from 'json-bigint';
 import { RowsCommentaires, RowsFavoris, RowsParticipate, RowsRessources } from '../../components/Rows';
 import { Tabs } from '../../components/Tabs';
+import Link from 'next/link';
 
 function Profil(props) {
     const ressources = props.ressources;
@@ -23,11 +24,11 @@ function Profil(props) {
             <SideBar />
             <Tabs nomElement1={"Mes ressources crées"} element1={
                 <div>
-                    <a href="/createRessource">
+                    <Link href="/createRessource">
                         <input type="submit" href="/createRessource" className="cursor-pointer border-2 bg-white-600 hover:bg-gray-300 rounded-lg
                     border-solid font-bold text-base leading-normal py-3 px-5 uppercase" value="Créer une ressource"></input>
 
-                    </a>
+                    </Link>
                     {ressources?.map((ressource, i) => <RowsRessources key={ressource.idRessource} ressource={ressource} categorie={categorie} />)}
                 </div>
 

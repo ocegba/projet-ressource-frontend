@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
-import Image from 'next/image'
-import logo from "../public/img/logo.gif"
+import React, { useState } from 'react';
+import Image from 'next/image';
+import logo from "../public/img/logo.gif";
+import Link from 'next/link';
 
 /*requete si c'est connecté ou non */
 function isLogged() {
@@ -13,16 +14,16 @@ const Navbar = () => {
   return (
     <nav className="bg-black border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-800">
       <div className="container flex flex-wrap justify-between items-center mx-auto">
-        <a href="/" className="flex items-center">
+        <Link href="/" className="flex items-center">
             <Image className="rounded-2xl" src={logo} width={80} height={80} />
-        </a>
+        </Link>
         <div className="flex pt-5 md:order-2">
           <li>
-            {isLogged() == false && <a href="/signup" className="text-white bg-custom-blue hover:bg-slate-400 focus:ring-3 focus:ring-slate-400 font-medium rounded-lg text-xl px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >S'inscrire</a>}
-            {isLogged() == true && <a href="/profil/profil" className="text-white bg-custom-blue hover:bg-slate-400 focus:ring-3 focus:ring-slate-400 font-medium rounded-lg text-xl px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >Mon profil</a>}
+            {isLogged() == false && <Link href="/signup" className="text-white bg-custom-blue hover:bg-slate-400 focus:ring-3 focus:ring-slate-400 font-medium rounded-lg text-xl px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >S'inscrire</Link>}
+            {isLogged() == true && <Link href="/profil/profil" className="text-white bg-custom-blue hover:bg-slate-400 focus:ring-3 focus:ring-slate-400 font-medium rounded-lg text-xl px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >Mon profil</Link>}
           </li>
           <li>
-            {isLogged() == false && <a href="/signin" className="text-white bg-custom-blue hover:bg-slate-400 focus:ring-3 focus:ring-slate-400 font-medium rounded-lg text-xl px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >Se connecter</a>}
+            {isLogged() == false && <Link href="/signin" className="text-white bg-custom-blue hover:bg-slate-400 focus:ring-3 focus:ring-slate-400 font-medium rounded-lg text-xl px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >Se connecter</Link>}
           </li>
          
 
@@ -36,17 +37,17 @@ const Navbar = () => {
           {!open ? (
             <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-xl md:font-medium">
               <li>
-                <a href="/createRessource" className="block hover:text-custom-blue py-2 pr-4 pl-3 text-white">Créer une ressource</a>
+                <Link href="/createRessource" className="block hover:text-custom-blue py-2 pr-4 pl-3 text-white">Créer une ressource</Link>
               </li>
               <li>
-                <a href="/searchRessource" className="block hover:text-custom-blue py-2 pr-4 pl-3 text-white">Rechercher une ressource</a>
+                <Link href="/searchRessource" className="block hover:text-custom-blue py-2 pr-4 pl-3 text-white">Rechercher une ressource</Link>
               </li>
               <li>
-                <a href="/about" className="block hover:text-custom-blue py-2 pr-4 pl-3 text-white">À propos</a>
+                <Link href="/about" className="block hover:text-custom-blue py-2 pr-4 pl-3 text-white">À propos</Link>
               </li>
               <li>
                 {/*requete si c'est connecté ou non */}
-                <a href="/help" className="block hover:text-custom-blue py-2 pr-4 pl-3 text-white">Aide</a>
+                <Link href="/help" className="block hover:text-custom-blue py-2 pr-4 pl-3 text-white">Aide</Link>
               </li>
             </ul>
           ) : false}
