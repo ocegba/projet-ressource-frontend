@@ -82,13 +82,13 @@ const Footer = () => {
           </div>
           <div className="grid lg:grid-cols-2">
             <div className="lg:mb-0 mb-6">
-              <Image
+              <Image alt="loading..."
                 src={logo}
                 className="rounded-3xl"
               />
             </div>
             <div className="lg:mb-0 mb-6">
-              <Image
+              <Image alt="loading..."
                 src={logoentreprise}
                 className="rounded-3xl"
               />
