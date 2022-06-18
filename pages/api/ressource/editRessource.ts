@@ -2,7 +2,7 @@ import JSONBig from 'json-bigint';
 import prisma from '../../../prisma/prisma';
 import axios from "axios";
 
-export default async (req, res) => {
+const defaultFonction = async (req, res) => {
   const {
     idRessource,
     titreRessource,
@@ -52,3 +52,5 @@ export default async (req, res) => {
     res.status(403).json({ err: "Erreur pendant la modification d'une ressource" });
   }
 };
+
+export default defaultFonction;

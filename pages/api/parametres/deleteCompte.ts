@@ -1,6 +1,6 @@
 import prisma from '../../../prisma/prisma'
 
-export default async (req, res) => {
+const defaultFonction = async (req, res) => {
   const { pseudoUtilisateur } = req.body;
   try {
     const deleteCompte = await prisma.compte.delete({
@@ -13,3 +13,5 @@ export default async (req, res) => {
     res.status(403).json({ err: "Erreur pendant la suppression du compte" });
   }
 };
+
+export default defaultFonction;

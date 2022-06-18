@@ -1,7 +1,7 @@
 import JSONBig from 'json-bigint';
 import prisma from '../../../prisma/prisma'
 
-export default async (req, res) => {
+const defaultFonction = async (req, res) => {
     const data = req.body;
     console.log(data)
     try {
@@ -17,3 +17,5 @@ export default async (req, res) => {
         res.status(403).json({ err: "Problème ajout catégorie" });
     }
 };
+
+export default defaultFonction;

@@ -1,6 +1,6 @@
 import prisma from '../../../prisma/prisma'
 
-export default async (req, res) => {
+const defaultFonction = async (req, res) => {
     const {
         mdpUtilisateur
     } = req.body;
@@ -19,3 +19,5 @@ export default async (req, res) => {
         res.status(403).json({ err: "Erreur pendant la modification du compte utilisateur" });
     }
 };
+
+export default defaultFonction;

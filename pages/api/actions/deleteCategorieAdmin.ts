@@ -1,7 +1,7 @@
 import JSONBig from 'json-bigint';
 import prisma from '../../../prisma/prisma'
 
-export default async (req, res) => {
+const defaultFonction = async (req, res) => {
     const { libelleCategorie } = req.body;
     try {
         const result = await prisma.categorie.deleteMany({
@@ -15,3 +15,5 @@ export default async (req, res) => {
         res.status(403).json({ err: "Problème suppression catégorie" });
     }
 };
+
+export default defaultFonction;

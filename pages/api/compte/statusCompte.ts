@@ -1,19 +1,19 @@
 import JSONBig from 'json-bigint';
 import prisma from '../../../prisma/prisma'
 
-export default async (req, res) => {
-    const data = req.body;
-    try {
+const defaultFonction = async (req, res) => {
+  const data = req.body;
+  try {
     const statusCompte = await prisma.compte.update({
-        select :{
-            isActive : true
-        },
-        where: {
-            idCompte :data.idCompte,
-        },
-        data: {
-                isActive: !(data.isActive),
-        }
+      select: {
+        isActive: true
+      },
+      where: {
+        idCompte: data.idCompte,
+      },
+      data: {
+        isActive: !(data.isActive),
+      }
     });
     res.status(200).json(JSONBig.parse(JSONBig.stringify((statusCompte))));
   } catch (error) {
@@ -21,3 +21,5 @@ export default async (req, res) => {
     res.status(403).json({ err: "Erreur pendant l'activation/désactivation d'un compte" });
   }
 };
+
+export default defaultFonction;

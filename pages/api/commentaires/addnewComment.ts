@@ -1,7 +1,7 @@
 import JSONBig from 'json-bigint';
 import prisma from '../../../prisma/prisma'
 
-export default async (req, res) => {
+const defaultFonction = async (req, res) => {
   const data = req.body;
   try {
     const result = await prisma.commentaire.create({
@@ -15,3 +15,5 @@ export default async (req, res) => {
     res.status(403).json({ err: "Il y a un problème en créant une ressource" });
   }
 };
+
+export default defaultFonction;

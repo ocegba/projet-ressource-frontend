@@ -1,7 +1,7 @@
 import prisma from '../../../prisma/prisma'
 import JSONBig from 'json-bigint';
 
-export default async (req, res) => {
+const defaultFonction = async (req, res) => {
     const {
         libelleCategorie,
         formerCategorie,
@@ -10,7 +10,7 @@ export default async (req, res) => {
     try {
         const updateInfo = await prisma.categorie.updateMany({
             where: {
-                libelleCategorie : formerCategorie,
+                libelleCategorie: formerCategorie,
             },
             data: {
                 libelleCategorie: libelleCategorie,
@@ -21,3 +21,5 @@ export default async (req, res) => {
         res.status(403).json({ err: "Erreur pendant la modification du compte utilisateur" });
     }
 };
+
+export default defaultFonction;

@@ -1,7 +1,7 @@
 import prisma from '../../../prisma/prisma'
 import JSONBig from 'json-bigint';
 
-export default async (req, res) => {
+const defaultFonction = async (req, res) => {
     const {
         idCompte,
         prenomUtilisateur,
@@ -15,14 +15,14 @@ export default async (req, res) => {
     try {
         const updateInfo = await prisma.compte.update({
             where: {
-                idCompte : idCompte,
+                idCompte: idCompte,
             },
             data: {
                 prenomUtilisateur,
                 nomUtilisateur,
                 regionUtilisateur,
                 mailUtilisateur,
-                ageUtilisateur : parseInt(ageUtilisateur),
+                ageUtilisateur: parseInt(ageUtilisateur),
                 departementUtilisateur,
             }
         });
@@ -31,3 +31,5 @@ export default async (req, res) => {
         res.status(403).json({ err: "Erreur pendant la modification du compte utilisateur" });
     }
 };
+
+export default defaultFonction;

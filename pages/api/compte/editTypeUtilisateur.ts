@@ -1,7 +1,7 @@
 import JSONBig from 'json-bigint';
 import prisma from '../../../prisma/prisma'
 
-export default async (req, res) => {
+const defaultFonction = async (req, res) => {
     const data = req.body;
     try {
         const editTypeUtilisateur = await prisma.compte.update({
@@ -21,3 +21,5 @@ export default async (req, res) => {
         res.status(403).json({ err: "Erreur pendant le changement de rôle de l'utilisateur" });
     }
 };
+
+export default defaultFonction;
