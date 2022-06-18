@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { useRef } from "react";
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-
+import Link from 'next/link';
 
 function Signup() {
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
@@ -61,10 +61,10 @@ function Signup() {
 
                 {data}
                 <div>
-                    <a className="block text-sm text-right text-indigo-700 pr-3 underline" href="/signin">Déjà inscrit ? Connectez-vous</a>
+                    <Link className="block text-sm text-right text-indigo-700 pr-3 underline" href="/signin">Déjà inscrit ? Connectez-vous</Link>
                 </div>
 
-                <p className="justify-center items-center ml-5">En créant un compte, vous acceptez <a color='blue' href="#">les règles de confidentialité et conditions d'utilisation</a>.</p>
+                <p className="justify-center items-center ml-5">En créant un compte, vous acceptez <Link color='blue' href="#">les règles de confidentialité et conditions d'utilisation</Link>.</p>
 
             </form>
         </div >
