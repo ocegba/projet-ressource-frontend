@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 
-function signin() {
+function Signup() {
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
     const [data, setData] = useState();
 
@@ -71,4 +71,4 @@ function signin() {
     )
 }
 
-export default signin;
+export default Signup;

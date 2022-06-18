@@ -14,7 +14,7 @@ import 'primereact/resources/primereact.css';
 import Link from 'next/link';
 import { Checkbox } from 'primereact/checkbox';
 
-function searchRessource(props) {
+function SearchRessource(props) {
   const ressources = props.ressources;
   const categorie = props.categorie;
   const Comment = useRef();
@@ -470,4 +470,4 @@ export async function getServerSideProps() {
 }
 
 
-export default searchRessource;
+export default SearchRessource;

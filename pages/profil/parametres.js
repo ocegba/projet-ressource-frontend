@@ -5,7 +5,7 @@ import InfoUpdate from '../../components/InfoUpdate'
 import MdpUpdate from '../../components/MdpUpdate'
 import DeleteCompte from '../../components/DeleteCompte'
 
-const parametres = () => {
+const Parametres = () => {
     return (
         <div className="flex">
             <Head>
@@ -38,4 +38,4 @@ const parametres = () => {
     )
 }
 
-export default parametres;
+export default Parametres;

@@ -6,7 +6,7 @@ import JSONBig from 'json-bigint';
 import { RowsCommentaires, RowsFavoris, RowsParticipate, RowsRessources } from '../../components/Rows';
 import { Tabs } from '../../components/Tabs';
 
-function profil(props) {
+function Profil(props) {
     const ressources = props.ressources;
     const commentaires = props.commentaires;
     const categorie = props.categorie;
@@ -129,4 +129,4 @@ export async function getServerSideProps() {
 }
 
 
-export default profil
+export default Profil;

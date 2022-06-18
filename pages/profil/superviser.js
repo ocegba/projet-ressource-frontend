@@ -5,7 +5,7 @@ import { RowsCompteSuperAdmin } from '../../components/Rows'
 import JSONBig from 'json-bigint'
 import prisma from '../../prisma/prisma'
 
-function superviser(props){
+function Superviser(props){
     const comptes =props.comptes;
   return (
     <div className="flex">
@@ -34,4 +34,4 @@ export async function getServerSideProps() {
         },
     };
 }
-export default superviser
+export default Superviser;

@@ -2,7 +2,7 @@ import Head from 'next/head'
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-function signin() {
+function Signin() {
     const { register, formState: { errors } } = useForm();
     const [open, setOpen] = useState(true);
 
@@ -42,4 +42,4 @@ function signin() {
     )
 }
 
-export default signin
+export default Signin;

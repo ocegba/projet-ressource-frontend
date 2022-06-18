@@ -9,7 +9,7 @@ import axios from "axios";
 import { Checkbox } from 'primereact/checkbox';
 import { InputText } from 'primereact/inputtext';
 
-function administrer(props) {
+function Administrer(props) {
   const ressources = props.ressources;
   const categories = props.categories;
   const comptes = props.comptes;
@@ -331,4 +331,4 @@ export async function getServerSideProps() {
   };
 }
 
-export default administrer
+export default Administrer;

@@ -5,7 +5,7 @@ import logoentreprise from "../public/img/logoentreprise.png"
 import logoministere from "../public/img/Ministère_des_Solidarités_et_de_la_Santé.png"
 import Head from 'next/head'
 
-const about = () => {
+const About = () => {
     return (
         <div className="h-fit w-fit ml-2.5">
             <Head>
@@ -24,4 +24,4 @@ const about = () => {
     )
 }
 
-export default about
+export default About;

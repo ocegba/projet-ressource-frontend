@@ -12,7 +12,7 @@ import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.css';
 import { Checkbox } from 'primereact/checkbox';
 
-export default function createRessource(props) {
+export default function CreateRessource(props) {
   const [disable, setDisable] = useState(false);
 
   const relations = [{ name: "Tous", key: "relationstous" },

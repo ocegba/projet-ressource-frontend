@@ -6,7 +6,7 @@ import { RowsCompteAdmin, RowsCommentairesAdmin, RowsCommentairesMod, RowsRessou
 import JSONBig from 'json-bigint';
 import prisma from '../../prisma/prisma'
 
-function moderer(props) {
+function Moderer(props) {
     const commentaires = props.commentaires;
     const ressourcesRef = props.ressourcesRef;
     const ressourcesHold = props.ressourcesHold;
@@ -126,4 +126,4 @@ export async function getServerSideProps() {
     };
 }
 
-export default moderer
+export default Moderer;
