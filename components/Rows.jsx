@@ -308,7 +308,7 @@ export const RowsRessources = ({ ressource, categorie }) => {
                                 id="idCategorie"
                                 placeholder='Sélectionnez une catégorie'
                             >
-                                {categorie?.map((compte, i) => <option value={compte.idCategorie}>{compte.libelleCategorie}</option>)}
+                                {categorie?.map((compte, i) => <option key={compte.idCategorie} value={compte.idCategorie}>{compte.libelleCategorie}</option>)}
                             </select>
                         </div>
 
@@ -752,7 +752,7 @@ export const RowsRessourcesAdmin = ({ ressource, categorie }) => {
                                 id="idCategorie"
                                 placeholder='Sélectionnez une catégorie'
                             >
-                                {categorie?.map((compte, i) => <option value={compte.idCategorie}>{compte.libelleCategorie}</option>)}
+                                {categorie?.map((compte, i) => <option key={compte.idCategorie} value={compte.idCategorie}>{compte.libelleCategorie}</option>)}
                             </select>
                         </div>
 
@@ -1202,7 +1202,7 @@ export const RowsRessourcesModHold = ({ ressource, categorie }) => {
                 {
                     array.map((items) => {
                         return items.map((id) => {
-                            return <p className="col-start-6">  {id} </p>
+                            return <p key={id} className="col-start-6">  {id} </p>
                         }
                         )
                     })
