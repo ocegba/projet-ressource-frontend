@@ -6,8 +6,7 @@ const defaultFonction = async (req, res) => {
   const {
     idRessource,
   } = req.body;
-  console.log(req.body)
-
+  
   try {
     const editCommentaire = await prisma.ressource.update({
       where: {

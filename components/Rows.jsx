@@ -1155,14 +1155,13 @@ export const RowsRessourcesModHold = ({ ressource, categorie }) => {
             const {
                 raison
             } = Raison.current;
-            const idRessource = (ressource?.idRessource);
-            const validerRessource = false;
+            const idRessource = ressource.idRessource;
             const notRaisonRessource = raison.value;
-            await axios.post("../api/ressource/deleteRessource", {
+            await axios.post("../api/ressource/updateRessourcetosuspend", {
                 idRessource,
-                validerRessource,
                 notRaisonRessource,
             });
+
         };
         window.location.reload();
     }
