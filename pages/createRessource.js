@@ -121,8 +121,23 @@ export default function CreateRessource(props) {
 
   const categorieChange = (e) => {
     [setNomCategorieRessource(e.target.label)];
-    [setCategorieRessource(e.target.value)];}
-  
+    [setCategorieRessource(e.target.value)];
+  }
+
+  const [error, setError] = useState(false);
+
+  const handleClick = () => {
+    if (!storyRessource && !titreRessource && !categorie && !typeRessource1) {
+      setError(true);
+      return false;
+    } else if (storyRessource && titreRessource && categorie && typeRessource1)  {
+      addNewRessource()
+    } else {
+      setError(true);
+      return false;
+    }
+  };
+
   return (
     <div className="flex flex-column portrait:flex-col w-full	bg-gray-100 h-fit">
       <Head>
@@ -132,24 +147,24 @@ export default function CreateRessource(props) {
       </Head>
       <div className="bg-custom-blue/50 rounded-3xl flex-1 justify-center	items-center p-8 m-4 h-fit">
         <h1 className="flex justify-center items-center align-justify font-extrabold text-4xl">Créer votre ressource</h1>
-        <form ref={formRef} d="formCreate" className="flex flex-col">
+        <form ref={formRef} d="formCreate" className="flex flex-col" onSubmit={() => handleClick()}>
 
           <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-            <label className="text-xl" htmlFor="titreRessource">Titre de la ressource :</label>
+            <label className="text-xl" htmlFor="titreRessource">Titre de la ressource * :</label>
             <input className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10" maxLength="50"
               type="text"
               name="addRessourcesTitreRessource"
               id="titreRessource"
               placeholder='ex: Chasse aux trésors'
               value={titreRessource}
-              required onChange={(e) => setTitreRessource(e.target.value)}
+              required error="false" onChange={(e) => setTitreRessource(e.target.value)}
             />
           </div>
 
           <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-            <label className="text-xl" htmlFor="categorieRessource">Catégorie :</label>
+            <label className="text-xl" htmlFor="categorieRessource">Catégorie * :</label>
             <select className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
-              required
+              required error="false"
               name="addRessourcesCategorieRessource"
               id="categorie"
               placeholder='Sélectionnez une catégorie'
@@ -162,9 +177,9 @@ export default function CreateRessource(props) {
           </div>
 
           <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-            <label className="text-xl" htmlFor="typesRessources">Types de ressources :</label>
+            <label className="text-xl" htmlFor="typesRessources">Types de ressources * :</label>
             <Dropdown
-              required
+              error="false"
               name="addRessourcesTypeRessource"
               id="typesRessources"
               placeholder='Sélectionnez un type de ressource'
@@ -174,9 +189,9 @@ export default function CreateRessource(props) {
           </div>
 
           <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-            <label className="text-xl" htmlFor="storyRessource">Texte :</label>
+            <label className="text-xl" htmlFor="storyRessource">Texte * :</label>
             <textarea className="bg-white border-0 rounded-2xl font-medium shadow-xl h-14 pl-10"
-              required
+              required error="false"
               type="text"
               name="addRessourcesStoryRessource"
               id="storyRessource"
@@ -340,7 +355,10 @@ export default function CreateRessource(props) {
           </div>
 
           <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
-            <button disabled={disable} className="h-20 mt-3 mb-3 bg-custom-blue text-white font-bold text-3xl w-fit pr-2 pl-2 rounded-xl block m-auto cursor-pointer rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" type="submit" onClick={() => addNewRessource()}>Créer une ressource</button>
+            <button disabled={disable} className="h-20 mt-3 mb-3 bg-custom-blue text-white font-bold text-3xl w-fit pr-2 pl-2 rounded-xl block m-auto cursor-pointer rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" type="submit">Créer une ressource</button>
+          </div>
+          <div className="flex flex-col min-h-80 mt-15 w-11/12 my-3">
+                * : les champs sont obligatoires
           </div>
         </form >
       </div>
@@ -350,7 +368,7 @@ export default function CreateRessource(props) {
         <p className="p-6 text-lg">Un modérateur vérifiera la ressource avant sa publication alors vérifier bien les informations inscrites.</p>
         <div className="static w-600 h-550 bg-white rounded-lg drop-shadow-xl">
           <Card key="cardExample" className='border-black' title={titreRessource} subTitle={categorie}>
-          <p className="text-lg" key={"id" + typeRessource1}>{typeRessource1}</p>
+            <p className="text-lg" key={"id" + typeRessource1}>{typeRessource1}</p>
             {
               typeRelationRessource1.map((x) =>
                 <p className="text-lg" key={"id" + x.name}>{x.name}<br /></p>
