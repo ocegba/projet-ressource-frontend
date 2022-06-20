@@ -12,15 +12,15 @@ const Navbar = () => {
   const [open, setOpen] = useState("");
 
   return (
-    <nav className="bg-black border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-800">
-      <div className="container flex flex-wrap justify-between items-center mx-auto">
+    <nav className="bg-black text-white	border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-800">
+      <div className="container flex flex-wrap justify-between items-center mx-auto" x-data="{ open: false }">
         <Link passHref href="/" className="flex items-center">
           <Image alt="loading..." className="rounded-2xl" src={logo} width={80} height={80} />
         </Link>
         <div className="flex pt-5 md:order-2">
           <li>
-            {isLogged() == false && <Link href="/signup" className="text-white bg-custom-blue hover:bg-slate-400 focus:ring-3 focus:ring-slate-400 font-medium rounded-lg text-xl px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >S'inscrire</Link>}
-            {isLogged() == true && <Link href="/profil/profil" className="text-white bg-custom-blue hover:bg-slate-400 focus:ring-3 focus:ring-slate-400 font-medium rounded-lg text-xl px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >Mon profil</Link>}
+            {isLogged() == false && <Link href="/signup" className="bg-custom-blue text-white  hover:bg-slate-400 focus:ring-3 focus:ring-slate-400 font-medium rounded-lg text-xl px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >S'inscrire</Link>}
+            {isLogged() == true && <Link href="/profil/profil" className="bg-custom-blue text-white  hover:bg-slate-400 focus:ring-3 focus:ring-slate-400 font-medium rounded-lg text-xl px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >Mon profil</Link>}
           </li>
           <li>
             {isLogged() == false && <Link href="/signin" className="text-white bg-custom-blue hover:bg-slate-400 focus:ring-3 focus:ring-slate-400 font-medium rounded-lg text-xl px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >Se connecter</Link>}
