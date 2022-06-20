@@ -6,6 +6,7 @@ import 'moment/locale/fr'
 moment.locale('fr')
 
 const Post = (props) => {
+    console.log(props)
     const Comment = useRef();
 
     async function addNewComment(data) {
@@ -89,7 +90,7 @@ const Post = (props) => {
                     <div className='text-lg p-2'>
                         <p>Catégorie : {props.idCategorie}</p>
                         <p>Type de ressources : {props.typeRessource}</p>
-                        <p>Type de relations : {(voirRelations(props)).map(function(x){ return ( x+ "  " )})}</p>
+                        <p>Type de relations : {(voirRelations(props)).map(function(x){ return ( "\n"+x)})}</p>
                         <p>Lieu : {props.localisationRessource}</p>
                         <p>Lien de la ressource : <a href={props.lienRessource}>{props.lienRessource}</a></p>
                         <p>Fichier : {props.fileRessource}</p>
