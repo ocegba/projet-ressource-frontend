@@ -169,7 +169,16 @@ function SearchRessource(props) {
     });
   }
 
-  const listRessources = search(ressources).map((item) => (<Card key={"cardSearch" + item.idRessource} className='border-black' title={item.titreRessource} subTitle={(categorie[item.idCategorie - 1]).libelleCategorie}>
+  function getCategorie(tab , ressource) {
+    var categorie = ""
+    tab.map(function (item) {
+      if (Object.values(item)[0] == ressource.idCategorie) {
+        categorie = (Object.values(item)[1])
+      }
+    })
+    return categorie;
+}
+  const listRessources = search(ressources).map((item) => (<Card key={"cardSearch" + item.idRessource} className='border-black' title={item.titreRessource} subTitle={getCategorie(categorie, item)}>
     <p key={"id" + item.typeRessource} className="text-lg">{item.typeRessource}</p>
     {voirRelations(item).map(function (x) {
       return (<p key={"id" + x} className="text-lg">{x}<br /></p>)
@@ -180,7 +189,7 @@ function SearchRessource(props) {
         query: {
           id: item.idRessource,
           title: item.titreRessource,
-          idCategorie: (categorie[item.idCategorie - 1]).libelleCategorie,
+          idCategorie: getCategorie(categorie, item),
           typeRessource: item.typeRessource,
           relationstous: item.relationstous,
           relationssoi: item.relationssoi,
@@ -460,7 +469,7 @@ export async function getServerSideProps() {
       }
     }
   );
-  const rechercheCategorie = await prisma.categorie.findMany();
+  const rechercheCategorie = await prisma.categorie.findMany({})
   return {
     props: {
       ressources: JSONBig.parse(JSONBig.stringify(listRessourcess)),
