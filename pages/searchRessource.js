@@ -144,7 +144,7 @@ function SearchRessource(props) {
 
   function search(items) {
     return items.filter((item) => {
-      for (var i = 0; i < [voirRelations(item)].length; i++) {
+      for (let i = 0; i <  Object.keys(voirRelations(item)).length; i++) {
         if ((item.idCategorie == selectionnerCategorie) && ((voirRelations(item)[i] == selectionnerRelations[i]?.name) || selectionnerRelations == "") && (item.typeRessource == selectionnerAct || selectionnerAct == "")) {
           return searchParam.some((newItem) => {
             return (
